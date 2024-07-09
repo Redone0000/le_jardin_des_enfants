@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TeacherController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +20,19 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+// Teachers
+
+Route::get('teacher/index', [TeacherController::class, 'index'])->name('teacher.index');
+Route::get('teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
+Route::post('teacher/create', [TeacherController::class, 'store'])->name('teacher.store');
+
+
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
