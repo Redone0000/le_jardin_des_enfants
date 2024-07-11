@@ -15,12 +15,23 @@ class TeacherController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $teacher = Teacher::all();
+        $search = $request->input('search');
+        $order = $request->input('order'); 
 
-        // return view('teachers.index', compact('teachers'));
-        return view('teachers.index');
+        $query = Teacher::with('user');
+
+        if ($search) {
+            $query->whereHas('user', function($query) use ($search) {
+                $query->where('firstname', 'like', '%' . $search . '%')
+                    ->orWhere('lastname', 'like', '%' . $search . '%');
+            });
+        }
+
+        $teachers = $query->get();
+
+        return view('teachers.index', ['teachers' => $teachers]);
     }
 
     /**
@@ -115,7 +126,7 @@ class TeacherController extends Controller
 
         // Sauvegarder l'image
         if ($request->hasFile('picture')) {
-            $imagePath = $request->file('picture')->store('pictures', 'public');
+            $imagePath = $request->file('picture')->store('pictures_teacher', 'public');
         } else {
             $imagePath = null;
         }
@@ -150,9 +161,19 @@ class TeacherController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show($id)
+    {   
+            // Trouver l'enseignant par ID
+    $teacher = Teacher::find($id);
+
+    if (!$teacher) {
+        // Rediriger vers la liste des enseignants avec un message d'erreur
+        $teachers = Teacher::all(); // Récupération de tous les enseignants pour l'index
+        return view('teachers.index', ['teachers' => $teachers, 'error' => 'L\'enseignant demandé n\'existe pas.']);
+    }
+
+    // Si trouvé, afficher la vue du profil de l'enseignant
+    return view('teachers.show', ['teacher' => $teacher]);
     }
 
     /**
