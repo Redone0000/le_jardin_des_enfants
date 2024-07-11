@@ -86,12 +86,12 @@
                                 <div class="row">
                                     <a href="{{ route('teacher.show', $teacher->id) }}" class="btn btn-primary mr-3">show</a>
                                     @can('access-admin')
-                                    <a href="{{ route('teacher.edit', $teacher->user->id) }}" class="btn btn-info mr-3">edit</a>
-                                    <form action="{{ route('teacher.delete', $teacher->user_id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')" class="btn btn-danger">supprimer</button>
-                                    </form>
+                                        <a href="{{ route('teacher.edit', $teacher->user->id) }}" class="btn btn-info mr-3">edit</a>
+                                        <form action="{{ route('teacher.delete', $teacher->user_id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')" class="btn btn-danger">supprimer</button>
+                                        </form>
                                     @endcan
                                 </div>
                             </td>

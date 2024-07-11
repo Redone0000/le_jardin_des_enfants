@@ -9,6 +9,9 @@ use App\Http\Requests\StoreTeacherRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class TeacherController extends Controller
 {
@@ -181,7 +184,15 @@ class TeacherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $teacher = User::findOrFail($id);
+        $t = $teacher->teacher;
+
+        // if (!Gate::allows('update', $t)) {
+        //     // L'utilisateur actuel n'a pas la permission de voir le profil de l'enseignant
+        //     abort(403);
+        // }
+
+        return view('teachers.edit', ['teacher' => $teacher]);
     }
 
     /**
@@ -189,14 +200,73 @@ class TeacherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Récuperer l'enseignant
+        $teacher = User::findOrFail($id);
+        $t = $teacher->teacher;
+
+        if (!Gate::allows('update', $t)) {
+            // L'utilisateur actuel n'a pas la permission de voir le profil de l'enseignant
+            abort(403);
+        }
+        
+        // Validation des données
+        $request->validate([
+            'login' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($teacher->id)],
+            'phone' => ['required', 'string', 'max:255'],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'], 
+            'picture' => ['nullable', 'image', 'mimetypes:image/jpeg,image/png,image/jpg,image/gif', 'max:2048'],
+            'description' => ['required', 'string', 'max:255'],
+        ]);
+
+        $firstname = ucwords(strtolower($request->firstname));
+        $lastname = ucwords(strtolower($request->lastname));
+
+        // Handle the image upload
+        if ($request->hasFile('picture')) {
+            // Suppression de l'ancienne photo si l'utilisateur a entré une nouvelle photo
+            if ($teacher->teacher->picture) {
+                Storage::disk('public')->delete($teacher->teacher->picture);
+            }
+            // Sauvegarde de la nouvelle photo
+            $imagePath = $request->file('picture')->store('pictures', 'public');
+            $teacher->teacher->picture = $imagePath;
+        }
+
+        // Mise à jour des autres champs
+        $teacher->login = $request->login;
+        $teacher->firstname = $firstname;
+        $teacher->lastname = $lastname;
+        $teacher->phone = $request->phone;
+        
+        if ($request->filled('password')) {
+            $teacher->password = bcrypt($request->password);
+        }
+        
+        $teacher->teacher->description = $request->description;
+
+        // Save the changes
+        $teacher->push(); // This will save the teacher and its related teacher record
+
+        return redirect()->route('teacher.show', ['id' => $teacher->teacher->id] )->with('success', 'Opération réussie !');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        //
+    {   
+        $teacher = Teacher::findOrFail($id);
+        // Vérifier si l'utilisateur a la permission de supprimer cet enseignant
+        if (!Gate::allows('delete', $teacher)) {
+            abort(403, 'Vous n\'avez pas la permission de supprimer cet enseignant.');
+        }
+        if($teacher) {
+            $teacher->delete();
+        }
+
+        return redirect()->route('teacher.index')->with('error', 'Enseignant supprimé avec succès.');
     }
 }
