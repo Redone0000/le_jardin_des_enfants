@@ -170,9 +170,7 @@ class TeacherController extends Controller
     $teacher = Teacher::find($id);
 
     if (!$teacher) {
-        // Rediriger vers la liste des enseignants avec un message d'erreur
-        $teachers = Teacher::all(); // Récupération de tous les enseignants pour l'index
-        return view('teachers.index', ['teachers' => $teachers, 'error' => 'L\'enseignant demandé n\'existe pas.']);
+        return redirect()->route('teacher.index')->with('error', 'L\'enseignant demandé n\'existe pas.');
     }
 
     // Si trouvé, afficher la vue du profil de l'enseignant

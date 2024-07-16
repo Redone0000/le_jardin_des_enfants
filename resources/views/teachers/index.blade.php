@@ -23,12 +23,6 @@
 
 @section('content')
     <div class="container">
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
         <div class="row justify-content-end mb-5 mt-5">
             <a href="{{ route('teacher.create') }}" class="btn btn-success">Nouvel enseignant</a>
         </div>
@@ -37,13 +31,13 @@
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
-    @endif
+        @endif
 
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="row mb-3 mt-5 col-md-12">
 

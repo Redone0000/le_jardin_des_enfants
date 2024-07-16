@@ -97,15 +97,13 @@
         </div>
       </div>
       <div
-        class="container-fluid pt-5"
+        class="container-fluid mt-3"
         style="border-top: 1px solid rgba(23, 162, 184, 0.2) ;"
       >
         <p class="m-0 text-center text-white">
           &copy;
           <a class="text-primary font-weight-bold" href="#">Nom</a>.
           Tout droit réservé.
-
-        
           <a class="text-primary font-weight-bold" href="#"
             >lien</a
           >

@@ -25,7 +25,7 @@
           <div class="navbar-nav font-weight-bold mx-auto py-0">
             <a href="{{ route('page.home') }}" class="nav-item nav-link active">Accueil</a>
             <a href="class.html" class="nav-item nav-link">Classes</a>
-            <a href="team.html" class="nav-item nav-link">Enseignants</a>
+            <a href="{{ route('page.teachers') }}" class="nav-item nav-link">Enseignants</a>
             <a href="" class="nav-item nav-link">Gallerie</a>
             <a href="" class="nav-item nav-link">Activités</a>
             <div class="nav-item dropdown">

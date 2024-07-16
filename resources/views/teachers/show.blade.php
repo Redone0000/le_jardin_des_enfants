@@ -25,7 +25,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="{{ asset('storage/' . $teacher->picture) }}" alt="Photo" class="rounded-circle" width="150">
+                    <img src="{{ asset('storage/' . $teacher->picture) }}" alt="Photo" class="rounded-circle" width="100%">
                     <div class="mt-3">
                       <h4>{{ $teacher->user->lastname }} {{ $teacher->user->firstname }}</h4>
                     </div>
@@ -83,7 +83,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info float-right" target="__blank" href="">Mettre à jour</a>
+                      <a class="btn btn-info float-right" target="__blank" href="{{ route('teacher.edit', $teacher->user->id) }}">Mettre à jour</a>
                     </div>
                   </div>
                 </div>

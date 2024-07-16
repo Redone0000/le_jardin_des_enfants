@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AppointmentController;
 
 
 Route::get('/', function () {
@@ -27,6 +28,23 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [PageController::class, 'home'])->name('page.home');
 Route::get('/contact', [PageController::class, 'contact'])->name('page.contact');
+Route::get('/teachers', [PageController::class, 'teachers'])->name('page.teachers');
+
+// Appointment
+
+Route::get('/appointments/available', [AppointmentController::class, 'showAvailableAppointments'])->name('availableappointments');
+
+Route::get('/appointments/form', [AppointmentController::class, 'formAppointment'])->name('formAppointment');
+
+Route::post('/appointments/form', [AppointmentController::class, 'appointment'])->name('appointment');
+
+Route::get('/appointment/cancel/{id}/{token}', [AppointmentController::class, 'cancel'])->name('appointment.cancel');
+
+Route::get('/add-available-dates', [AppointmentController::class, 'showAddAvailableDatesForm'])->name('appointment.addAvailableDates');
+
+Route::get('/appointments-list', [AppointmentController::class, 'appointmentsList'])->name('appointment.list');
+
+Route::post('/store-available-dates', [AppointmentController::class, 'storeAvailableDates'])->name('appointment.storeAvailableDates');
 
 // Teachers
 
