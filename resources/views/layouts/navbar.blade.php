@@ -53,7 +53,7 @@
                 </form>
             @else
                 <a  href="{{ route('login') }}" class="nav-item nav-link">Connexion</a>
-                <a href="" class="nav-item nav-link btn btn-primary px-4">Prenez rendez-vous</a>
+                <a href="{{ route('availableappointments') }}" class="nav-item nav-link btn btn-primary px-4">Prenez rendez-vous</a>
             @endauth
         </div>
       </nav>

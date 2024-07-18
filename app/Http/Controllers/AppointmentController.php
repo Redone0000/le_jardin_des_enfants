@@ -135,7 +135,7 @@ class AppointmentController extends Controller
         }
         $appointments = Appointment::all();
 
-        return view('appointment.appointments-list', ['appointments' => $appointments]);
+        return view('appointments.appointments-list', ['appointments' => $appointments]);
     }
 
     public function showAddAvailableDatesForm()
@@ -145,7 +145,7 @@ class AppointmentController extends Controller
             abort(403);
         }
 
-        return view('appointment.add_available_dates');
+        return view('appointments.add_available_dates');
 
     }
 

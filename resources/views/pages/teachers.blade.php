@@ -59,7 +59,7 @@
                 ></a>
               </div>
             </div>
-            <h4>{{ $teacher->user->lastname }}</h4>
+            <h4>{{ $teacher->user->lastname }} {{ $teacher->user->firstname }}</h4>
             <i>{{ $teacher->description }}</i>
           </div>
           @endforeach

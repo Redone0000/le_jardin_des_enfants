@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('appointments', function (Blueprint $table) {
-            $table->string('token', 60)->after('email');
+        Schema::table('class_sections', function (Blueprint $table) {
+            $table->string('school_year')->after('teacher_id');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('appointments', function (Blueprint $table) {
-            $table->dropColumn('token');
+        Schema::table('class_sections', function (Blueprint $table) {
+            $table->dropColumn('school_year');
         });
     }
 };
