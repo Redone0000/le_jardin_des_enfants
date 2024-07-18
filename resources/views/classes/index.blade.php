@@ -66,7 +66,13 @@
                                 </td>
                                 <td>
                                     <div class="">
-                                        
+                                        @php
+                                            $totalChildren = 0;
+                                            foreach($class->children as $child) {
+                                                $totalChildren += 1;
+                                            }
+                                        @endphp
+                                        {{ $totalChildren }}
                                     </div>
                                 </td>
                                 <td>

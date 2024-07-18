@@ -30,7 +30,7 @@ class ClassSection extends Model
 
     public function children()
     {
-        return $this->hasMany(Child::class, 'class_sections_id');
+        return $this->hasMany(Child::class, 'class_id');
     }
 
     /**
