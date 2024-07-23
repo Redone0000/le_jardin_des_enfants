@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClassSectionController;
+use App\Http\Controllers\ChildController;
 
 
 Route::get('/', function () {
@@ -63,7 +64,6 @@ Route::get('/teacher/edit/{id}', [TeacherController::class, 'edit'])->where('id'
 
 Route::put('/teacher/update/{id}', [TeacherController::class, 'update'])->where('id', '[0-9]+')->name('teacher.update');
 
-// ClassSection
 
 // ClassSection
 
@@ -84,6 +84,28 @@ Route::delete('/class/delete/{id}', [ClassSectionController::class, 'destroy'])-
 Route::get('/class/children/{id}', [ClassSectionController::class, 'getChild'])->name('class.children'); 
 
 Route::get('/my-class', [ClassSectionController::class, 'showByClass'])->name('myclass');
+
+// Child
+
+// Child
+
+Route::get('children', [ChildController::class, 'index'])->name('children.index');
+
+Route::get('child/create', [ChildController::class, 'create'])->name('child.create');
+
+Route::post('child/create', [ChildController::class, 'store'])->name('child.store');
+
+Route::get('child/{id}', [ChildController::class, 'show'])->name('child.show');
+
+Route::get('/child/edit/{id}', [ChildController::class, 'edit'])->where('id', '[0-9]+')->name('child.edit');
+
+Route::delete('/child/delete/{id}', [ChildController::class, 'destroy'])->where('id', '[0-9]+')->name('child.delete');
+
+Route::put('/child/update/{id}', [ChildController::class, 'update'])->where('id', '[0-9]+')->name('child.update');
+
+
+
+
 
 
 Auth::routes();

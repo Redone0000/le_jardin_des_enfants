@@ -31,27 +31,27 @@ class Child extends Model
     }
 
     public function scopeFilterByUserRole($query)
-{
-    $user = auth()->user();
+    {
+        $user = auth()->user();
 
-    if ($user->role_id === 1) {
-        // Pour l'administrateur, afficher tous les enfants
-        return $query;
-    } elseif ($user->role_id === 2) {
-        // Pour l'enseignant, afficher uniquement les enfants de sa classe
-        return $query->where('class_id', $user->teacher->classSection->id);
-    } elseif ($user->role_id === 3) {
-        // Pour le tuteur, afficher uniquement les enfants dont il est le tuteur
+        if ($user->role_id === 1) {
+            // Pour l'administrateur, afficher tous les enfants
+            return $query;
+        } elseif ($user->role_id === 2) {
+            // Pour l'enseignant, afficher uniquement les enfants de sa classe
+            return $query->where('class_id', $user->teacher->classSection->id);
+        } elseif ($user->role_id === 3) {
+            // Pour le tuteur, afficher uniquement les enfants dont il est le tuteur
 
 
-        return $query->whereIn('class_id', function ($query) use ($user) {
-            $query->select('class_id')
-                  ->from('children')
-                  ->where('tutor_id', $user->tutor->id);
-        });
-    } else {
-        // Si le rôle de l'utilisateur n'est pas défini, retourner une collection vide
-        return $query->where('id', 0);
+            return $query->whereIn('class_id', function ($query) use ($user) {
+                $query->select('class_id')
+                    ->from('children')
+                    ->where('tutor_id', $user->tutor->id);
+            });
+        } else {
+            // Si le rôle de l'utilisateur n'est pas défini, retourner une collection vide
+            return $query->where('id', 0);
+        }
     }
-}
 }

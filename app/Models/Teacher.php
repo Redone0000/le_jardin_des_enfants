@@ -22,8 +22,8 @@ class Teacher extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function classSection()
-    // {
-    //     return $this->hasOne(ClassSection::class);
-    // }
+    public function classSection()
+    {
+        return $this->hasOne(ClassSection::class);
+    }
 }
