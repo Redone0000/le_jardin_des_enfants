@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AvailableDatesSeeder::class,
             SectionSeeder::class,
+            ActivityTypeSeeder::class,
         ]);
     }
 }
