@@ -27,7 +27,7 @@
         </div>
     @endif
 
-<div class="container">
+<div class="container-fluid">
 
     <div class="row justify-content-end mb-3 mt-5">
         <a href="{{ route('class.create') }}" class="btn btn-success">Créer une nouvelle classe</a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\ChildController;
+use App\Http\Controllers\ActivityTypeController;
 
 
 Route::get('/', function () {
@@ -87,8 +88,6 @@ Route::get('/my-class', [ClassSectionController::class, 'showByClass'])->name('m
 
 // Child
 
-// Child
-
 Route::get('children', [ChildController::class, 'index'])->name('children.index');
 
 Route::get('child/create', [ChildController::class, 'create'])->name('child.create');
@@ -103,8 +102,21 @@ Route::delete('/child/delete/{id}', [ChildController::class, 'destroy'])->where(
 
 Route::put('/child/update/{id}', [ChildController::class, 'update'])->where('id', '[0-9]+')->name('child.update');
 
+// ActivityType
 
+Route::get('/activity-types', [ActivityTypeController::class, 'index'])->name('activity-types.index');
 
+Route::get('/activity-type/create', [ActivityTypeController::class, 'create'])->name('activity-types.create');
+
+Route::post('activity-types', [ActivityTypeController::class, 'store'])->name('activity-types.store');
+
+Route::get('activity-type/{id}', [ActivityTypeController::class, 'show'])->name('activity-types.show');
+
+Route::get('activity-types/{id}/edit', [ActivityTypeController::class, 'edit'])->name('activity-types.edit');
+
+Route::put('activity-types/{id}', [ActivityTypeController::class, 'update'])->name('activity-types.update');
+
+Route::delete('activity-types/{id}', [ActivityTypeController::class, 'destroy'])->name('activity-types.destroy');
 
 
 
