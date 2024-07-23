@@ -392,7 +392,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'warning',
         ],
-        ['header' => 'TYPE D\'ACTIVITE'],
+        ['header' => 'TYPE D\'ACTIVITE', 'can' => 'access-admin'],
         [
             'text' => 'Type d\'activités',
             'url' => '/activity-types',

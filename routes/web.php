@@ -106,11 +106,11 @@ Route::put('/child/update/{id}', [ChildController::class, 'update'])->where('id'
 
 Route::get('/activity-types', [ActivityTypeController::class, 'index'])->name('activity-types.index');
 
-Route::get('/activity-type/create', [ActivityTypeController::class, 'create'])->name('activity-types.create');
+Route::get('/activity-types/create', [ActivityTypeController::class, 'create'])->name('activity-types.create');
 
 Route::post('activity-types', [ActivityTypeController::class, 'store'])->name('activity-types.store');
 
-Route::get('activity-type/{id}', [ActivityTypeController::class, 'show'])->name('activity-types.show');
+Route::get('activity-types/{id}', [ActivityTypeController::class, 'show'])->name('activity-types.show');
 
 Route::get('activity-types/{id}/edit', [ActivityTypeController::class, 'edit'])->name('activity-types.edit');
 

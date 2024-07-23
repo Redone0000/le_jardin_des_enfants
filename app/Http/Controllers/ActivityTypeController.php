@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreActivityTypeRequest;
 use App\Http\Requests\UpdateActivityTypeRequest;
 use App\Models\ActivityType;
+use Illuminate\Support\Facades\Gate;
 
 class ActivityTypeController extends Controller
 {
@@ -14,39 +15,45 @@ class ActivityTypeController extends Controller
      */
     public function index(Request $request)
     {   
+        if (!Gate::allows('viewAny', ActivityType::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403);
+        }
 
         // Récupérer les catégories distinctes
         $categories = ActivityType::select('category')->distinct()->get();
 
-        // $activityTypes = ActivityType::all();
-
-        // return view('activityTypes.index', compact('activityTypes', 'categories'));
         // Créer la requête de base pour les types d'activité
-    $query = ActivityType::query();
+        $query = ActivityType::query();
 
-    // Appliquer le filtre de recherche par nom
-    if ($request->has('search') && !empty($request->search)) {
-        $query->where('name', 'like', '%' . $request->search . '%')
-        ->orWhere('description', 'like', '%' . $request->input('search') . '%');
-    }
+        // Appliquer le filtre de recherche par nom
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+            ->orWhere('description', 'like', '%' . $request->input('search') . '%');
+        }
 
-    // Appliquer le filtre de catégorie
-    if ($request->has('sort') && !empty($request->sort)) {
-        $query->where('category', $request->sort);
-    }
+        // Appliquer le filtre de catégorie
+        if ($request->has('sort') && !empty($request->sort)) {
+            $query->where('category', $request->sort);
+        }
 
-    // Récupérer les résultats paginés
-    $activityTypes = $query->paginate(10);
+        // Récupérer les résultats paginés
+        $activityTypes = $query->paginate(10);
 
-    // Passer les catégories et les résultats à la vue
-    return view('activity-types.index', compact('activityTypes', 'categories'));
+        // Passer les catégories et les résultats à la vue
+        return view('activity-types.index', compact('activityTypes', 'categories'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   
+        if (!Gate::allows('viewAny', ActivityType::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403);
+        }
+
         $activityTypes = ActivityType::all();
 
         return view('activity-types.create', compact('activityTypes'));
@@ -56,7 +63,12 @@ class ActivityTypeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreActivityTypeRequest $request)
-    {
+    {   
+        if (!Gate::allows('viewAny', ActivityType::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403);
+        }
+
         // Création d'un nouvel enregistrement
         ActivityType::create([
             'category' => $request->category,
@@ -72,7 +84,12 @@ class ActivityTypeController extends Controller
      * Display the specified resource.
      */
     public function show($id)
-    {
+    {   
+        if (!Gate::allows('viewAny', ActivityType::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403);
+        }
+
          // Trouver l'enregistrement par ID
          $activityType = ActivityType::findOrFail($id);
 
@@ -84,7 +101,12 @@ class ActivityTypeController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
+    {   
+        if (!Gate::allows('viewAny', ActivityType::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403);
+        }
+
         // Trouver l'enregistrement par ID
         $activityType = ActivityType::findOrFail($id);
 
@@ -96,7 +118,12 @@ class ActivityTypeController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateActivityTypeRequest  $request, $id)
-    {
+    {   
+        if (!Gate::allows('viewAny', ActivityType::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403);
+        }
+
         // Trouver l'enregistrement par ID
         $activityType = ActivityType::findOrFail($id);
 
@@ -115,7 +142,12 @@ class ActivityTypeController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
+    {   
+        if (!Gate::allows('viewAny', ActivityType::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403);
+        }
+
         // Trouver l'enregistrement par ID
         $activityType = ActivityType::findOrFail($id);
 
