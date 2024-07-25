@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/',
+    'dashboard_url' => '/dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -296,6 +296,11 @@ return [
     'menu' => [
         // Navbar items:
         [
+            'text' => 'Accueil',
+            'url' => '/',
+            'topnav_right' => true,
+        ],
+        [
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
@@ -330,14 +335,14 @@ return [
         ],
         ['header' => 'RENDEZ-VOUS', 'can' => 'access-admin'],
         [
-            'text' => 'liste de rendez-vous',
+            'text' => 'Liste de rendez-vous',
             'url' => '/appointments-list',
             'icon' => 'fas fa-fw fa-file-signature',
             'can' => 'access-admin',
             'icon_color' => 'info',
         ],
         [
-            'text' => 'ajouter des dates',
+            'text' => 'Ajouter des dates',
             'url' => '/add-available-dates',
             'icon' => 'fas fa-fw fa-file-signature',
             'can' => 'access-admin',
@@ -361,6 +366,11 @@ return [
         [
             'text' => 'Liste des classes',
             'url' => '/classes',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Nouvelle classe',
+            'url' => '/class/create',
             'icon' => 'fas fa-fw fa-user',
         ],
         ['header' => 'ENFANTS', 'can' => ['access-admin', 'access-teacher']],
@@ -402,7 +412,7 @@ return [
         ],
         [
             'text' => 'Nouveau type d\'activité',
-            'url' => '/activity-type/create',
+            'url' => '/activity-types/create',
             'can' => 'access-admin',
             'icon' => 'fas fa-fw fa-chalkboard',
             'icon_color' => 'warning',

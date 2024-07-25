@@ -8,6 +8,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ActivityTypeController;
+use App\Http\Controllers\ActivityController;
 
 
 Route::get('/', function () {
@@ -117,6 +118,16 @@ Route::get('activity-types/{id}/edit', [ActivityTypeController::class, 'edit'])-
 Route::put('activity-types/{id}', [ActivityTypeController::class, 'update'])->name('activity-types.update');
 
 Route::delete('activity-types/{id}', [ActivityTypeController::class, 'destroy'])->name('activity-types.destroy');
+
+
+// Activity
+
+Route::get('/activities', [ActivityController::class, 'index'])->name('activity.index');
+
+Route::get('/activity-create', [ActivityController::class, 'create'])->name('activity.create');
+
+Route::post('/activity-create', [ActivityController::class, 'store'])->name('activity.store');
+
 
 
 

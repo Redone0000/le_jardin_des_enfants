@@ -91,7 +91,9 @@ class ClassSectionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $class = ClassSection::findOrFail($id);
+
+        return view('classes.show', ['class' => $class]);
     }
 
     /**
@@ -99,7 +101,17 @@ class ClassSectionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $class = ClassSection::findOrFail($id);
+
+        // if (!Gate::allows('update', $class)) {
+        //     // Retourne une erreur 403 (accès interdit)
+        //     abort(403);
+        // }
+
+        $sections = Section::all();
+        $teachers = Teacher::all();
+
+        return view('classes.edit', ['class' => $class, 'sections' => $sections, 'teachers' => $teachers]);
     }
 
     /**

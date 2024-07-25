@@ -61,39 +61,6 @@
      @endif
  
  
-        <!-- <div class="row mt-5">
-        <h5><strong>Nos activités</strong></h5>
-            <table class="table table-horizontal">
-                <thead>
-                    <tr>
-                        <td>Id</td>
-                        <td>Date</td>
-                        <td>Nom</td>
-                        <td>Type</td>
-                        <td>Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($class->activities as $activity)
-                        <tr>
-                            <td>{{ $activity->id }}</td>
-                            <td>{{ $activity->created_at }}</td>
-                            <td>{{ $activity->name }}</td>
-                            <td>{{ $activity->typeActivity->name }}</td>
-                            <td>
-                                <div class="row">
-                                    <a href="{{ route('activity.show', $activity->id) }}" class="btn-sm btn-primary mr-2">Plus de détails</a>
-                                    <a href="{{ route('activity.edit', $activity->id) }}" class="btn-sm btn-success mr-2">Modifier</a>
-                                    <form method="" action="">
-                                        <button type="submit" class="btn-sm btn-danger">Supprimer</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div> -->
     </div>
 @stop
 

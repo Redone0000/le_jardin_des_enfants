@@ -27,7 +27,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="container">
+    <div class="container-fluid">
         <div class="row mb-3 mt-3">
             <div class="col-md-4">
                 <!-- Search Form -->

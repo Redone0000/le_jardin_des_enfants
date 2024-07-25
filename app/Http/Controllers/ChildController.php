@@ -176,7 +176,7 @@ class ChildController extends Controller
         return redirect()->route('children.index')->with('success', 'Enfant ajouté avec succès.');
     }
 
-
+    
     /**
      * Display the specified resource.
      */
