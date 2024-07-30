@@ -420,14 +420,14 @@ return [
         ['header' => 'ACTIVITE'],
         [
             'text' => 'Liste d\'activités',
-            'url' => '',
+            'url' => '/activities',
             // 'can' => ['access-admin', 'access-teacher'],
             'icon' => 'fas fa-fw fa-chalkboard',
             'icon_color' => 'warning',
         ],
         [
             'text' => 'Nouvelle activité',
-            'url' => '',
+            'url' => 'activity-create',
             'can' => ['access-admin', 'access-teacher'],
             'icon' => 'fas fa-fw fa-chalkboard',
             'icon_color' => 'danger',

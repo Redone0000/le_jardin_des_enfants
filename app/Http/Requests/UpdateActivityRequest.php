@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreActivityRequest extends FormRequest
+class UpdateActivityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,11 +21,13 @@ class StoreActivityRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('id'); // Récupère l'ID de la route
+
         return [
-            'classe' => 'required',
-            'type' => 'required',
+            'classe' => 'required|integer|exists:class_sections,id', // Assurez-vous que la classe existe
+            'type' => 'required|integer|exists:activity_types,id', // Assurez-vous que le type existe
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
 
             // Validation pour les images
             'pictures.*' => 'nullable|file|mimes:jpeg,png,jpg|max:2048', // Maximum 2MB par image

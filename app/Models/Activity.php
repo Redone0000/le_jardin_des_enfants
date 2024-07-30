@@ -40,10 +40,10 @@ class Activity extends Model
     /**
      * Get the type activity that owns the activity.
      */
-    // public function dataActivity()
-    // {
-    //     return $this->hasMany(DataActivity::class, 'activity_id');
-    // }
+    public function activityData()
+    {
+        return $this->hasMany(activityData::class, 'activity_id');
+    }
 
     /**
      * Scope a query to only include activities relevant to the given user.

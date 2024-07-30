@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Activity;
 use App\Models\ActivityType;
+use App\Models\ActivityData;
 use App\Models\ClassSection;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreActivityRequest;
+use App\Http\Requests\UpdateActivityRequest;
 
 class ActivityController extends Controller
 {
@@ -83,12 +85,6 @@ class ActivityController extends Controller
      */
     public function store(StoreActivityRequest $request)
     {    
-        // $request->validate([
-        //     'classe' => 'required',
-        //     'type' => 'required',
-        //     'name' => 'required|string|max:255',
-        //     'description' => 'required|string',
-        // ]);
         $validatedData = $request->validated();
         
         // Créer une nouvelle activité
@@ -129,7 +125,7 @@ class ActivityController extends Controller
         $filePath = $file->store('activity', 'public');
 
         // Enregistrer le chemin du fichier dans la base de données
-        DataActivity::create([
+        ActivityData::create([
             'activity_id' => $activityId,
             'type' => $type,
             'file_path' => $filePath,
@@ -141,7 +137,9 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+
+        return view('activities.show', ['activity' => $activity]);
     }
 
     /**
@@ -149,17 +147,58 @@ class ActivityController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Récupérer l'activité par son ID
+        $activity = Activity::findOrFail($id);
+        $classes = ClassSection::all();
+        $types = ActivityType::all();
+
+        // Passer l'activité à la vue d'édition
+        return view('activities.edit', compact('activity', 'types', 'classes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateActivityRequest $request, string $id)
     {
-        //
+        // Récupérer l'activité à mettre à jour
+        $activity = Activity::findOrFail($id);
+
+        $validatedData = $request->validated();
+
+        // Mettre à jour les champs de l'activité
+        $activity->class_id = $validatedData['classe'];
+        $activity->activity_type_id = $validatedData['type'];
+        $activity->title = $validatedData['name'];
+        $activity->description = $validatedData['description'];
+
+        // Enregistrer les modifications
+        $activity->save();
+
+       // Enregistrer les fichiers dans la table DataActivity
+       if ($request->hasFile('pictures')) {
+        foreach ($request->file('pictures') as $picture) {
+            $this->storeFile($picture, $activity->id, 'photo');
+        }
     }
 
+    if ($request->hasFile('videos')) {
+        foreach ($request->file('videos') as $video) {
+            $this->storeFile($video, $activity->id, 'video');
+        }
+    }
+
+    if ($request->hasFile('pdfs')) {
+        foreach ($request->file('pdfs') as $pdf) {
+            $this->storeFile($pdf, $activity->id, 'pdf');
+        }
+    }
+
+
+        // Rediriger avec un message de succès
+        return redirect()->route('activity.index')->with('success', 'Activité mise à jour avec succès.');
+    }
+    
     /**
      * Remove the specified resource from storage.
      */

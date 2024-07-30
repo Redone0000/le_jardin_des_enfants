@@ -128,7 +128,11 @@ Route::get('/activity-create', [ActivityController::class, 'create'])->name('act
 
 Route::post('/activity-create', [ActivityController::class, 'store'])->name('activity.store');
 
+Route::get('/activity/{id}', [ActivityController::class, 'show'])->name('activity.show');
 
+Route::get('activity/{id}/edit', [ActivityController::class, 'edit'])->name('activity.edit');
+
+Route::put('activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
 
 
 Auth::routes();
