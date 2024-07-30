@@ -134,6 +134,8 @@ Route::get('activity/{id}/edit', [ActivityController::class, 'edit'])->name('act
 
 Route::put('activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
 
+Route::delete('/activity/{id}', [ActivityController::class, 'destroy'])->where('id', '[0-9]+')->name('activity.delete');
+
 
 Auth::routes();
 

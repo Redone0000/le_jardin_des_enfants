@@ -98,7 +98,7 @@
                                         <a href="{{ route('activity.show', $activity->id) }}" class="btn-sm btn-primary mr-3">show</a>
                                         @can('access-admin-teacher')
                                             <a href="{{ route('activity.edit', $activity->id) }}" class="btn-sm btn-info mr-3">edit</a>
-                                            <form action="" method="POST">
+                                            <form action="{{ route('activity.delete', $activity->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')" class="btn btn-danger">supprimer</button>

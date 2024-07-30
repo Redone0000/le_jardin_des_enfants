@@ -204,6 +204,12 @@ class ActivityController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+
+        if($activity) {
+            $activity->delete();
+        }
+        // Rediriger avec un message de succès
+        return redirect()->route('activity.index')->with('success', 'Activité supprimée avec succès.');
     }
 }
