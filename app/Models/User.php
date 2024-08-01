@@ -64,5 +64,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(Tutor::class);
     }
+
+    /**
+     * Get the events for the user.
+     */
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }
 

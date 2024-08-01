@@ -398,14 +398,14 @@ return [
         ['header' => 'EVENEMENT', 'can' => 'access-admin'],
         [
             'text' => 'Liste d\'événements',
-            'url' => '',
+            'url' => '/events',
             'can' => 'access-admin',
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'secondary',
         ],
         [
             'text' => 'Nouvel événement',
-            'url' => '',
+            'url' => '/event/create',
             'can' => 'access-admin',
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'warning',

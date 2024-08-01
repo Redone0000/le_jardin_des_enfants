@@ -9,6 +9,7 @@ use App\Http\Controllers\ClassSectionController;
 use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ActivityTypeController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\EventController;
 
 
 Route::get('/', function () {
@@ -135,6 +136,25 @@ Route::get('activity/{id}/edit', [ActivityController::class, 'edit'])->name('act
 Route::put('activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
 
 Route::delete('/activity/{id}', [ActivityController::class, 'destroy'])->where('id', '[0-9]+')->name('activity.delete');
+
+
+
+// Event
+
+Route::get('events', [EventController::class, 'index'])->name('event.index');
+
+Route::get('event/create', [EventController::class, 'create'])->name('event.create');
+
+Route::post('events', [EventController::class, 'store'])->name('event.store');
+
+Route::get('event/{id}', [EventController::class, 'show'])->name('event.show');
+
+Route::get('event/{id}/edit', [EventController::class, 'edit'])->name('event.edit');
+
+Route::put('event/{id}', [EventController::class, 'update'])->name('event.update');
+
+Route::delete('event/{id}', [EventController::class, 'destroy'])->name('event.destroy');
+
 
 
 Auth::routes();
