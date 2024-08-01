@@ -32,6 +32,9 @@
                     </table>
                 </div>
             </div>
+            <div class="col-md-5">
+<p>hehehe</p>
+            </div>
         </div>
         @endforeach
      @else
@@ -57,6 +60,16 @@
                     </table>
                 </div>
             </div>
+            <div class="col-md-4 mt-4">
+            <img src="{{ asset('storage/' . $class->teacher->picture) }}" alt="Photo" class="" width="100%">
+            </div>
+        </div>
+        <div class="row mt-5">
+            <ul class="list-group">
+                @foreach($class->children as $children)
+                    <li class="list-group-item">{{ $children->firstname }} {{ $children->lastname }}</li>
+                @endforeach
+            </ul>
         </div>
      @endif
  

@@ -38,12 +38,20 @@ class ActivityController extends Controller
         if ($request->has('sortType') && $request->input('sortType')) {
             $query->where('activity_type_id', $request->input('sortType'));
         }
+        // Filtre par catégorie 
+        if ($request->has('category') && $request->category != '') {
+            $query->whereHas('activityType', function ($q) use ($request) {
+                $q->where('category', $request->category);
+            });
+        }
         $activities = $query->get();
         $activityTypes = ActivityType::all();
         $classes = ClassSection::all();
         $types = ActivityType::all();
+        $categories = ActivityType::select('category')->distinct()->get();
+        // dd($categories);
 
-        return view('activities.index', compact('activities', 'activityTypes', 'classes', 'types'));
+        return view('activities.index', compact('activities', 'activityTypes', 'classes', 'types', 'categories'));
     }
 
     /**
@@ -56,29 +64,6 @@ class ActivityController extends Controller
 
         return view('activities.create', compact('classes', 'types'));
     }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //            // Obtenez le nom de la table pour ce modèle
-    //    $instance = new $model();
-    //    $tableName = $instance->getTable();
-   
-    //    // Obtenez les informations sur les colonnes de cette table
-    //    $columns = Schema::getColumnListing($tableName);
-    //    $columnsInfo = [];
-   
-    //    foreach ($columns as $column) {
-    //        $columnInfo = Schema::getColumnType($tableName, $column);
-    //        $columnsInfo[$column] = $this->parseColumnType($columnInfo);
-    //    }
-   
-    //    return $columnsInfo;
-    // }
-
-
 
     /**
      * Store a newly created resource in storage.

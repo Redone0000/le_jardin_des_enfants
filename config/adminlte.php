@@ -366,12 +366,20 @@ return [
         [
             'text' => 'Liste des classes',
             'url' => '/classes',
+            'can' => 'access-admin',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Nouvelle classe',
             'url' => '/class/create',
+            'can' => 'access-admin',
             'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'ma classe',
+            'url' => '/my-class',
+            'icon' => 'fas fa-fw fa-chalkboard',
+            'can' => ['access-teacher', 'access-parent'],
         ],
         ['header' => 'ENFANTS', 'can' => ['access-admin', 'access-teacher']],
         [

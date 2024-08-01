@@ -27,13 +27,13 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="row mb-3 mt-3">
             <div class="col-md-12 mb-3">
                 <form action="{{ route('activity.index') }}" method="GET">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control" placeholder="Rechercher par nom">
                                 <div class="input-group-append">
@@ -52,7 +52,7 @@
                         </div>
                         @endcan
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <select name="sortType" class="form-control" onchange="this.form.submit()">
                                 <option value="">Filtrer par type</option>
                                 @foreach($types as $type)
@@ -60,7 +60,19 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-3">
+
+                         <!-- Filter by category -->
+                        <div class="col-md-2">
+                            <select name="category" class="form-control" onchange="this.form.submit()">
+                                <option value="">Filtrer par catégorie</option>
+                                @foreach($categories as $category)
+                                    @if($category->category) <!-- Assurez-vous que chaque catégorie est bien définie -->
+                                        <option value="{{ $category->category }}">{{ $category->category }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
                             <a href="{{ route('activity.index') }}" class="btn btn-success">Réinitialiser</a>
                         </div>
                     </div>
@@ -75,7 +87,9 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Classe</th>
+                                @can('access-admin')
+                                    <th>Classe</th>
+                                @endcan
                                 <th>Catégorie</th>
                                 <th>Type Activité</th>
                                 <th>Nom de l'activité</th>
@@ -89,7 +103,9 @@
                         @foreach($activities as $activity)
                             <tr>
                                 <td>{{ $activity->id }}</td>
-                                <td>{{ $activity->class->name}}</td>
+                                @can('access-admin')
+                                    <td>{{ $activity->class->name}}</td>
+                                @endcan
                                 <td>{{ $activity->activityType->category }}</td>
                                 <td>{{ $activity->activityType->name }}</td>
                                 <td>{{ $activity->title }}</td>

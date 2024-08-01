@@ -77,7 +77,7 @@
                       <h6 class="mb-0">Classe</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        
+                      {{ $teacher->classSection->name }}
                     </div>
                   </div>
                   <hr>

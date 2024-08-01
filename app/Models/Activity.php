@@ -63,7 +63,7 @@ class Activity extends Model
         }
 
         if ($user->role->name === 'tutor') {
-            $classIds = $user->tutor->children->pluck('class_sections_id')->toArray();
+            $classIds = $user->tutor->children->pluck('class_id')->toArray();
             return $query->whereIn('class_id', $classIds);
         }
 
