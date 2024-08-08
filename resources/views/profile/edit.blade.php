@@ -1,29 +1,27 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('adminlte::page')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+@section('title', 'Liste des Événements')
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
+@section('content_header')
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-3 px-0">
+    <div
+    class="d-flex flex-column align-items-center justify-content-center"
+    style="min-height: 100px"
+    >
+    <h3 class="display-5 font-weight-bold text-white">Profile</h3>
+    <div class="d-inline-flex text-white">
+        <p class="m-0"><a class="text-white" href="">Accueil</a></p>
+        <p class="m-0 ">/</p>
+        <p class="m-0">Profile</p>
     </div>
-</x-app-layout>
+    </div>
+</div>
+<!-- Header End -->
+@stop
+
+@section('content')
+<div class="container">
+  
+</div>
+@stop

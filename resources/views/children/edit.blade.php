@@ -24,7 +24,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">               
+                <div class="col-md-8"> 
+                    @can('access-admin')              
                     <h5 class="mb-3 mt-2">Informations de l'enfant</h5>
                     <div class="border p-4 bg-white shadow">
                         <div class="row">
@@ -83,6 +84,7 @@
                             </div>
                         </div>
                     </div>
+                    @endcan
                     <h5 class="mb-3 mt-3">Informations tuteur</h5>
                     <div class="border p-4 bg-white shadow mb-2">
                         <div class="row">

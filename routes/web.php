@@ -21,11 +21,14 @@ Route::get('/dashboard', function () {
     return view('mydashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+
 
 require __DIR__.'/auth.php';
 
@@ -103,6 +106,8 @@ Route::get('/child/edit/{id}', [ChildController::class, 'edit'])->where('id', '[
 Route::delete('/child/delete/{id}', [ChildController::class, 'destroy'])->where('id', '[0-9]+')->name('child.delete');
 
 Route::put('/child/update/{id}', [ChildController::class, 'update'])->where('id', '[0-9]+')->name('child.update');
+
+Route::delete('/child/delete/{id}', [ChildController::class, 'destroy'])->name('child.delete');
 
 // ActivityType
 

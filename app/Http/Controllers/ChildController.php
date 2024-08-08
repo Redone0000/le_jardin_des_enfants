@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Tutor;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreChildRequest;
+use App\Http\Requests\UpdateChildRequest;
 
 class ChildController extends Controller
 {
@@ -58,64 +59,6 @@ class ChildController extends Controller
         $sections = Section::all();
         return view('children.create', ['classes' => $classes, 'sections' => $sections]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {   
-    //     // Autorisation + validation
-    //     $validatedData = $request->validated();
-
-    //     $classe = ClassSection::findOrFail($request->classe);
-    //     // un login
-    //     $userLogin = strtolower($request->lastname_tutor . '_' . $request->firstname_tutor);
-
-    //     // mot de passe 
-    //     $password = Str::random(10);
-
-    //     // Sauvegarder l'image
-    //     if ($request->hasFile('picture')) {
-    //         $imagePath = $request->file('picture')->store('children', 'public');
-    //     } else {
-    //         $imagePath = null;
-    //     }
-
-    //     $user = new User();
-    //     $user->login = $userLogin;
-    //     $user->lastname = ucwords(strtolower($request->lastname_tutor));
-    //     $user->firstname = ucwords(strtolower($request->firstname_tutor));
-    //     $user->email = $request->email;
-    //     $user->password = $password;
-    //     $user->phone = $request->phone;
-    //     $user->role_id = $request->role_id;
-    //     $user->save();
-
-    //     $tutor = new Tutor();
-    //     $tutor->user_id = $user->id;
-    //     $tutor->address = $request->address;
-    //     $tutor->emergency_contact_name = $request->emergency_contact_name;
-    //     $tutor->emergency_contact_phone = $request->emergency_contact_phone;
-    //     $tutor->save();
-
-    //     $child = new Child();
-    //     $child->class_id = $request->classe;
-    //     $child->lastname = ucwords(strtolower($request->lastname));
-    //     $child->firstname = ucwords(strtolower($request->firstname));
-    //     $child->sexe = $request->sexe;
-    //     $child->birth_date = $request->birth_date;
-    //     $child->picture = $imagePath;
-    //     $child->tutor_id = $tutor->id;
-    //     $child->save();
-
-
-
-    //     // Mail::to($user->email)->send(new RegisterMail($request->all(), $password, $classe->name));
-    
-    //     return redirect()->route('child.index')->with('success', $password);
-    // }
-
-
 
     public function store(StoreChildRequest $request)
     {   
@@ -196,15 +139,79 @@ class ChildController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $child = Child::with('classe')->find($id);
+
+        // Vérifie si l'utilisateur actuel est autorisé à voir le profil de l'enfant
+        // if (!Gate::allows('update', $child)) {
+        //     abort(403);
+        // }
+
+        $classes = ClassSection::all();
+
+        return view('children.edit', ['child' => $child, 'classes' => $classes]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateChildRequest $request, string $id)
     {
-        //
+        $child = Child::findOrFail($id);
+        
+        // Vérifie si l'utilisateur actuel est autorisé à voir le profil de l'enfant
+        // if (!Gate::allows('update', $child)) {
+        //     abort(403);
+        // }
+
+        // $request->validate([
+        //     'classe' => 'required|integer',
+        //     'lastname' => 'required|string',
+        //     'firstname' => 'required|string',
+        //     'sexe' => 'required|in:Male,Female',
+        //     'birth_date' => 'nullable|date',
+        //     'picture' => ['nullable', 'image', 'mimetypes:image/jpeg,image/png,image/jpg,image/gif', 'max:2048'],
+        //     'firstname_tutor' => ['required', 'string', 'max:255'],
+        //     'lastname_tutor' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255'],
+        //     'phone' => ['required', 'string', 'max:255'],
+        //     'address' => ['required', 'string', 'max:255'],
+        //     'emergency_contact_name' => ['required', 'string', 'max:255'],
+        //     'emergency_contact_phone' => ['required', 'string', 'max:255'],
+        // ]);
+
+        // Mettre à jour les champs du modèle Child avec les données du formulaire
+        $child->class_id = $request->classe;
+        $child->lastname = $request->lastname;
+        $child->firstname = $request->firstname;
+        $child->sexe = $request->sexe;
+        $child->birth_date = $request->birth_date;
+        $child->tutor->user->firstname = $request->firstname_tutor;
+        $child->tutor->user->lastname = $request->lastname_tutor;
+        $child->tutor->user->email = $request->email;
+        $child->tutor->user->phone = $request->phone;
+        $child->tutor->address = $request->address;
+        $child->tutor->emergency_contact_name = $request->emergency_contact_name;
+        $child->tutor->emergency_contact_phone = $request->emergency_contact_phone;
+
+        // Sauvegarde des changements sur le tuteur (User)
+        $child->tutor->user->save();
+
+        // Sauvegarde des changements sur le tuteur (Tutor)
+        $child->tutor->save();
+
+        if ($request->hasFile('picture')) {
+            // Suppression de l'ancienne photo si l'utilisateur a entré une nouvelle photo
+            if ($child->picture) {
+                Storage::disk('public')->delete($child->picture);
+            }
+            // Sauvegarde de la nouvelle photo
+            $imagePath = $request->file('picture')->store('pictures', 'public');
+            $child->picture = $imagePath;
+        }
+
+        $child->save();
+
+        return redirect()->route('child.show', ['id' => $child->id])->with('success', 'Enfant mis à jour avec succès.');
     }
 
     /**
@@ -212,6 +219,17 @@ class ChildController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if (!Gate::allows('viewAny', Child::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403);
+        }
+
+        $child = Child::findOrFail($id);
+
+        if($child) {
+            $child->delete();
+        }
+
+        return redirect()->route('children.index')->with('success', 'Opération effectuée avec succès.');
     }
 }

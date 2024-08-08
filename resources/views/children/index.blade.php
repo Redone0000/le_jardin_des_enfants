@@ -66,9 +66,11 @@
                                 <th>Id</th>
                                 <th>Nom</th>
                                 <th>Prenom</th>
-                                <th>Section</th>
-                                <th>Classe</th>
-                                <th>Enseignant</th>
+                                @can('access-admin')
+                                    <th>Section</th>
+                                    <th>Classe</th>
+                                    <th>Enseignant</th>
+                                @endcan
                                 <th>Parents</th>
                                 <th>Action</th>
                             </tr>
@@ -80,15 +82,17 @@
                                 <td>{{ $child->id }}</td>
                                 <td>{{ $child->lastname }}</td>
                                 <td>{{ $child->firstname }}</td>
-                                <td>{{ $child->classe->section->name }}</td>
-                                <td>{{ $child->classe->name }}</td>
-                                <td>{{ $child->classe->teacher->user->lastname }} {{ $child->classe->teacher->user->firstname }}</td>
+                                @can('access-admin')
+                                    <td>{{ $child->classe->section->name }}</td>
+                                    <td>{{ $child->classe->name }}</td>
+                                    <td>{{ $child->classe->teacher->user->lastname }} {{ $child->classe->teacher->user->firstname }}</td>
+                                @endcan
                                 <td>{{ $child->tutor->user->lastname }} {{ $child->tutor->user->firstname }}</td>                            
 
                                 <td>
                                     <div class="row">
                                         <a href="{{ route('child.show', $child->id) }}" class="btn-sm btn-primary mr-3">show</a>
-                                        @can('access-admin-teacher')
+                                        @can('access-admin')
                                         <a href="{{ route('child.edit', $child->id) }}" class="btn-sm btn-info mr-3">edit</a>
                                         <form action="{{ route('child.delete', $child->id) }}" method="POST">
                                             @csrf

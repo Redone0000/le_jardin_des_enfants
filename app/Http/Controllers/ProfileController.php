@@ -57,4 +57,15 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Afficher le profil de l'utilisateur authentifié.
+     */
+    public function show()
+    {
+        $user = Auth::user();
+        $role = $user->role_id;
+
+        return view('profile.show', compact('user','role'));
+    }
 }
