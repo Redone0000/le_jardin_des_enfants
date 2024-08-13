@@ -34,7 +34,7 @@
                     <p><i class="fas fa-phone"></i> Téléphone : {{ $user->phone }}</p>
                 </div>
             </div>
-            
+            <a href="{{ route('profile.edit', ['id' => $user->id]) }}" class="btn-sm btn-info">Mettre à jour</a>
         </div>
 
         <!-- Section Détails Spécifiques au Rôle -->
