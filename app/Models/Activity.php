@@ -69,4 +69,10 @@ class Activity extends Model
 
         return $query->where('class_id', 0);
     }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
+    }
+
 }

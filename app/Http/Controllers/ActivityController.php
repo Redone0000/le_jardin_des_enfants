@@ -59,6 +59,8 @@ class ActivityController extends Controller
      */
     public function create()
     {   
+        // $activity = Activity::findOrfail($id);
+        // $children = $activity->classSection->children;
         $classes = ClassSection::all();
         $types = ActivityType::all();
 

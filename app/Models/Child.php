@@ -54,4 +54,9 @@ class Child extends Model
             return $query->where('id', 0);
         }
     }
+
+    public function evaluations()
+{
+    return $this->hasMany(Evaluation::class, 'child_id');
+}
 }

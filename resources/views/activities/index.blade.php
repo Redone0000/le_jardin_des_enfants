@@ -119,6 +119,14 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')" class="btn btn-danger">supprimer</button>
                                             </form>
+                                            @if($activity->evaluations->isNotEmpty())
+                                            <!-- Afficher le lien pour voir les évaluations -->
+                                            <a href="{{ route('evaluations.index', $activity->id) }}" class="btn-sm btn-secondary mr-3">Voir les évaluations</a>
+                                        @else
+                                            <!-- Afficher le lien pour évaluer -->
+                                            <a href="{{ route('evaluation.create', $activity->id) }}" class="btn-sm btn-success mr-3">Evaluer</a>
+                                        @endif
+
                                         @endcan
                                     </div>
                                 </td>

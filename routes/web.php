@@ -10,6 +10,7 @@ use App\Http\Controllers\ChildController;
 use App\Http\Controllers\ActivityTypeController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EvaluationController;
 
 
 Route::get('/', function () {
@@ -161,6 +162,25 @@ Route::put('event/{id}', [EventController::class, 'update'])->name('event.update
 
 Route::delete('event/{id}', [EventController::class, 'destroy'])->name('event.destroy');
 
+// Evaluation
+
+// Route::get('evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
+
+Route::get('/activities/{activity}/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
+
+Route::get('evaluations/create/{id}', [EvaluationController::class, 'create'])->name('evaluation.create');
+
+Route::post('/evaluations/{id}', [EvaluationController::class, 'store'])->name('evaluations.store');
+
+// Route::get('evaluations/{activity}/edit', [EvaluationController::class, 'edit'])->name('evaluations.edit');
+
+// Route::put('evaluations/{activity}', [EvaluationController::class, 'update'])->name('evaluations.update');
+
+Route::get('/evaluations/{evaluation}/edit', [EvaluationController::class, 'edit'])->name('evaluations.edit');
+
+Route::put('/evaluations/{evaluation}', [EvaluationController::class, 'update'])->name('evaluations.update');
+
+Route::delete('/evaluations/{id}', [EvaluationController::class, 'destroy'])->name('evaluations.destroy');
 
 
 Auth::routes();
