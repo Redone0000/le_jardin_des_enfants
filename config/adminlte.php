@@ -381,11 +381,11 @@ return [
             'icon' => 'fas fa-fw fa-chalkboard',
             'can' => ['access-teacher', 'access-parent'],
         ],
-        ['header' => 'ENFANTS', 'can' => ['access-admin', 'access-teacher']],
+        ['header' => 'ENFANTS', 'can' => ['access-admin', 'access-teacher', 'access-parent']],
         [
             'text' => 'Enfants',
             'url' => '/children',
-            'can' => ['access-admin', 'access-teacher'],
+            'can' => ['access-admin', 'access-teacher', 'access-parent'],
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'success',
         ],

@@ -17,26 +17,37 @@
                     <thead>
                         <tr>
                             <th>Nom de l'Enfant</th>
-                            <th>Grade</th>
-                            <th>Feedback</th>
-                            <th>Action</th>
+                            <th>Évaluation</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($evaluations as $evaluation)
+                        @foreach($children as $child)
+                            @php
+                            $evaluation = $evaluations->get($child->id);
+                            @endphp
                             <tr>
-                                <td>{{ $evaluation->child->lastname }} {{ $evaluation->child->firstname }}</td>
-                                <td>{{ $evaluation->grade }}</td>
-                                <td>{{ $evaluation->feedback }}</td>
+                                <td>{{ $child->lastname }} {{ $child->firstname }}</td>
                                 <td>
-                                    <a href="{{ route('evaluations.edit', $evaluation) }}" class="btn btn-success btn-sm">Editer</a>
-                                    <form action="{{ route('evaluations.destroy', $evaluation->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette évaluation ?')">
-                                            Supprimer
-                                        </button>
-                                    </form>
+                                    @if($evaluation)
+                                        Note: {{ $evaluation->grade }} <br>
+                                        Feedback: {{ $evaluation->feedback }}
+                                    @else
+                                        Non évalué
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($evaluation)
+                                        <a href="{{ route('evaluations.edit', $evaluation->id) }}" class="btn btn-info btn-sm">
+                                            Modifier
+                                        </a>
+                                    @else
+                                        @if($user->role_id === 1 || ($user->role_id !== 1 && $child->class_id == $user->teacher->classSection->id))
+                                            <a href="{{ route('evaluation.create', ['activity_id' => $activity->id, 'child_id' => $child->id]) }}" class="btn btn-success btn-sm">
+                                                Évaluer
+                                            </a>
+                                        @endif
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -46,9 +57,4 @@
         </div>
     </div>
 </div>
-
-@section('css')
-<style>
-</style>
-@stop
 @stop

@@ -19,7 +19,7 @@
 <!-- Header End -->
 @stop
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12 mb-5">
             <h5 class="mb-3"><strong>Les prochains rendez-vous</strong></h5>
@@ -43,8 +43,12 @@
                         <td>{{ $appointment->phone_number }}</td>
                         <td>{{ $appointment->email }}</td>
                         <td>
-                            <a href="" class="btn-sm btn-danger">Supprimer</a>
-                            <a href="" class="btn-sm btn-info">Contacter</a>
+                            <form action="{{ route('appointments.destroy', $appointment->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">Supprimer</button>
+                            </form>
+                            <a href="" class="btn btn-info btn-sm">Contacter</a>
                         </td>
                     </tr>
                     @endforeach

@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        @can('access-admin')
+                        @can('access-parent')
                         <div class="col-md-2">
                             <select name="sort" class="form-control" onchange="this.form.submit()">
                                 <option value="">Filtrer par classe</option>
@@ -87,7 +87,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                @can('access-admin')
+                                @if(Auth::user()->can('access-admin') || Auth::user()->can('access-parent') && Auth::user()->tutor->children->count() > 1)
                                     <th>Classe</th>
                                 @endcan
                                 <th>Catégorie</th>
@@ -103,7 +103,7 @@
                         @foreach($activities as $activity)
                             <tr>
                                 <td>{{ $activity->id }}</td>
-                                @can('access-admin')
+                                @if(Auth::user()->can('access-admin') || Auth::user()->can('access-parent') && Auth::user()->tutor->children->count() > 1)
                                     <td>{{ $activity->class->name}}</td>
                                 @endcan
                                 <td>{{ $activity->activityType->category }}</td>
@@ -119,13 +119,9 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')" class="btn btn-danger">supprimer</button>
                                             </form>
-                                            @if($activity->evaluations->isNotEmpty())
                                             <!-- Afficher le lien pour voir les évaluations -->
-                                            <a href="{{ route('evaluations.index', $activity->id) }}" class="btn-sm btn-secondary mr-3">Voir les évaluations</a>
-                                        @else
-                                            <!-- Afficher le lien pour évaluer -->
-                                            <a href="{{ route('evaluation.create', $activity->id) }}" class="btn-sm btn-success mr-3">Evaluer</a>
-                                        @endif
+                                            <a href="{{ route('evaluations.index', $activity->id) }}" class="btn-sm btn-secondary ml-3">évaluations</a>
+
 
                                         @endcan
                                     </div>

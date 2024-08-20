@@ -56,7 +56,7 @@ class Child extends Model
     }
 
     public function evaluations()
-{
-    return $this->hasMany(Evaluation::class, 'child_id');
-}
+    {
+        return $this->hasMany(Evaluation::class, 'child_id');
+    }
 }

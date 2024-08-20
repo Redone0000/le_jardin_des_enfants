@@ -52,9 +52,12 @@ Route::get('/appointment/cancel/{id}/{token}', [AppointmentController::class, 'c
 
 Route::get('/add-available-dates', [AppointmentController::class, 'showAddAvailableDatesForm'])->name('appointment.addAvailableDates');
 
-Route::get('/appointments-list', [AppointmentController::class, 'appointmentsList'])->name('appointment.list');
+Route::get('/appointments-list', [AppointmentController::class, 'appointmentsList'])->name('appointments.list');
 
 Route::post('/store-available-dates', [AppointmentController::class, 'storeAvailableDates'])->name('appointment.storeAvailableDates');
+
+Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
+
 
 // Teachers
 
@@ -168,9 +171,11 @@ Route::delete('event/{id}', [EventController::class, 'destroy'])->name('event.de
 
 Route::get('/activities/{activity}/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
 
-Route::get('evaluations/create/{id}', [EvaluationController::class, 'create'])->name('evaluation.create');
+// Route::get('evaluations/create/{id}', [EvaluationController::class, 'create'])->name('evaluation.create');
 
-Route::post('/evaluations/{id}', [EvaluationController::class, 'store'])->name('evaluations.store');
+Route::get('evaluations/create/{activity_id}/{child_id}', [EvaluationController::class, 'create'])->name('evaluation.create');
+
+Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
 
 // Route::get('evaluations/{activity}/edit', [EvaluationController::class, 'edit'])->name('evaluations.edit');
 

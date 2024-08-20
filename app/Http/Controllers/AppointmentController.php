@@ -182,4 +182,29 @@ class AppointmentController extends Controller
 
         return redirect()->route('appointment.addAvailableDates')->with('success', 'Les dates ont été ajoutées avec succès.');
     }
+
+    public function destroy($id)
+{
+    // Trouver le rendez-vous par ID
+    $appointment = Appointment::findOrFail($id);
+
+    // Récupérer le jour et l'heure pour réactiver le créneau horaire
+    $app = AvailableDate::where('date', $appointment->day)->first();
+    $time = TimeSlot::where('available_date_id', $app->id)
+        ->where('start_time', $appointment->hour)
+        ->first();
+
+    // Réactiver le créneau horaire
+    if ($time) {
+        $time->is_available = 1;
+        $time->save();
+    }
+
+    // Supprimer le rendez-vous
+    $appointment->delete();
+
+    // Rediriger avec un message de succès
+    return redirect()->route('appointments.list')->with('success', 'Rendez-vous supprimé avec succès');
+}
+
 }
