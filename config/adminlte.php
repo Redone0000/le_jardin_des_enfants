@@ -434,6 +434,13 @@ return [
             'icon_color' => 'warning',
         ],
         [
+            'text' => 'Evaluations',
+            'url' => '/tutors/evaluations',
+            'can' => 'access-parent',
+            'icon' => 'fas fa-fw fa-user',
+            'icon_color' => 'success',
+        ],
+        [
             'text' => 'Nouvelle activité',
             'url' => 'activity-create',
             'can' => ['access-admin', 'access-teacher'],

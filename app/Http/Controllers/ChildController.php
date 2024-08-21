@@ -12,6 +12,8 @@ use App\Models\Tutor;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreChildRequest;
 use App\Http\Requests\UpdateChildRequest;
+use Illuminate\Support\Facades\Storage;
+
 
 class ChildController extends Controller
 {
@@ -185,19 +187,19 @@ class ChildController extends Controller
         $child->firstname = $request->firstname;
         $child->sexe = $request->sexe;
         $child->birth_date = $request->birth_date;
-        $child->tutor->user->firstname = $request->firstname_tutor;
-        $child->tutor->user->lastname = $request->lastname_tutor;
-        $child->tutor->user->email = $request->email;
-        $child->tutor->user->phone = $request->phone;
-        $child->tutor->address = $request->address;
-        $child->tutor->emergency_contact_name = $request->emergency_contact_name;
-        $child->tutor->emergency_contact_phone = $request->emergency_contact_phone;
+        // $child->tutor->user->firstname = $request->firstname_tutor;
+        // $child->tutor->user->lastname = $request->lastname_tutor;
+        // $child->tutor->user->email = $request->email;
+        // $child->tutor->user->phone = $request->phone;
+        // $child->tutor->address = $request->address;
+        // $child->tutor->emergency_contact_name = $request->emergency_contact_name;
+        // $child->tutor->emergency_contact_phone = $request->emergency_contact_phone;
 
-        // Sauvegarde des changements sur le tuteur (User)
-        $child->tutor->user->save();
+        // // Sauvegarde des changements sur le tuteur (User)
+        // $child->tutor->user->save();
 
-        // Sauvegarde des changements sur le tuteur (Tutor)
-        $child->tutor->save();
+        // // Sauvegarde des changements sur le tuteur (Tutor)
+        // $child->tutor->save();
 
         if ($request->hasFile('picture')) {
             // Suppression de l'ancienne photo si l'utilisateur a entré une nouvelle photo
@@ -205,9 +207,10 @@ class ChildController extends Controller
                 Storage::disk('public')->delete($child->picture);
             }
             // Sauvegarde de la nouvelle photo
-            $imagePath = $request->file('picture')->store('pictures', 'public');
+            $imagePath = $request->file('picture')->store('children', 'public');
             $child->picture = $imagePath;
         }
+
 
         $child->save();
 

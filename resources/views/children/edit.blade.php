@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-md-8"> 
-                    @can('access-admin')              
+                                 
                     <h5 class="mb-3 mt-2">Informations de l'enfant</h5>
                     <div class="border p-4 bg-white shadow">
                         <div class="row">
@@ -84,57 +84,7 @@
                             </div>
                         </div>
                     </div>
-                    @endcan
-                    <h5 class="mb-3 mt-3">Informations tuteur</h5>
-                    <div class="border p-4 bg-white shadow mb-2">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="lastname_tutor">Nom</label>
-                                    <input type="text" name="lastname_tutor" class="form-control" placeholder="Nom" value="{{ old('lastname_tutor', $child->tutor->user->lastname ?? '') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="firstname_tutor">Prénom</label>
-                                    <input type="text" name="firstname_tutor" class="form-control" placeholder="Prénom" value="{{ old('firstname_tutor', $child->tutor->user->firstname ?? '') }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email', $child->tutor->user->email ?? '') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="phone">Numéro de téléphone</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="Email" value="{{ old('phone', $child->tutor->user->phone) }}">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="row"> -->
-                            <div class="form-group">
-                                <label for="address">Adresse</label>
-                                <input type="text" name="address" class="form-control" placeholder="Adresse" value="{{ old('address', $child->tutor->address) }}">
-                            </div>
-                        <!-- </div> -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="emergency_contact_name">Nom du contact d'urgence</label>
-                                    <input type="text" name="emergency_contact_name" class="form-control" placeholder="Nom contact urgence" value="{{ old('emergency_contact_name', $child->tutor->emergency_contact_name) }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="emergency_contact_phone">Numéro de télépone du contact</label>
-                                    <input type="text" name="emergency_contact_phone" class="form-control" placeholder="Numéro de téléphone contact" value="{{ old('emergency_contact_phone', $child->tutor->emergency_contact_phone) }}">
-                            </div>
-                        </div>
-                        <input type="hidden" name="role_id" value="3">
+
                         <button type="submit" class="btn btn-primary mt-3 mb-2 float-right">Envoyer</button>
                     </div>
                 </div>

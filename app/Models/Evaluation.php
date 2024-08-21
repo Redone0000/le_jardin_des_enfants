@@ -27,4 +27,14 @@ class Evaluation extends Model
     {
         return $this->belongsTo(Child::class);
     }
+
+    public static function getEvaluationsForTutor($tutorId)
+    {
+        return self::whereHas('child', function ($query) use ($tutorId) {
+            $query->where('tutor_id', $tutorId);
+        })
+        ->with('child', 'activity') // Inclure les relations nécessaires
+        ->get()
+        ->groupBy('activity_id');
+    }
 }

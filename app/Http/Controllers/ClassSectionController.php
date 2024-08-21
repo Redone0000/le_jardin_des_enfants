@@ -205,7 +205,7 @@ class ClassSectionController extends Controller
             $classSectionIds = $children->pluck('class_id')->unique()->toArray();
             // Rechercher les classes en utilisant les IDs
             $classSections = ClassSection::whereIn('id', $classSectionIds)->get();
-            return view('classes.show', ['classSections' => $classSections]);
+            return view('classes.show', ['classSections' => $classSections, 'user' => $user]);
         } else {
             // Rediriger ou afficher une erreur pour d'autres rôles non traités
             return redirect()->route('home')->with('error', 'Vous n\'avez pas la permission d\'accéder à cette page.');

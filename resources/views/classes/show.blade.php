@@ -1,84 +1,94 @@
 @extends('adminlte::page')
 
-@section('title', 'Enseignant')
+@section('title', 'Classe')
 
 @section('content_header')
-    <h1></h1>
+    <h1>Classes</h1>
 @stop
 
 @section('content')
-    <div class="container">
-    @if(isset($classSections))
-        @foreach($classSections as $class)
-        <div class="row mt-5">
-            <div class="col-md-7 ml-5">
-                <h1 class=""><strong>{{ $class->name }} <span class="float-right">#{{ $class->id }}</span></strong></h1>
-                <div class="table-responsive table-striped mt-5">
-                    <table class="table table-horizontal">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Enseignant</th>
-                                <td>{{ $class->teacher->user->firstname }} {{ $class->teacher->user->lastname }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Section</th>
-                                <td>{{ $class->section->name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Classe</th>
-                                <td>{{ $class->name }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-5">
-<p>hehehe</p>
-            </div>
-        </div>
-        @endforeach
-     @else
-        <div class="row mt-5">
-            <div class="col-md-7 ml-5">
-                <h1 class=""><strong>{{ $class->name }} <span class="float-right">#{{ $class->id }}</span></strong></h1>
-                <div class="table-responsive table-striped mt-5">
-                    <table class="table table-horizontal">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Enseignant</th>
-                                <td>{{ $class->teacher->user->firstname }} {{ $class->teacher->user->lastname }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Section</th>
-                                <td>{{ $class->section->name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Classe</th>
-                                <td>{{ $class->name }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4 mt-4">
-            <img src="{{ asset('storage/' . $class->teacher->picture) }}" alt="Photo" class="" width="100%">
-            </div>
-        </div>
-        <div class="row mt-5">
-            <ul class="list-group">
-                @foreach($class->children as $children)
-                    <li class="list-group-item">{{ $children->firstname }} {{ $children->lastname }}</li>
+    <div class="container mt-4">
+        @if(isset($classSections) && $classSections->isNotEmpty())
+            @foreach($classSections as $class)
+                @php
+                    $childrenInClass = $user->tutor->children->where('class_id', $class->id);
+                @endphp
+
+                @foreach($childrenInClass as $child)
+                    <div class="card mb-4 border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">{{ $child->firstname }} {{ $child->lastname }} - Classe: {{ $class->name }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Enseignant</th>
+                                                <td>{{ $class->teacher->user->firstname }} {{ $class->teacher->user->lastname }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Section</th>
+                                                <td>{{ $class->section->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Classe</th>
+                                                <td>{{ $class->name }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <img src="{{ asset('storage/' . $class->teacher->picture) }}" alt="Photo" class="img-fluid rounded-circle" width="150">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <p class="mb-0">
+                                Dernière mise à jour: 
+                                {{ $class->updated_at ? $class->updated_at->format('d/m/Y H:i') : 'Non disponible' }}
+                            </p>
+                        </div>
+                    </div>
                 @endforeach
-            </ul>
-        </div>
-     @endif
- 
- 
+            @endforeach
+        @else
+            <div class="alert alert-info" role="alert">
+                Aucune classe trouvée.
+            </div>
+        @endif
     </div>
 @stop
 
 @section('css')
-@stop
-
-@section('js')
+    <style>
+        .card {
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: #007bff; /* Couleur primaire */
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+        
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .rounded-circle {
+            border-radius: 50%;
+        }
+    </style>
 @stop

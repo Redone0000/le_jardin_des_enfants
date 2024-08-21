@@ -28,13 +28,6 @@ class UpdateChildRequest extends FormRequest
             'sexe' => 'required|in:Male,Female',
             'birth_date' => 'nullable|date',
             'picture' => ['nullable', 'image', 'mimetypes:image/jpeg,image/png,image/jpg,image/gif', 'max:2048'],
-            'firstname_tutor' => ['required', 'string', 'max:255'],
-            'lastname_tutor' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'phone' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'emergency_contact_name' => ['required', 'string', 'max:255'],
-            'emergency_contact_phone' => ['required', 'string', 'max:255'],
         ];
     }
 }

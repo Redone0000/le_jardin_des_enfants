@@ -187,7 +187,9 @@ Route::put('/evaluations/{evaluation}', [EvaluationController::class, 'update'])
 
 Route::delete('/evaluations/{id}', [EvaluationController::class, 'destroy'])->name('evaluations.destroy');
 
-
+Route::get('/tutors/evaluations', [EvaluationController::class, 'showEvaluationsForConnectedTutor'])
+    ->name('tutor.evaluations');
+    
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -121,8 +121,6 @@
                                             </form>
                                             <!-- Afficher le lien pour voir les évaluations -->
                                             <a href="{{ route('evaluations.index', $activity->id) }}" class="btn-sm btn-secondary ml-3">évaluations</a>
-
-
                                         @endcan
                                     </div>
                                 </td>

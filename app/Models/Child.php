@@ -41,11 +41,9 @@ class Child extends Model
             // Pour l'enseignant, afficher uniquement les enfants de sa classe
             return $query->where('class_id', $user->teacher->classSection->id);
         } elseif ($user->role_id === 3) {
-            // Pour le tuteur, afficher uniquement les enfants dont il est le tuteur
-
-
-            return $query->whereIn('class_id', function ($query) use ($user) {
-                $query->select('class_id')
+             // Pour le tuteur, afficher uniquement les enfants dont il est le tuteur
+            return $query->whereIn('id', function ($subQuery) use ($user) {
+                $subQuery->select('id')
                     ->from('children')
                     ->where('tutor_id', $user->tutor->id);
             });
