@@ -26,11 +26,15 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Enseignant</th>
-                                                <td>{{ $class->teacher->user->firstname }} {{ $class->teacher->user->lastname }}</td>
+                                                <td><a href="{{ route('teacher.show', $class->teacher->id) }}">{{ $class->teacher->user->firstname }} {{ $class->teacher->user->lastname }}</a></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Section</th>
                                                 <td>{{ $class->section->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Description</th>
+                                                <td>{{ $class->section->description }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Classe</th>

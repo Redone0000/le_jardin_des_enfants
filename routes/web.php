@@ -11,6 +11,7 @@ use App\Http\Controllers\ActivityTypeController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\PartnerController;
 
 
 Route::get('/', function () {
@@ -189,6 +190,25 @@ Route::delete('/evaluations/{id}', [EvaluationController::class, 'destroy'])->na
 
 Route::get('/tutors/evaluations', [EvaluationController::class, 'showEvaluationsForConnectedTutor'])
     ->name('tutor.evaluations');
+
+
+// Partners
+
+Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
+
+Route::get('/partners/create', [PartnerController::class, 'create'])->name('partners.create');
+
+Route::post('/partners', [PartnerController::class, 'store'])->name('partners.store');
+
+Route::get('partners/{id}', [PartnerController::class, 'show'])->name('partners.show');
+
+Route::get('partners/{id}/edit', [PartnerController::class, 'edit'])->name('partners.edit');
+
+Route::put('partners/{id}', [PartnerController::class, 'update'])->name('partners.update');
+
+Route::delete('/partners/{id}', [PartnerController::class, 'destroy'])->name('partners.destroy');
+
+
     
 Auth::routes();
 

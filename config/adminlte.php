@@ -327,13 +327,18 @@ return [
         //     'label' => 4,
         //     'label_color' => 'success',
         // ],
-        ['header' => 'account_settings'],
+        // ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url' => '/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
-        ['header' => 'RENDEZ-VOUS', 'can' => 'access-admin'],
+        [
+            'text' => 'change_password',
+            'url' => '/forgot-password',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        // ['header' => 'RENDEZ-VOUS', 'can' => 'access-admin'],
         [
             'text' => 'Liste de rendez-vous',
             'url' => '/appointments-list',
@@ -348,7 +353,7 @@ return [
             'can' => 'access-admin',
             'icon_color' => 'warning',
         ],
-        ['header' => 'INSCRIPTION', 'can' => 'access-admin'],
+        // ['header' => 'INSCRIPTION', 'can' => 'access-admin'],
         [
             'text' => 'Nouvel enseignant',
             'url' => 'teacher/create',
@@ -362,7 +367,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'success',
         ],
-        ['header' => 'CLASSE'],
+        // ['header' => 'CLASSE'],
         [
             'text' => 'Liste des classes',
             'url' => '/classes',
@@ -376,26 +381,20 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'ma classe',
+            'text' => 'Classe',
             'url' => '/my-class',
             'icon' => 'fas fa-fw fa-chalkboard',
             'can' => ['access-teacher', 'access-parent'],
         ],
-        ['header' => 'ENFANTS', 'can' => ['access-admin', 'access-teacher', 'access-parent']],
+        // ['header' => 'ENFANTS', 'can' => ['access-admin', 'access-teacher', 'access-parent']],
         [
             'text' => 'Enfants',
             'url' => '/children',
             'can' => ['access-admin', 'access-teacher', 'access-parent'],
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'success',
-        ],
-        // [
-        //     'text' => 'change_password',
-        //     'url' => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-lock',
-        // ],
-       
-        ['header' => 'EVENEMENT', 'can' => 'access-admin'],
+        ],       
+        // ['header' => 'EVENEMENT', 'can' => 'access-admin'],
         [
             'text' => 'Liste d\'événements',
             'url' => '/events',
@@ -410,7 +409,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'warning',
         ],
-        ['header' => 'TYPE D\'ACTIVITE', 'can' => 'access-admin'],
+        // ['header' => 'TYPE D\'ACTIVITE', 'can' => 'access-admin'],
         [
             'text' => 'Type d\'activités',
             'url' => '/activity-types',
@@ -425,9 +424,9 @@ return [
             'icon' => 'fas fa-fw fa-chalkboard',
             'icon_color' => 'warning',
         ],
-        ['header' => 'ACTIVITE'],
+        // ['header' => 'ACTIVITE'],
         [
-            'text' => 'Liste d\'activités',
+            'text' => 'Activités',
             'url' => '/activities',
             // 'can' => ['access-admin', 'access-teacher'],
             'icon' => 'fas fa-fw fa-chalkboard',
