@@ -12,6 +12,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\CommentController;
 
 
 Route::get('/', function () {
@@ -40,6 +41,7 @@ require __DIR__.'/auth.php';
 Route::get('/', [PageController::class, 'home'])->name('page.home');
 Route::get('/contact', [PageController::class, 'contact'])->name('page.contact');
 Route::get('/teachers', [PageController::class, 'teachers'])->name('page.teachers');
+Route::get('/us-partners', [PageController::class, 'partners'])->name('page.partners');
 
 // Appointment
 
@@ -147,6 +149,20 @@ Route::get('activity/{id}/edit', [ActivityController::class, 'edit'])->name('act
 Route::put('activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
 
 Route::delete('/activity/{id}', [ActivityController::class, 'destroy'])->where('id', '[0-9]+')->name('activity.delete');
+
+Route::get('/feed', [ActivityController::class, 'feed'])->name('feed.index');
+
+// Comment
+
+Route::post('activities/{activityId}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+
+Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
+
+
 
 
 

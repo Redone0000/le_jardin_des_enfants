@@ -196,9 +196,12 @@ class ClassSectionController extends Controller
         if ($user->role_id === 2) {
             // Récupérer l'ID de la classe enseignée par l'enseignant
             $classSectionId = $user->teacher->classSection->id;
+            // dd($classSectionId);
             // Rechercher la classe en utilisant l'ID
             $class = ClassSection::findOrFail($classSectionId);
-            return view('classes.show', ['class' => $class]);
+            // dd($class);
+            return view('classes.show', compact('class'));
+
         } elseif ($user->role_id === 3) {
             // Récupérer les IDs de classe de tous les enfants du parent (tuteur)
             $children = $user->tutor->children;

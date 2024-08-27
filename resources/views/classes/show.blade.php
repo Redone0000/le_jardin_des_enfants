@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+@can('access-parent')
     <div class="container mt-4">
         @if(isset($classSections) && $classSections->isNotEmpty())
             @foreach($classSections as $class)
@@ -63,6 +64,51 @@
             </div>
         @endif
     </div>
+@endcan
+@can('access-teacher')
+    <div class="container mt-4">
+        <div class="card mb-4 border-primary">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Classe: {{ $class->name }}</h4>
+            </div>      
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Enseignant</th>
+                                    <td><a href="{{ route('teacher.show', $class->teacher->id) }}">{{ $class->teacher->user->firstname }} {{ $class->teacher->user->lastname }}</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Section</th>
+                                    <td>{{ $class->section->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Description</th>
+                                    <td>{{ $class->section->description }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Classe</th>
+                                    <td>{{ $class->name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <img src="{{ asset('storage/' . $class->teacher->picture) }}" alt="Photo" class="img-fluid rounded-circle" width="150">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <p class="mb-0">
+                    Dernière mise à jour: 
+                    {{ $class->updated_at ? $class->updated_at->format('d/m/Y H:i') : 'Non disponible' }}
+                </p>
+            </div>
+        </div>
+    </div>
+@endcan
 @stop
 
 @section('css')

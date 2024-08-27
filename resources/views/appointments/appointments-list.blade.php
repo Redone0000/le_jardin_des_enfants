@@ -20,6 +20,9 @@
 @stop
 @section('content')
 <div class="container-fluid">
+<div class="row">
+            <a href="{{ route('appointment.addAvailableDates') }}" class="btn btn-primary ml-auto">Ajouter des dates</a>
+        </div>
     <div class="row">
         <div class="col-md-12 mb-5">
             <h5 class="mb-3"><strong>Les prochains rendez-vous</strong></h5>

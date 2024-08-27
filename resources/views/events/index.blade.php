@@ -29,9 +29,7 @@
     @endif
 
     <div class="row mb-3">
-        <div class="col-md-12">
-            <a href="{{ route('event.create') }}" class="btn btn-primary">Créer un Nouvel Événement</a>
-        </div>
+        <a href="{{ route('event.create') }}" class="btn btn-primary ml-auto">Créer un Nouvel Événement</a>
     </div>
 
     <div class="row">

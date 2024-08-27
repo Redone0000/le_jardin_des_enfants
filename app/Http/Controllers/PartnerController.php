@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Partner;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePartnerRequest;
+use Illuminate\Support\Facades\Gate;
 
 class PartnerController extends Controller
 {
@@ -13,7 +14,12 @@ class PartnerController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
+        if (!Gate::allows('viewAny', Partner::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
+        
         $partners = Partner::all();
 
         return view('partners.index', compact('partners'));
@@ -23,7 +29,12 @@ class PartnerController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   
+        if (!Gate::allows('create', Partner::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
+
         return view('partners.create');
     }
 
@@ -50,7 +61,11 @@ class PartnerController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
+    {   
+        if (!Gate::allows('view', Partner::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
          // Récupérer le partenaire par son ID, ou lancer une exception 404 si non trouvé
          $partner = Partner::findOrFail($id);
 

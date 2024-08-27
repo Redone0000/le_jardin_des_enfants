@@ -75,4 +75,9 @@ class Activity extends Model
         return $this->hasMany(Evaluation::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }

@@ -10,6 +10,7 @@ use App\Models\ClassSection;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ActivityController extends Controller
 {
@@ -18,6 +19,11 @@ class ActivityController extends Controller
      */
     public function index(Request $request)
     {   
+        if (!Gate::allows('viewAny', Activity::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
+
         $user = Auth::user();
         $query = Activity::query()->forUser($user);
 
@@ -59,8 +65,11 @@ class ActivityController extends Controller
      */
     public function create()
     {   
-        // $activity = Activity::findOrfail($id);
-        // $children = $activity->classSection->children;
+        if (!Gate::allows('create', Activity::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
+        
         $classes = ClassSection::all();
         $types = ActivityType::all();
 
@@ -71,7 +80,12 @@ class ActivityController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreActivityRequest $request)
-    {    
+    {   
+        if (!Gate::allows('create', Activity::class)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
+
         $validatedData = $request->validated();
         
         // Créer une nouvelle activité
@@ -123,8 +137,14 @@ class ActivityController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
+    {   
+
         $activity = Activity::findOrFail($id);
+
+        if (!Gate::allows('view', $activity)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
 
         return view('activities.show', ['activity' => $activity]);
     }
@@ -199,4 +219,69 @@ class ActivityController extends Controller
         // Rediriger avec un message de succès
         return redirect()->route('activity.index')->with('success', 'Activité supprimée avec succès.');
     }
+
+
+    // public function feed()
+    // {
+    //    // Récupérer l'utilisateur connecté
+    //     $user = auth()->user();
+
+    //     if ($user->role_id === 1) {
+    //         // Pour un administrateur, récupérer toutes les activités
+    //         $activities = Activity::with(['activityData', 'comments'])
+    //             ->orderBy('created_at', 'desc')
+    //             ->get();
+    //     } elseif ($user->role_id === 2) {
+    //         // Pour un enseignant, récupérer les activités liées à sa classe
+    //         $activities = Activity::where('class_id', $user->teacher->classSection->id)
+    //             ->with(['activityData', 'comments'])
+    //             ->orderBy('created_at', 'desc')
+    //             ->get();
+    //     } elseif ($user->user_id === 3) {
+    //         // Pour un parent, récupérer les activités liées aux enfants sous sa responsabilité
+    //         $childClassIds = $user->tutor->children->pluck('class_id');
+    //         $activities = Activity::whereIn('class_id', $childClassIds)
+    //             ->with(['activityData', 'comments'])
+    //             ->orderBy('created_at', 'desc')
+    //             ->get();
+    //     } else {
+
+    //         $activities = collect();
+    //     }
+
+    //     // Retourner la vue avec les activités filtrées
+    //     return view('activities.feed', compact('activities'));
+    // }
+
+    public function feed()
+{
+    // Récupérer l'utilisateur connecté
+    $user = auth()->user();
+
+    if ($user->role_id === 1) {
+        // Pour un administrateur, récupérer toutes les activités
+        $activities = Activity::with(['activityData', 'comments'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+    } elseif ($user->role_id === 2) {
+        // Pour un enseignant, récupérer les activités liées à sa classe
+        $activities = Activity::where('class_id', $user->teacher->classSection->id)
+            ->with(['activityData', 'comments'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+    } elseif ($user->role_id === 3) {
+        // Pour un parent, récupérer les activités liées aux enfants sous sa responsabilité
+        $childClassIds = $user->tutor->children->pluck('class_id');
+        $activities = Activity::whereIn('class_id', $childClassIds)
+            ->with(['activityData', 'comments'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+    } else {
+        // Gérer les autres types d'utilisateurs si nécessaire
+        $activities = collect();
+    }
+
+    // Retourner la vue avec les activités filtrées
+    return view('activities.feed', compact('activities'));
+}
 }

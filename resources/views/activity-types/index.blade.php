@@ -28,37 +28,38 @@
         </div>
     @endif
     <div class="container-fluid">
-        
+        <div class="row">
+            <a href="{{ route('activity-types.create') }}" class="btn btn-primary ml-auto">Nouveau type d'activité</a>
+        </div>
         <div class="row mb-3 mt-3">
-        <div class="col-md-12 mb-3">
-            <form action="{{ route('activity-types.index') }}" method="GET">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Rechercher par nom" value="{{ request()->search }}">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Rechercher</button>
+            <div class="col-md-12 mb-3">
+                <form action="{{ route('activity-types.index') }}" method="GET">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="Rechercher par nom" value="{{ request()->search }}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Rechercher</button>
+                                </div>
                             </div>
                         </div>
+                        @can('access-admin')
+                        <div class="col-md-2">
+                            <select name="sort" class="form-control" onchange="this.form.submit()">
+                                <option value="">Filtrer par catégories</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->category }}" {{ request()->sort == $category->category ? 'selected' : '' }}>{{ $category->category }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @endcan
+                        <div class="col-md-3">
+                            <a href="{{ route('activity-types.index') }}" class="btn btn-success">Réinitialiser</a>
+                        </div>
                     </div>
-                    @can('access-admin')
-                    <div class="col-md-2">
-                        <select name="sort" class="form-control" onchange="this.form.submit()">
-                            <option value="">Filtrer par catégories</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->category }}" {{ request()->sort == $category->category ? 'selected' : '' }}>{{ $category->category }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @endcan
-                    <div class="col-md-3">
-                        <a href="{{ route('activity-types.index') }}" class="btn btn-success">Réinitialiser</a>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>       
         </div>
-        
-    </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">

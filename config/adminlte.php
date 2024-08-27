@@ -339,19 +339,20 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         // ['header' => 'RENDEZ-VOUS', 'can' => 'access-admin'],
+
         [
-            'text' => 'Liste de rendez-vous',
+            'text' => 'File d\'actualité',
+            'url' => '/feed',
+            'icon' => 'fas fa-fw fa-calendar-alt',
+            'can' => ['access-teacher', 'access-parent'],
+            'icon_color' => 'info',
+        ],
+        [
+            'text' => 'Rendez-vous',
             'url' => '/appointments-list',
             'icon' => 'fas fa-fw fa-file-signature',
             'can' => 'access-admin',
             'icon_color' => 'info',
-        ],
-        [
-            'text' => 'Ajouter des dates',
-            'url' => '/add-available-dates',
-            'icon' => 'fas fa-fw fa-file-signature',
-            'can' => 'access-admin',
-            'icon_color' => 'warning',
         ],
         // ['header' => 'INSCRIPTION', 'can' => 'access-admin'],
         [
@@ -369,14 +370,8 @@ return [
         ],
         // ['header' => 'CLASSE'],
         [
-            'text' => 'Liste des classes',
+            'text' => 'Classes',
             'url' => '/classes',
-            'can' => 'access-admin',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Nouvelle classe',
-            'url' => '/class/create',
             'can' => 'access-admin',
             'icon' => 'fas fa-fw fa-user',
         ],
@@ -396,18 +391,11 @@ return [
         ],       
         // ['header' => 'EVENEMENT', 'can' => 'access-admin'],
         [
-            'text' => 'Liste d\'événements',
+            'text' => 'Evénements',
             'url' => '/events',
             'can' => 'access-admin',
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'secondary',
-        ],
-        [
-            'text' => 'Nouvel événement',
-            'url' => '/event/create',
-            'can' => 'access-admin',
-            'icon' => 'fas fa-fw fa-user',
-            'icon_color' => 'warning',
         ],
         // ['header' => 'TYPE D\'ACTIVITE', 'can' => 'access-admin'],
         [
@@ -417,13 +405,13 @@ return [
             'icon' => 'fas fa-fw fa-chalkboard',
             'icon_color' => 'warning',
         ],
-        [
-            'text' => 'Nouveau type d\'activité',
-            'url' => '/activity-types/create',
-            'can' => 'access-admin',
-            'icon' => 'fas fa-fw fa-chalkboard',
-            'icon_color' => 'warning',
-        ],
+        // [
+        //     'text' => 'Nouveau type d\'activité',
+        //     'url' => '/activity-types/create',
+        //     'can' => 'access-admin',
+        //     'icon' => 'fas fa-fw fa-chalkboard',
+        //     'icon_color' => 'warning',
+        // ],
         // ['header' => 'ACTIVITE'],
         [
             'text' => 'Activités',
@@ -439,13 +427,13 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'success',
         ],
-        [
-            'text' => 'Nouvelle activité',
-            'url' => 'activity-create',
-            'can' => ['access-admin', 'access-teacher'],
-            'icon' => 'fas fa-fw fa-chalkboard',
-            'icon_color' => 'danger',
-        ],
+        // [
+        //     'text' => 'Nouvelle activité',
+        //     'url' => 'activity-create',
+        //     'can' => ['access-admin', 'access-teacher'],
+        //     'icon' => 'fas fa-fw fa-chalkboard',
+        //     'icon_color' => 'danger',
+        // ],
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',
