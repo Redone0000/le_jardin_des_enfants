@@ -34,7 +34,7 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-require __DIR__.'/auth.php';
+
 
 // Pages
 
@@ -229,3 +229,5 @@ Route::delete('/partners/{id}', [PartnerController::class, 'destroy'])->name('pa
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+require __DIR__.'/auth.php';

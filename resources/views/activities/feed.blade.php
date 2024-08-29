@@ -13,15 +13,15 @@
             <div class="profile-cover">
                 <!-- Profil cover content (identique à ton code) -->
                 <div class="profile-cover__action bg--img" data-overlay="0.3">
-                <a href="" class="btn btn-info">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Profil</span>
-                </a>
-                <button class="btn btn-rounded btn-info">
-                    <i class="fa fa-comment"></i>
-                    <span>Message</span>
-                </button>
-            </div>
+                    <a href="" class="btn btn-info">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Profil</span>
+                    </a>
+                    <button class="btn btn-rounded btn-info">
+                        <i class="fa fa-comment"></i>
+                        <span>Message</span>
+                    </button>
+                </div>
             </div>
 
             @foreach($activities as $activity)
@@ -37,7 +37,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-8">
-                    <strong>{{ $activity->name }}</strong>
+                    <strong>{{ $activity->title }}</strong>
                 </div>
                 <div class="col-md-4 text-md-right">
                     <span class="text-muted">{{ $activity->ActivityType->name }}</span>
