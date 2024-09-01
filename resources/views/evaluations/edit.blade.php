@@ -1,4 +1,3 @@
-<!-- resources/views/evaluations/edit.blade.php -->
 @extends('adminlte::page')
 
 @section('title', 'Éditer l\'Évaluation')

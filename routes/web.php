@@ -186,9 +186,11 @@ Route::delete('event/{id}', [EventController::class, 'destroy'])->name('event.de
 
 Route::get('/activities/{activity}/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
 
-Route::get('evaluations/create/{activity_id}/{child_id}', [EvaluationController::class, 'create'])->name('evaluation.create');
+Route::get('evaluations/create-form/{activity_id}', [EvaluationController::class, 'createForm'])->name('evaluations.create-form');
 
-Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
+Route::get('evaluations/create/{activity_id}/{child_id}', [EvaluationController::class, 'create'])->name('evaluations.create');
+
+Route::post('/evaluations/store', [EvaluationController::class, 'store'])->name('evaluations.store');
 
 Route::get('/evaluations/{evaluation}/edit', [EvaluationController::class, 'edit'])->name('evaluations.edit');
 

@@ -3,13 +3,12 @@
 @section('title', 'Évaluations pour l\'activité')
 
 @section('content_header')
-    <h1>Évaluations pour {{ $activity->title }}</h1>
+<h1>{{ $activity->title }}</h1>
+<h2>{{ $activity->activityType->name }}</h2>
 @stop
 
 @section('content')
 <div class="container">
-    <h1>{{ $activity->title }}</h1>
-    <h1>{{ $activity->activityType->name }}</h1>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
@@ -43,7 +42,7 @@
                                         </a>
                                     @else
                                         @if($user->role_id === 1 || ($user->role_id !== 1 && $child->class_id == $user->teacher->classSection->id))
-                                            <a href="{{ route('evaluation.create', ['activity_id' => $activity->id, 'child_id' => $child->id]) }}" class="btn btn-success btn-sm">
+                                            <a href="{{ route('evaluations.create', ['activity_id' => $activity->id, 'child_id' => $child->id]) }}" class="btn btn-success btn-sm">
                                                 Évaluer
                                             </a>
                                         @endif
@@ -57,4 +56,23 @@
         </div>
     </div>
 </div>
+@stop
+@section('css')
+<style>
+    /* Style pour le titre de l'activité */
+    h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Style pour le sous-titre du type d'activité */
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #666;
+        margin-bottom: 1rem;
+    }
+</style>
 @stop
