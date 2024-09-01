@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\Partner;
+use App\Models\ClassSection;
 
 class PageController extends Controller
 {   
@@ -23,6 +24,13 @@ class PageController extends Controller
         $teachers = Teacher::all();
 
         return view('pages.teachers', compact('teachers'));
+    }
+
+    public function classes()
+    {   
+        $classes = ClassSection::all();
+
+        return view('pages.classes', compact('classes'));
     }
 
     public function partners()

@@ -58,6 +58,11 @@
                             <textarea name="description" id="description" class="form-control" rows="4">{{ old('description') }}</textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label for="event_date">Date de l'événement</label>
+                            <input type="date" name="event_date" id="event_date" class="form-control" value="{{ old('event_date') }}">
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Créer</button>
                         <a href="{{ route('event.index') }}" class="btn btn-secondary">Annuler</a>
                     </form>

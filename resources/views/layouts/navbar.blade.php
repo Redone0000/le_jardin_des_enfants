@@ -24,8 +24,9 @@
         >
           <div class="navbar-nav font-weight-bold mx-auto py-0">
             <a href="{{ route('page.home') }}" class="nav-item nav-link active">Accueil</a>
-            <a href="class.html" class="nav-item nav-link">Classes</a>
-            <a href="{{ route('page.teachers') }}" class="nav-item nav-link">Enseignants</a>
+            <a href="{{ route('page.classes') }}" class="nav-item nav-link">Nos classes</a>
+            <a href="{{ route('page.teachers') }}" class="nav-item nav-link">Nos enseignants</a>
+            <a href="{{ route('page.partners') }}" class="nav-item nav-link">Nos partenaires</a>
             <a href="" class="nav-item nav-link">Gallerie</a>
             <a href="" class="nav-item nav-link">Activités</a>
             <div class="nav-item dropdown">
@@ -37,8 +38,7 @@
               >
               <div class="dropdown-menu rounded-0 m-0">
                 <a href="" class="dropdown-item">Présentation de l'école</a>
-                <a href="" class="dropdown-item">Nos infrastructures</a>
-                <a href="" class="dropdown-item">Activités</a>
+                <a href="" class="dropdown-item">Nos événements</a>
               </div>
             </div>
             <a href="{{ route('page.contact') }}" class="nav-item nav-link">Contact</a>

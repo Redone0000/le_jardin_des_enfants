@@ -79,7 +79,6 @@
                                     <div class="row">
                                         <a href="{{ route('class.show', $class->id) }}" class="btn-sm btn-primary mr-1">show</a>
                                         @can('access-admin')
-                                        <a href="{{ route('class.children', $class->id) }}" class="btn btn-sm btn-info mr-1">enfants</a>
                                         <a href="{{ route('class.edit', $class->id) }}" class="btn-sm btn-info mr-1">edit</a>
                                         <form action="{{ route('class.delete', $class->id) }}" method="POST">
                                             @csrf

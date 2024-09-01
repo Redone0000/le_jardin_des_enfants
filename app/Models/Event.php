@@ -14,6 +14,7 @@ class Event extends Model
         'user_id',
         'name',
         'description',
+        'event_date',
     ];
 
     // Relation avec l'utilisateur

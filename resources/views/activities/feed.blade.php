@@ -13,7 +13,7 @@
             <div class="profile-cover">
                 <!-- Profil cover content (identique à ton code) -->
                 <div class="profile-cover__action bg--img" data-overlay="0.3">
-                    <a href="" class="btn btn-info">
+                    <a href="{{route('profile.show')}}" class="btn btn-info">
                         <i class="fas fa-fw fa-user"></i>
                         <span>Profil</span>
                     </a>

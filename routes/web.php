@@ -24,17 +24,9 @@ Route::get('/dashboard', function () {
     return view('mydashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-
-
 
 // Pages
 
@@ -42,6 +34,7 @@ Route::get('/', [PageController::class, 'home'])->name('page.home');
 Route::get('/contact', [PageController::class, 'contact'])->name('page.contact');
 Route::get('/teachers', [PageController::class, 'teachers'])->name('page.teachers');
 Route::get('/us-partners', [PageController::class, 'partners'])->name('page.partners');
+Route::get('/us-classes', [PageController::class, 'classes'])->name('page.classes');
 
 // Appointment
 
@@ -95,7 +88,7 @@ Route::put('/class/edit/{id}', [ClassSectionController::class, 'update'])->where
 
 Route::delete('/class/delete/{id}', [ClassSectionController::class, 'destroy'])->name('class.delete');
 
-Route::get('/class/children/{id}', [ClassSectionController::class, 'getChild'])->name('class.children'); 
+// Route::get('/class/children/{id}', [ClassSectionController::class, 'getChild'])->name('class.children'); 
 
 Route::get('/my-class', [ClassSectionController::class, 'showByClass'])->name('myclass');
 

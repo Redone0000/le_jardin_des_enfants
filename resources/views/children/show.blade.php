@@ -18,7 +18,6 @@
                         <img src="{{ asset('storage/' . $child->picture) }}" alt="Photo de l'enfant" class="img-fluid rounded-circle" width="200">
                         <div class="mt-3">
                             <a href="{{ route('child.edit', $child->id) }}" class="btn btn-info mb-2">Mettre à jour</a>
-                            <a href="mailto:{{ $child->tutor->user->email }}" class="btn btn-success mb-2">Contacter {{ $child->tutor->user->firstname }} {{ $child->tutor->user->lastname }}</a>
                         </div>
                     </div>
                     <div class="col-md-8">

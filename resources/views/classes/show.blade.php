@@ -65,7 +65,7 @@
         @endif
     </div>
 @endcan
-@can('access-teacher')
+@if(auth()->user()->can('access-teacher') || auth()->user()->can('access-admin'))
     <div class="container mt-4">
         <div class="card mb-4 border-primary">
             <div class="card-header bg-primary text-white">

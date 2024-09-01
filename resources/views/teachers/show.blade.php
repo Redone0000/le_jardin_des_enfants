@@ -77,7 +77,11 @@
                       <h6 class="mb-0">Classe</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{ $teacher->classSection->name }}
+                        @if($teacher->classSection)
+                            {{ $teacher->classSection->name }}
+                        @else
+                            <span class="text-muted">Aucune classe assignée</span>
+                        @endif
                     </div>
                   </div>
                   <hr>

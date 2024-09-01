@@ -21,7 +21,7 @@
 @stop
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -42,7 +42,7 @@
                             <th>Nom</th>
                             <th>Description</th>
                             <th>Créé le</th>
-                            <th>Mis à jour le</th>
+                            <th>Date de l'événement</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -53,7 +53,13 @@
                                 <td>{{ $event->name }}</td>
                                 <td>{{ $event->description }}</td>
                                 <td>{{ $event->created_at->format('d/m/Y H:i') }}</td>
-                                <td>{{ $event->updated_at->format('d/m/Y H:i') }}</td>
+                                <td>
+                                    @if($event->event_date)
+                                        {{ \Carbon\Carbon::parse($event->event_date)->format('d/m/Y') }}
+                                    @else
+                                        Date non définie
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ route('event.show', $event->id) }}" class="btn btn-info btn-sm">Voir</a>
                                     <a href="{{ route('event.edit', $event->id) }}" class="btn btn-warning btn-sm">Modifier</a>

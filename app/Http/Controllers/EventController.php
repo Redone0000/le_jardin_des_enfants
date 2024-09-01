@@ -52,6 +52,7 @@ class EventController extends Controller
             'user_id' => $user_id,
             'name' => $request->name,
             'description' => $request->description,
+            'event_date' => $request->event_date,
         ]);
 
         return redirect()->route('event.index')->with('success', 'Événement créé avec succès.');
@@ -97,6 +98,7 @@ class EventController extends Controller
         $event->update([
             'name' => $request->name,
             'description' => $request->description,
+            'event_date' => $request->event_date,
         ]);
 
         return redirect()->route('event.index')->with('success', 'Événement mis à jour avec succès.');

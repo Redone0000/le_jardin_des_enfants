@@ -113,9 +113,9 @@
                                 <td>{{ $activity->title }}</td>
                                 <td>
                                     <div class="row">
-                                        <a href="{{ route('activity.show', $activity->id) }}" class="btn-sm btn-primary mr-3">show</a>
+                                        <a href="{{ route('activity.show', $activity->id) }}" class="btn-sm btn-primary mr-3">Voir</a>
                                         @can('access-admin-teacher')
-                                            <a href="{{ route('activity.edit', $activity->id) }}" class="btn-sm btn-info mr-3">edit</a>
+                                            <a href="{{ route('activity.edit', $activity->id) }}" class="btn-sm btn-info mr-3">éditer</a>
                                             <form action="{{ route('activity.delete', $activity->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
