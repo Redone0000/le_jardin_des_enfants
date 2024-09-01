@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
+use App\Mail\TeacherRegisterMail;
+use Illuminate\Support\Facades\Mail;
 
 class TeacherController extends Controller
 {
@@ -141,8 +143,7 @@ class TeacherController extends Controller
         $teacher->description = $validated['description'];
         $teacher->save();
 
-        // Envoyer un e-mail de bienvenue (désactivé pour l'instant)
-        // Mail::to($user->email)->send(new TeacherRegisterMail($validated, $userLogin, $password));
+        Mail::to($user->email)->send(new TeacherRegisterMail($validated, $userLogin, $password));
 
         // Commit de la transaction
         DB::commit();

@@ -48,20 +48,4 @@ class ChildPolicy
     {
         return $user->role_id === 1;
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Child $child): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Child $child): bool
-    {
-        //
-    }
 }

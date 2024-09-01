@@ -320,14 +320,6 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        // [
-        //     'text' => 'pages',
-        //     'url' => 'admin/pages',
-        //     'icon' => 'far fa-fw fa-file',
-        //     'label' => 4,
-        //     'label_color' => 'success',
-        // ],
-        // ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url' => '/profile',
@@ -338,8 +330,6 @@ return [
             'url' => '/forgot-password',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        // ['header' => 'RENDEZ-VOUS', 'can' => 'access-admin'],
-
         [
             'text' => 'File d\'actualité',
             'url' => '/feed',
@@ -354,7 +344,6 @@ return [
             'can' => 'access-admin',
             'icon_color' => 'info',
         ],
-        // ['header' => 'INSCRIPTION', 'can' => 'access-admin'],
         [
             'text' => 'Nouvel enseignant',
             'url' => 'teacher/create',
@@ -368,7 +357,6 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'success',
         ],
-        // ['header' => 'CLASSE'],
         [
             'text' => 'Classes',
             'url' => '/classes',
@@ -381,7 +369,6 @@ return [
             'icon' => 'fas fa-fw fa-chalkboard',
             'can' => ['access-teacher', 'access-parent'],
         ],
-        // ['header' => 'ENFANTS', 'can' => ['access-admin', 'access-teacher', 'access-parent']],
         [
             'text' => 'Enfants',
             'url' => '/children',
@@ -389,7 +376,6 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'success',
         ],       
-        // ['header' => 'EVENEMENT', 'can' => 'access-admin'],
         [
             'text' => 'Evénements',
             'url' => '/events',
@@ -397,7 +383,6 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'secondary',
         ],
-        // ['header' => 'TYPE D\'ACTIVITE', 'can' => 'access-admin'],
         [
             'text' => 'Type d\'activités',
             'url' => '/activity-types',
@@ -405,14 +390,6 @@ return [
             'icon' => 'fas fa-fw fa-chalkboard',
             'icon_color' => 'warning',
         ],
-        // [
-        //     'text' => 'Nouveau type d\'activité',
-        //     'url' => '/activity-types/create',
-        //     'can' => 'access-admin',
-        //     'icon' => 'fas fa-fw fa-chalkboard',
-        //     'icon_color' => 'warning',
-        // ],
-        // ['header' => 'ACTIVITE'],
         [
             'text' => 'Activités',
             'url' => '/activities',

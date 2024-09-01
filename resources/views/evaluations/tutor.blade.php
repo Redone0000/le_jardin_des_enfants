@@ -31,7 +31,7 @@
                                     <td>{{ $evaluation['category'] }}</td>
                                     <td>{{ $evaluation['type'] }}</td>
                                     <td>{{ $evaluation['activity'] }}</td>                                   
-                                    <td>{{ $evaluation['grade'] }}</td>
+                                    <td>{{ $evaluation['grade'] }} /5</td>
                                     <td>{{ $evaluation['feedback'] }}</td>
                                 </tr>
                             @endforeach

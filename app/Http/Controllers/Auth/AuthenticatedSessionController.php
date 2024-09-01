@@ -34,14 +34,14 @@ class AuthenticatedSessionController extends Controller
 
       // Générer un nouveau token pour l'utilisateur
       $token = $user->createToken('YourAppName')->plainTextToken;
-      
-    //   Retourner le token et les informations utilisateur dans la réponse
-      return response()->json([
-          'user' => $user,
-          'token' => $token
-      ]);
 
-        // return redirect()->intended(route('dashboard', absolute: false));
+    //   Retourner le token et les informations utilisateur dans la réponse
+    //   return response()->json([
+    //       'user' => $user,
+    //       'token' => $token
+    //   ]);
+
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreChildRequest;
 use App\Http\Requests\UpdateChildRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\ChildRegisterMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class ChildController extends Controller
@@ -117,7 +119,8 @@ class ChildController extends Controller
         $child->tutor_id = $tutor->id;
         $child->save();
 
-        // Redirection avec un message de succès
+        Mail::to($user->email)->send(new ChildRegisterMail($request->all(), $password, $class->name));
+
         return redirect()->route('children.index')->with('success', 'Enfant ajouté avec succès.');
     }
 
@@ -144,9 +147,9 @@ class ChildController extends Controller
         $child = Child::with('classe')->find($id);
 
         // Vérifie si l'utilisateur actuel est autorisé à voir le profil de l'enfant
-        // if (!Gate::allows('update', $child)) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('update', $child)) {
+            abort(403);
+        }
 
         $classes = ClassSection::all();
 
@@ -159,27 +162,10 @@ class ChildController extends Controller
     public function update(UpdateChildRequest $request, string $id)
     {
         $child = Child::findOrFail($id);
-        
-        // Vérifie si l'utilisateur actuel est autorisé à voir le profil de l'enfant
-        // if (!Gate::allows('update', $child)) {
-        //     abort(403);
-        // }
 
-        // $request->validate([
-        //     'classe' => 'required|integer',
-        //     'lastname' => 'required|string',
-        //     'firstname' => 'required|string',
-        //     'sexe' => 'required|in:Male,Female',
-        //     'birth_date' => 'nullable|date',
-        //     'picture' => ['nullable', 'image', 'mimetypes:image/jpeg,image/png,image/jpg,image/gif', 'max:2048'],
-        //     'firstname_tutor' => ['required', 'string', 'max:255'],
-        //     'lastname_tutor' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255'],
-        //     'phone' => ['required', 'string', 'max:255'],
-        //     'address' => ['required', 'string', 'max:255'],
-        //     'emergency_contact_name' => ['required', 'string', 'max:255'],
-        //     'emergency_contact_phone' => ['required', 'string', 'max:255'],
-        // ]);
+        if (!Gate::allows('update', $child)) {
+            abort(403);
+        }
 
         // Mettre à jour les champs du modèle Child avec les données du formulaire
         $child->class_id = $request->classe;
@@ -187,19 +173,6 @@ class ChildController extends Controller
         $child->firstname = $request->firstname;
         $child->sexe = $request->sexe;
         $child->birth_date = $request->birth_date;
-        // $child->tutor->user->firstname = $request->firstname_tutor;
-        // $child->tutor->user->lastname = $request->lastname_tutor;
-        // $child->tutor->user->email = $request->email;
-        // $child->tutor->user->phone = $request->phone;
-        // $child->tutor->address = $request->address;
-        // $child->tutor->emergency_contact_name = $request->emergency_contact_name;
-        // $child->tutor->emergency_contact_phone = $request->emergency_contact_phone;
-
-        // // Sauvegarde des changements sur le tuteur (User)
-        // $child->tutor->user->save();
-
-        // // Sauvegarde des changements sur le tuteur (Tutor)
-        // $child->tutor->save();
 
         if ($request->hasFile('picture')) {
             // Suppression de l'ancienne photo si l'utilisateur a entré une nouvelle photo
@@ -210,7 +183,6 @@ class ChildController extends Controller
             $imagePath = $request->file('picture')->store('children', 'public');
             $child->picture = $imagePath;
         }
-
 
         $child->save();
 

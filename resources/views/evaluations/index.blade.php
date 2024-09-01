@@ -30,7 +30,7 @@
                                 <td>{{ $child->lastname }} {{ $child->firstname }}</td>
                                 <td>
                                     @if($evaluation)
-                                        Note: {{ $evaluation->grade }} <br>
+                                        Note: {{ $evaluation->grade }}<br>
                                         Feedback: {{ $evaluation->feedback }}
                                     @else
                                         Non évalué

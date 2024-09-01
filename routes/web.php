@@ -184,19 +184,11 @@ Route::delete('event/{id}', [EventController::class, 'destroy'])->name('event.de
 
 // Evaluation
 
-// Route::get('evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
-
 Route::get('/activities/{activity}/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
-
-// Route::get('evaluations/create/{id}', [EvaluationController::class, 'create'])->name('evaluation.create');
 
 Route::get('evaluations/create/{activity_id}/{child_id}', [EvaluationController::class, 'create'])->name('evaluation.create');
 
 Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
-
-// Route::get('evaluations/{activity}/edit', [EvaluationController::class, 'edit'])->name('evaluations.edit');
-
-// Route::put('evaluations/{activity}', [EvaluationController::class, 'update'])->name('evaluations.update');
 
 Route::get('/evaluations/{evaluation}/edit', [EvaluationController::class, 'edit'])->name('evaluations.edit');
 
@@ -204,8 +196,7 @@ Route::put('/evaluations/{evaluation}', [EvaluationController::class, 'update'])
 
 Route::delete('/evaluations/{id}', [EvaluationController::class, 'destroy'])->name('evaluations.destroy');
 
-Route::get('/tutors/evaluations', [EvaluationController::class, 'showEvaluationsForConnectedTutor'])
-    ->name('tutor.evaluations');
+Route::get('/tutors/evaluations', [EvaluationController::class, 'showEvaluationsForConnectedTutor'])->name('tutor.evaluations');
 
 
 // Partners
