@@ -43,7 +43,7 @@
             <div class="card">
                 <div class="card-header">Nouveau Événement</div>
                 <div class="card-body">
-                    <form action="{{ route('event.store') }}" method="POST">
+                    <form action="{{ route('event.store') }}" method="POST"  enctype="multipart/form-data">
                         @csrf
 
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -61,6 +61,29 @@
                         <div class="form-group">
                             <label for="event_date">Date de l'événement</label>
                             <input type="date" name="event_date" id="event_date" class="form-control" value="{{ old('event_date') }}">
+                        </div>
+
+                        <!-- Champs pour EventData -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="pictures">Photos</label>
+                                <input id="pictures" class="form-control" type="file" name="pictures[]" accept="image/*" multiple />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- video -->
+                            <div class="col-md-6">
+                                <label for="videos">Vidéos</label>
+                                <input id="videos" class="form-control" type="file" name="videos[]" accept="video/*" multiple />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- pdf -->
+                            <div class="col-md-6">
+                                <label for="pdfs">PDFs</label>
+                                <input id="pdfs" class="form-control" type="file" name="pdfs[]" accept=".pdf" multiple />
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Créer</button>

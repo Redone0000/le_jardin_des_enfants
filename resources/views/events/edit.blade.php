@@ -43,7 +43,7 @@
             <h4>Modifier l'Événement : {{ $event->name }}</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('event.update', $event->id) }}" method="POST">
+            <form action="{{ route('event.update', $event->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -60,6 +60,50 @@
                 <div class="form-group">
                     <label for="event_date">Date de l'événement</label>
                     <input type="date" name="event_date" id="event_date" class="form-control" value="{{ old('event_date', $event->event_date) }}">
+                </div>
+
+                <!-- Affichage des fichiers existants -->
+                <div class="form-group">
+                    <h5>Fichiers associés :</h5>
+                    @foreach($event->eventData as $data)
+                        <div class="mb-2">
+                            @if($data->isImage())
+                                <div>
+                                    <img src="{{ asset('storage/' . $data->file_path) }}" alt="Image" style="max-width: 200px;">
+                                    <input type="checkbox" name="delete_files[]" value="{{ $data->id }}"> Supprimer
+                                </div>
+                            @elseif($data->isVideo())
+                                <div>
+                                    <video width="320" height="240" controls>
+                                        <source src="{{ asset('storage/' . $data->file_path) }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <input type="checkbox" name="delete_files[]" value="{{ $data->id }}"> Supprimer
+                                </div>
+                            @elseif($data->isPdf())
+                                <div>
+                                    <a href="{{ asset('storage/' . $data->file_path) }}" target="_blank">Télécharger le PDF</a>
+                                    <input type="checkbox" name="delete_files[]" value="{{ $data->id }}"> Supprimer
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Champs pour ajouter de nouveaux fichiers -->
+                <div class="form-group">
+                    <label for="pictures">Photos</label>
+                    <input id="pictures" class="form-control" type="file" name="pictures[]" accept="image/*" multiple />
+                </div>
+
+                <div class="form-group">
+                    <label for="videos">Vidéos</label>
+                    <input id="videos" class="form-control" type="file" name="videos[]" accept="video/*" multiple />
+                </div>
+
+                <div class="form-group">
+                    <label for="pdfs">PDFs</label>
+                    <input id="pdfs" class="form-control" type="file" name="pdfs[]" accept=".pdf" multiple />
                 </div>
 
                 <button type="submit" class="btn btn-primary">Sauvegarder les Modifications</button>
