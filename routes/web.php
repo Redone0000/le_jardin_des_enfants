@@ -226,14 +226,7 @@ Route::put('/menus/{menu}', [MenuController::class, 'update'])->name('menus.upda
 
 Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
 
-// MenuDays
-
-// Route::get('/menus/{menu}/days', [MenuDayController::class, 'index'])->name('menuDays.index');
-// Route::get('/menus/{menu}/days/create', [MenuDayController::class, 'create'])->name('menuDays.create');
-// Route::post('/menus/{menu}/days', [MenuDayController::class, 'store'])->name('menuDays.store');
-// Route::get('/menus/{menu}/days/{menuDay}/edit', [MenuDayController::class, 'edit'])->name('menuDays.edit');
-// Route::put('/menus/{menu}/days/{menuDay}', [MenuDayController::class, 'update'])->name('menuDays.update');
-// Route::delete('/menus/{menu}/days/{menuDay}', [MenuDayController::class, 'destroy'])->name('menuDays.destroy');
+Route::get('/menus/next/menus', [MenuController::class, 'showNextMonthsMenus'])->name('menus.next_menus');
 
    
 Auth::routes();

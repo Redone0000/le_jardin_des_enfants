@@ -152,4 +152,29 @@ class MenuController extends Controller
 
         return redirect()->route('menus.index')->with('success', 'Menu supprimé avec succès.');
     }
+
+//     public function showNextMonthsMenus()
+// {
+//     $startDate = Carbon::now()->startOfMonth()->addMonth(); // Début du mois prochain
+//     $endDate = Carbon::now()->addMonths(3)->endOfMonth(); // Fin du troisième mois à venir
+
+//     $menuDays = MenuDay::whereBetween('date', [$startDate, $endDate])
+//                        ->orderBy('date')
+//                        ->get();
+
+//     return view('menus.next_menus', compact('menuDays', 'startDate', 'endDate'));
+// }
+
+public function showNextMonthsMenus()
+{
+    $startDate = Carbon::now()->startOfMonth();
+    $endDate = Carbon::now()->addMonths(2)->endOfMonth();
+    
+    // Obtenir les jours de menu pour les trois mois prochains
+    $menuDays = MenuDay::whereBetween('date', [$startDate, $endDate])
+                       ->orderBy('date')
+                       ->get();
+
+    return view('menus.next_menus', compact('menuDays'));
+}
 }
