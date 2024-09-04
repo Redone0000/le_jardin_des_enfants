@@ -345,6 +345,13 @@ return [
             'icon_color' => 'info',
         ],
         [
+            'text' => 'Cantine',
+            'url' => '/menus',
+            'icon' => 'fas fa-fw fa-file-signature',
+            'can' => 'access-admin',
+            'icon_color' => 'info',
+        ],
+        [
             'text' => 'Nouvel enseignant',
             'url' => 'teacher/create',
             'can' => 'access-admin',

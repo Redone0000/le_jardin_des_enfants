@@ -13,6 +13,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MenuDayController;
 
 
 Route::get('/', function () {
@@ -31,10 +33,16 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 // Pages
 
 Route::get('/', [PageController::class, 'home'])->name('page.home');
+
 Route::get('/contact', [PageController::class, 'contact'])->name('page.contact');
+
 Route::get('/teachers', [PageController::class, 'teachers'])->name('page.teachers');
+
 Route::get('/us-partners', [PageController::class, 'partners'])->name('page.partners');
+
 Route::get('/us-classes', [PageController::class, 'classes'])->name('page.classes');
+
+Route::get('/us-events', [PageController::class, 'events'])->name('page.events');
 
 // Appointment
 
@@ -88,8 +96,6 @@ Route::put('/class/edit/{id}', [ClassSectionController::class, 'update'])->where
 
 Route::delete('/class/delete/{id}', [ClassSectionController::class, 'destroy'])->name('class.delete');
 
-// Route::get('/class/children/{id}', [ClassSectionController::class, 'getChild'])->name('class.children'); 
-
 Route::get('/my-class', [ClassSectionController::class, 'showByClass'])->name('myclass');
 
 // Child
@@ -126,7 +132,6 @@ Route::put('activity-types/{id}', [ActivityTypeController::class, 'update'])->na
 
 Route::delete('activity-types/{id}', [ActivityTypeController::class, 'destroy'])->name('activity-types.destroy');
 
-
 // Activity
 
 Route::get('/activities', [ActivityController::class, 'index'])->name('activity.index');
@@ -154,10 +159,6 @@ Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('co
 Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
 
 Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
-
-
-
-
 
 // Event
 
@@ -193,7 +194,6 @@ Route::delete('/evaluations/{id}', [EvaluationController::class, 'destroy'])->na
 
 Route::get('/tutors/evaluations', [EvaluationController::class, 'showEvaluationsForConnectedTutor'])->name('tutor.evaluations');
 
-
 // Partners
 
 Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
@@ -210,8 +210,32 @@ Route::put('partners/{id}', [PartnerController::class, 'update'])->name('partner
 
 Route::delete('/partners/{id}', [PartnerController::class, 'destroy'])->name('partners.destroy');
 
+// Menus
 
-    
+Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
+
+Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
+
+Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
+
+Route::get('/menus/{id}', [MenuController::class, 'show'])->name('menus.show');
+
+Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menus.edit');
+
+Route::put('/menus/{menu}', [MenuController::class, 'update'])->name('menus.update');
+
+Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
+
+// MenuDays
+
+// Route::get('/menus/{menu}/days', [MenuDayController::class, 'index'])->name('menuDays.index');
+// Route::get('/menus/{menu}/days/create', [MenuDayController::class, 'create'])->name('menuDays.create');
+// Route::post('/menus/{menu}/days', [MenuDayController::class, 'store'])->name('menuDays.store');
+// Route::get('/menus/{menu}/days/{menuDay}/edit', [MenuDayController::class, 'edit'])->name('menuDays.edit');
+// Route::put('/menus/{menu}/days/{menuDay}', [MenuDayController::class, 'update'])->name('menuDays.update');
+// Route::delete('/menus/{menu}/days/{menuDay}', [MenuDayController::class, 'destroy'])->name('menuDays.destroy');
+
+   
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

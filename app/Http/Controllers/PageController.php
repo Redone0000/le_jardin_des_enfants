@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\Partner;
 use App\Models\ClassSection;
+use App\Models\Event;
 
 class PageController extends Controller
 {   
@@ -38,5 +39,12 @@ class PageController extends Controller
         $partners = Partner::all();
 
         return view('pages.partners', compact('partners'));
+    }
+
+    public function events()
+    {   
+        $events = Event::all();
+
+        return view('pages.events', compact('events'));
     }
 }

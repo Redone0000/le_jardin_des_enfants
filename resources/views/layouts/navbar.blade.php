@@ -38,7 +38,7 @@
               >
               <div class="dropdown-menu rounded-0 m-0">
                 <a href="" class="dropdown-item">Présentation de l'école</a>
-                <a href="" class="dropdown-item">Nos événements</a>
+                <a href="{{ route('page.events') }}" class="dropdown-item">Nos événements</a>
               </div>
             </div>
             <a href="{{ route('page.contact') }}" class="nav-item nav-link">Contact</a>

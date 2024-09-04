@@ -17,9 +17,9 @@ class Event extends Model
         'event_date',
     ];
 
-    protected $dates = [
-        'event_date',
-    ];
+    // protected $dates = [
+    //     'event_date',
+    // ];
 
     // Relation avec l'utilisateur
     public function user()
