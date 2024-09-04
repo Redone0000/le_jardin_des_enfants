@@ -218,15 +218,26 @@ Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.crea
 
 Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
 
-Route::get('/menus/{id}', [MenuController::class, 'show'])->name('menus.show');
+Route::get('/menus/{id}', [MenuController::class, 'show'])->where('id', '[0-9]+')->name('menus.show');
 
-Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menus.edit');
+Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->where('id', '[0-9]+')->name('menus.edit');
 
-Route::put('/menus/{menu}', [MenuController::class, 'update'])->name('menus.update');
+Route::put('/menus/{id}', [MenuController::class, 'update'])->where('id', '[0-9]+')->name('menus.update');
 
-Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
+Route::delete('/menus/{id}', [MenuController::class, 'destroy'])->where('id', '[0-9]+')->name('menus.destroy');
 
 Route::get('/menus/next/menus', [MenuController::class, 'showNextMonthsMenus'])->name('menus.next_menus');
+
+
+// Route::get('/debug-route', function (Illuminate\Http\Request $request) {
+//     return response()->json([
+//         'uri' => $request->getRequestUri(),
+//         'method' => $request->method(),
+//         'route' => $request->route(),
+//         'path' => $request->path(),
+//         'fullUrl' => $request->fullUrl(),
+//     ]);
+// });
 
    
 Auth::routes();

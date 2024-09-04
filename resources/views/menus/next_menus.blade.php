@@ -22,7 +22,7 @@
                     @php
                         $weeks = $daysInMonth->groupBy(function($day) {
                             return Carbon::parse($day->date)->weekOfMonth;
-                        });
+                        })->sortKeys();
                     @endphp
 
                     @foreach($weeks as $weekNumber => $daysInWeek)

@@ -345,13 +345,6 @@ return [
             'icon_color' => 'info',
         ],
         [
-            'text' => 'Cantine',
-            'url' => '/menus',
-            'icon' => 'fas fa-fw fa-file-signature',
-            'can' => 'access-admin',
-            'icon_color' => 'info',
-        ],
-        [
             'text' => 'Nouvel enseignant',
             'url' => 'teacher/create',
             'can' => 'access-admin',
@@ -410,6 +403,20 @@ return [
             'can' => 'access-parent',
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'success',
+        ],
+        [
+            'text' => 'Cantine',
+            'url' => '/menus',
+            'icon' => 'fas fa-fw fa-file-signature',
+            'can' => 'access-admin',
+            'icon_color' => 'info',
+        ],
+        [
+            'text' => 'Cantine',
+            'url' => '/menus/next/menus',
+            'icon' => 'fas fa-fw fa-file-signature',
+            'can' => 'access-parent',
+            'icon_color' => 'info',
         ],
         // [
         //     'text' => 'Nouvelle activité',
