@@ -144,15 +144,6 @@ class MenuController extends Controller
             // Retourne une erreur 403 (accès interdit)
             abort(403);
         }
-        
-        // $request->validate([
-        //     'month' => 'required|string',
-        //     'price' => 'required|numeric|min:0',
-        //     'dates.*' => 'required|date',
-        //     'meals.*' => 'required|string',
-        // ]);
-
-        // Trouver le menu à mettre à jour
 
         // Mettre à jour le menu
         $menu->update([
@@ -209,9 +200,11 @@ class MenuController extends Controller
         
         // Obtenir les jours de menu pour les trois mois prochains
         $menuDays = MenuDay::whereBetween('date', [$startDate, $endDate])
+                        ->with('menu')
                         ->orderBy('date')
                         ->get();
+        $children = auth()->user()->tutor->children;
 
-        return view('menus.next_menus', compact('menuDays'));
+        return view('menus.next_menus', compact('menuDays', 'children'));
     }
 }

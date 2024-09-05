@@ -14,7 +14,7 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\MenuDayController;
+use App\Http\Controllers\ReservationController;
 
 
 Route::get('/', function () {
@@ -227,6 +227,21 @@ Route::put('/menus/{id}', [MenuController::class, 'update'])->where('id', '[0-9]
 Route::delete('/menus/{id}', [MenuController::class, 'destroy'])->where('id', '[0-9]+')->name('menus.destroy');
 
 Route::get('/menus/next/menus', [MenuController::class, 'showNextMonthsMenus'])->name('menus.next_menus');
+
+// Reservation
+
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+
+// Route::get('reservations/confirm', [ReservationController::class, 'showConfirmationPage'])->name('reservations.confirmPage');
+
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+
+// Payment
+
+Route::get('payment/success/{reservation_id}', [ReservationController::class, 'paymentSuccess'])->name('payment.success');
+
+Route::get('payment/cancel/', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
+
 
 
 // Route::get('/debug-route', function (Illuminate\Http\Request $request) {

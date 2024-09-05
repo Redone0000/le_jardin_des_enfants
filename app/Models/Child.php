@@ -57,4 +57,13 @@ class Child extends Model
     {
         return $this->hasMany(Evaluation::class, 'child_id');
     }
+
+    /**
+     * Relation avec le modèle Reservation.
+     * Un enfant peut avoir plusieurs réservations.
+     */
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

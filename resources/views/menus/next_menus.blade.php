@@ -11,12 +11,22 @@
     use Carbon\Carbon;
 @endphp
     <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         @foreach($menuDays->groupBy(function($day) {
             return Carbon::parse($day->date)->format('F Y');
         }) as $month => $daysInMonth)
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="card-title">{{ $month }}</h3>
+                    <h3 class="card-title">{{ $month }}</h3><br>
+                    <h4 class="card-title">{{ $daysInMonth->first()->menu->price }} €</h4>
                 </div>
                 <div class="card-body">
                     @php
@@ -55,8 +65,28 @@
                             </tbody>
                         </table>
                     @endforeach
+                    <form action="{{ route('reservations.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="menu_id" value="{{ $daysInMonth->first()->menu_id }}">
+                        <input type="hidden" name="month" value="{{ $month }}">
+                        <input type="hidden" name="price" value="{{ $daysInMonth->first()->menu->price }}">
 
-                    <form action="" method="GET">
+                        <div class="form-group">
+                            <label for="child_id">Sélectionnez un enfant :</label>
+                            <select name="child_id" id="child_id" class="form-control">
+                                @if($children->count() > 1)
+                                    @foreach($children as $child)
+                                        <option value="{{ $child->id }}">{{ $child->lastname }}</option>
+                                    @endforeach
+                                @elseif($children->count() == 1)
+                                    <!-- Sélectionner automatiquement le seul enfant disponible -->
+                                    <option value="{{ $children->first()->id }}" selected>{{ $children->first()->lastname }}</option>
+                                @else
+                                    <option value="" disabled>Aucun enfant disponible</option>
+                                @endif
+                            </select>
+                        </div>
+
                         <button type="submit" class="btn btn-success mt-3">Réserver pour ce mois</button>
                     </form>
                 </div>

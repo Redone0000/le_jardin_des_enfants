@@ -70,7 +70,6 @@
                         <div id="menu-days-container">
                             <!-- Champs des jours seront ajoutés ici dynamiquement -->
                         </div>
-
                         <button type="submit" class="btn btn-primary">Créer</button>
                         <a href="{{ route('menus.index') }}" class="btn btn-secondary">Annuler</a>
                     </form>

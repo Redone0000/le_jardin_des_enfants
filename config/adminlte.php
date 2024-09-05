@@ -418,6 +418,13 @@ return [
             'can' => 'access-parent',
             'icon_color' => 'info',
         ],
+        [
+            'text' => 'Réservation',
+            'url' => '/reservations',
+            'icon' => 'fas fa-fw fa-file-signature',
+            'can' =>  ['access-admin', 'access-parent'],
+            'icon_color' => 'info',
+        ],
         // [
         //     'text' => 'Nouvelle activité',
         //     'url' => 'activity-create',
