@@ -44,8 +44,8 @@
                             <th>ID</th>
                             <th>Enfant</th>
                             <th>Prix</th>
-                            <th>Status</th>
                             <th>Mois</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -55,13 +55,28 @@
                                 <td>{{ $reservation->id }}</td>
                                 <td>{{ $reservation->child->lastname }} {{ $reservation->child->firstname }}</td>
                                 <td>{{ $reservation->price }} €</td>
-                                <td>{{ $reservation->status }}</td>
                                 <td>{{ $reservation->month }}</td>
+                                <td>
+                                @if ($reservation->status === 'pending')
+                                            <span class="badge badge-warning">En attente de paiement</span>
+                                        @elseif ($reservation->status === 'paid')
+                                            <span class="badge badge-success">Payé</span>
+                                        @endif
+                                </td>
                                 <td>
                                     <div class="row">
                                         <a href="" class="btn btn-primary mr-3">Voir</a>
 
                                     </div>
+                                    <td>
+                                        <!-- Si le statut est pending, afficher le bouton "Payer" -->
+                                        @if ($reservation->status === 'pending')
+                                            <form action="{{ route('reservations.pay', $reservation->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Payer</button>
+                                            </form>
+                                        @endif
+                                    </td>
                                 </td>
                             </tr>
                         @endforeach

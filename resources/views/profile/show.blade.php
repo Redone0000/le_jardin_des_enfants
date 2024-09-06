@@ -54,27 +54,25 @@
                     @elseif($role == 3)
                         <p><i class="fas fa-map-marker-alt"></i> <strong>Adresse :</strong> {{ $user->tutor->address }}</p>
                         <p><i class="fas fa-user-shield"></i> <strong>Nom du contact d'urgence :</strong> {{ $user->tutor->emergency_contact_name }}</p>
-                        <p><i class="fas fa-phone-alt"></i> <strong>Numéro de téléphone d'urgence :</strong> {{ $user->tutor->emergency_contact_phone }}</p>
-                        
+                        <p><i class="fas fa-phone-alt"></i> <strong>Numéro de téléphone d'urgence :</strong> {{ $user->tutor->emergency_contact_phone }}</p>                       
                         <hr>
-
-                <h5>Enfants</h5>
-                @foreach($user->tutor->children as $child)
-                    <div class="card mb-3">
-                        <div class="card-body d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <h4><strong>{{ $child->lastname }} {{ $child->firstname }}</strong></h4>
-                                <p><i class="fas fa-venus-mars"></i> Sexe : {{ $child->sexe }}</p>
-                                <p><i class="fas fa-birthday-cake"></i> Date de naissance : {{ $child->birth_date }}</p>
-                                <a href="{{ route('child.show', $child->id) }}" class="btn-sm btn-primary">Voir</a>
-                                <a href="{{ route('child.edit', $child->id) }}" class="btn-sm btn-info">Mettre à jour</a>
+                        <h5>Enfants</h5>
+                        @foreach($user->tutor->children as $child)
+                            <div class="card mb-3">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h4><strong>{{ $child->lastname }} {{ $child->firstname }}</strong></h4>
+                                        <p><i class="fas fa-venus-mars"></i> Sexe : {{ $child->sexe }}</p>
+                                        <p><i class="fas fa-birthday-cake"></i> Date de naissance : {{ $child->birth_date }}</p>
+                                        <a href="{{ route('child.show', $child->id) }}" class="btn-sm btn-primary">Voir</a>
+                                        <a href="{{ route('child.edit', $child->id) }}" class="btn-sm btn-info">Mettre à jour</a>
+                                    </div>
+                                    <div class="ml-3">
+                                        <img src="{{ asset('storage/' . $child->picture) }}" alt="Photo" class="" width="100">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ml-3">
-                                <img src="{{ asset('storage/' . $child->picture) }}" alt="Photo" class="" width="100">
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                        @endforeach
 
                     @else
                         <p class="text-center text-danger">Rôle inconnu. Veuillez contacter l'administrateur.</p>

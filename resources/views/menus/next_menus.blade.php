@@ -3,7 +3,7 @@
 @section('title', 'Menus des Trois Mois Prochains')
 
 @section('content_header')
-    <h1>Menus des Trois Mois Prochains</h1>
+    <h1>Cantine</h1>
 @stop
 
 @section('content')
@@ -20,6 +20,12 @@
                 {{ session('error') }}
             </div>
         @endif
+        <div class="row mb-4">
+            <a href="{{ route('reservations.index') }}" class="btn btn-primary ml-auto">Mes reservations</a>
+        </div>
+        <div class="row mb-2">
+            <h3>Nos Prochains Menu</h3>
+        </div>
         @foreach($menuDays->groupBy(function($day) {
             return Carbon::parse($day->date)->format('F Y');
         }) as $month => $daysInMonth)
@@ -87,7 +93,9 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-success mt-3">Réserver pour ce mois</button>
+                        <!-- <button type="submit" class="btn btn-success mt-3">Réserver pour ce mois</button> -->
+                        <button type="submit" name="action" value="pay_now" class="btn btn-success mt-3">Réserver et Payer</button>
+                        <button type="submit" name="action" value="pay_later" class="btn btn-warning mt-3">Réserver et Payer plus tard</button>
                     </form>
                 </div>
             </div>

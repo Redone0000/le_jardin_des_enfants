@@ -232,17 +232,15 @@ Route::get('/menus/next/menus', [MenuController::class, 'showNextMonthsMenus'])-
 
 Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
 
-// Route::get('reservations/confirm', [ReservationController::class, 'showConfirmationPage'])->name('reservations.confirmPage');
+Route::get('reservations/confirm', [ReservationController::class, 'showConfirmationPage'])->name('reservations.confirmPage');
 
 Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
-
-// Payment
 
 Route::get('payment/success/{reservation_id}', [ReservationController::class, 'paymentSuccess'])->name('payment.success');
 
 Route::get('payment/cancel/', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
 
-
+Route::post('/reservations/{id}/pay', [ReservationController::class, 'pay'])->name('reservations.pay');
 
 // Route::get('/debug-route', function (Illuminate\Http\Request $request) {
 //     return response()->json([

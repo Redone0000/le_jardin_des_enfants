@@ -422,7 +422,7 @@ return [
             'text' => 'Réservation',
             'url' => '/reservations',
             'icon' => 'fas fa-fw fa-file-signature',
-            'can' =>  ['access-admin', 'access-parent'],
+            'can' =>  'access-admin',
             'icon_color' => 'info',
         ],
         // [
