@@ -48,21 +48,21 @@
                         <input id="phone" class="form-control" type="text" name="phone" value="{{ old('phone', $teacher->phone) }}" required autocomplete="username" />
                         <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                     </div>
-
+                    @can('access-teacher')
                     <!-- Password -->
                     <div class="mb-3">
                         <label for="password" class="form-label">{{ __('Password') }}</label>
-                        <input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />
+                        <input id="password" class="form-control" type="password" name="password" required autocomplete="new-password"/>
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     <!-- Confirm Password -->
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
-                        <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required autocomplete="new-password" />
+                        <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required autocomplete="new-password"/>
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
-
+                    @endcan
                     <!-- Description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">{{ __('Description') }}</label>

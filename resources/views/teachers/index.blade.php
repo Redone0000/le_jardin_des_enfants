@@ -22,7 +22,7 @@
 @stop
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-end mb-5 mt-5">
             <a href="{{ route('teacher.create') }}" class="btn btn-success">Nouvel enseignant</a>
         </div>

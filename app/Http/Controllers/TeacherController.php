@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Http\Requests\StoreTeacherRequest;
+use App\Http\Requests\UpdateTeacherRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -144,60 +145,107 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        // Récuperer l'enseignant
-        $teacher = User::findOrFail($id);
-        $t = $teacher->teacher;
+    // public function update(UpdateTeacherRequest $request, string $id)
+    // {
+    //     // Récuperer l'enseignant
+    //     $user = User::findOrFail($id);
+    //     $teacher = $user->teacher;
 
-        if (!Gate::allows('update', $t)) {
-            // L'utilisateur actuel n'a pas la permission de voir le profil de l'enseignant
-            abort(403);
-        }
+    //     if (!Gate::allows('update', $teacher)) {
+    //         // L'utilisateur actuel n'a pas la permission de voir le profil de l'enseignant
+    //         abort(403);
+    //     }
         
-        // Validation des données
-        $request->validate([
-            'login' => ['required', 'string', 'max:255'],
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($teacher->id)],
-            'phone' => ['required', 'string', 'max:255'],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'], 
-            'picture' => ['nullable', 'image', 'mimetypes:image/jpeg,image/png,image/jpg,image/gif', 'max:2048'],
-            'description' => ['required', 'string', 'max:255'],
-        ]);
+    //     // Validation des données
+    //     // $request->validate([
+    //     //     'login' => ['required', 'string', 'max:255'],
+    //     //     'firstname' => ['required', 'string', 'max:255'],
+    //     //     'lastname' => ['required', 'string', 'max:255'],
+    //     //     'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($teacher->id)],
+    //     //     'phone' => ['required', 'string', 'max:255'],
+    //     //     'password' => ['nullable', 'string', 'min:8', 'confirmed'], 
+    //     //     'picture' => ['nullable', 'image', 'mimetypes:image/jpeg,image/png,image/jpg,image/gif', 'max:2048'],
+    //     //     'description' => ['required', 'string', 'max:255'],
+    //     // ]);
 
-        $firstname = ucwords(strtolower($request->firstname));
-        $lastname = ucwords(strtolower($request->lastname));
+    //     $firstname = ucwords(strtolower($request->firstname));
+    //     $lastname = ucwords(strtolower($request->lastname));
 
-        // Handle the image upload
-        if ($request->hasFile('picture')) {
-            // Suppression de l'ancienne photo si l'utilisateur a entré une nouvelle photo
-            if ($teacher->teacher->picture) {
-                Storage::disk('public')->delete($teacher->teacher->picture);
-            }
-            // Sauvegarde de la nouvelle photo
-            $imagePath = $request->file('picture')->store('pictures', 'public');
-            $teacher->teacher->picture = $imagePath;
-        }
+    //     // Handle the image upload
+    //     if ($request->hasFile('picture')) {
+    //         // Suppression de l'ancienne photo si l'utilisateur a entré une nouvelle photo
+    //         if ($teacher->teacher->picture) {
+    //             Storage::disk('public')->delete($teacher->teacher->picture);
+    //         }
+    //         // Sauvegarde de la nouvelle photo
+    //         $imagePath = $request->file('picture')->store('pictures', 'public');
+    //         $teacher->teacher->picture = $imagePath;
+    //     }
 
-        // Mise à jour des autres champs
-        $teacher->login = $request->login;
-        $teacher->firstname = $firstname;
-        $teacher->lastname = $lastname;
-        $teacher->phone = $request->phone;
+    //     // Mise à jour des autres champs
+    //     $teacher->login = $request->login;
+    //     $teacher->firstname = $firstname;
+    //     $teacher->lastname = $lastname;
+    //     $teacher->phone = $request->phone;
         
-        if ($request->filled('password')) {
-            $teacher->password = bcrypt($request->password);
-        }
+    //     if ($request->filled('password')) {
+    //         $teacher->password = bcrypt($request->password);
+    //     }
         
-        $teacher->teacher->description = $request->description;
+    //     $teacher->teacher->description = $request->description;
 
-        // Save the changes
-        $teacher->push(); // This will save the teacher and its related teacher record
+    //     // Save the changes
+    //     $teacher->push(); // This will save the teacher and its related teacher record
 
-        return redirect()->route('teacher.show', ['id' => $teacher->teacher->id] )->with('success', 'Opération réussie !');
+    //     return redirect()->route('teacher.show', ['id' => $teacher->teacher->id] )->with('success', 'Opération réussie !');
+    // }
+    public function update(UpdateTeacherRequest $request, string $id)
+{
+    // Récupérer l'utilisateur
+    $user = User::findOrFail($id);
+
+    // Accéder au modèle Teacher associé
+    $teacher = $user->teacher;
+
+    // Validation et autorisation sont déjà vérifiées par la FormRequest
+
+    // Formatage des noms
+    $firstname = ucwords(strtolower($request->firstname));
+    $lastname = ucwords(strtolower($request->lastname));
+
+    // Gestion de l'image
+    if ($request->hasFile('picture')) {
+        // Suppression de l'ancienne photo si elle existe
+        if ($teacher->picture) {
+            Storage::disk('public')->delete($teacher->picture);
+        }
+        // Sauvegarde de la nouvelle photo
+        $imagePath = $request->file('picture')->store('pictures', 'public');
+        $teacher->picture = $imagePath;
     }
+
+    // Mise à jour des données du modèle User
+    $user->login = $request->login;
+    $user->firstname = $firstname;
+    $user->lastname = $lastname;
+    $user->email = $request->email;
+    $user->phone = $request->phone;
+
+    if ($request->filled('password')) {
+        $user->password = bcrypt($request->password);
+    }
+
+    // Mise à jour des données du modèle Teacher
+    $teacher->description = $request->description;
+
+    // Sauvegarde des modifications
+    $user->save();
+    $teacher->save(); // Assurez-vous de sauvegarder le modèle Teacher également
+
+    // Rediriger avec un message de succès
+    return redirect()->route('teacher.show', ['id' => $teacher->id])
+                     ->with('success', 'Opération réussie !');
+}
 
     /**
      * Remove the specified resource from storage.

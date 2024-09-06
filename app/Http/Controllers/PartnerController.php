@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Partner;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePartnerRequest;
+use App\Http\Requests\UpdatePartnerRequest;
 use Illuminate\Support\Facades\Gate;
 
 class PartnerController extends Controller
@@ -62,12 +63,13 @@ class PartnerController extends Controller
      */
     public function show(string $id)
     {   
-        if (!Gate::allows('view', Partner::class)) {
+        // Récupérer le partenaire par son ID, ou lancer une exception 404 si non trouvé
+        $partner = Partner::findOrFail($id);
+
+        if (!Gate::allows('view', $partner)) {
             // retourner une erreur 403 (accès interdit)
             abort(403, 'Accès non autorisé.');
         }
-         // Récupérer le partenaire par son ID, ou lancer une exception 404 si non trouvé
-         $partner = Partner::findOrFail($id);
 
          // Passer le partenaire à la vue
          return view('partners.show', compact('partner'));
@@ -77,9 +79,14 @@ class PartnerController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
+    {   
         // Récupérer le partenaire par son ID, ou lancer une exception 404 si non trouvé
         $partner = Partner::findOrFail($id);
+
+        if (!Gate::allows('update', $partner)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
 
         // Passer le partenaire à la vue
         return view('partners.edit', compact('partner'));
@@ -88,20 +95,15 @@ class PartnerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePartnerRequest $request, string $id)
     {
-        // Validation des données
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'address' => 'nullable|string',
-            'phone' => 'nullable|string',
-            'website' => 'nullable|url',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
         // Récupérer le partenaire par son ID
         $partner = Partner::findOrFail($id);
+
+        if (!Gate::allows('update', $partner)) {
+            // retourner une erreur 403 (accès interdit)
+            abort(403, 'Accès non autorisé.');
+        }
 
         // Mettre à jour les détails du partenaire
         $partner->name = $request->input('name');
