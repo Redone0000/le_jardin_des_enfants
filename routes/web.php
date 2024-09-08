@@ -19,7 +19,7 @@ use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 Route::get('/dashboard', function () {
     // return view('dashboard');
@@ -43,6 +43,8 @@ Route::get('/us-partners', [PageController::class, 'partners'])->name('page.part
 Route::get('/us-classes', [PageController::class, 'classes'])->name('page.classes');
 
 Route::get('/us-events', [PageController::class, 'events'])->name('page.events');
+
+Route::get('/about', [PageController::class, 'about'])->name('page.about');
 
 // Appointment
 

@@ -26,24 +26,11 @@
             <a href="{{ route('page.home') }}" class="nav-item nav-link active">Accueil</a>
             <a href="{{ route('page.classes') }}" class="nav-item nav-link">Nos classes</a>
             <a href="{{ route('page.teachers') }}" class="nav-item nav-link">Nos enseignants</a>
-            <a href="{{ route('page.partners') }}" class="nav-item nav-link">Nos partenaires</a>
-            <a href="" class="nav-item nav-link">Gallerie</a>
-            <a href="" class="nav-item nav-link">Activités</a>
-            <div class="nav-item dropdown">
-              <a
-                href="#"
-                class="nav-link dropdown-toggle"
-                data-toggle="dropdown"
-                >L'école</a
-              >
-              <div class="dropdown-menu rounded-0 m-0">
-                <a href="" class="dropdown-item">Présentation de l'école</a>
-                <a href="{{ route('page.events') }}" class="dropdown-item">Nos événements</a>
-              </div>
-            </div>
+            <a href="{{ route('page.about') }}" class="nav-item nav-link">A propos</a>
+            <a href="{{ route('page.events') }}" class="nav-item nav-link">Nos événements</a>
+            <a href="" class="nav-item nav-link">Gallerie</a>            
             <a href="{{ route('page.contact') }}" class="nav-item nav-link">Contact</a>
-            
-           
+            <a href="{{ route('page.partners') }}" class="nav-item nav-link">Nos partenaires</a>          
           </div>
             @auth
                 <a href="{{ route('dashboard')}}" class="nav-item nav-link"><i class="fa-solid fa-user primary"></i> {{ Auth::user()->login }}</a>

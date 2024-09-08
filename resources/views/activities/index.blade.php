@@ -28,9 +28,11 @@
         </div>
     @endif
     <div class="container-fluid">
+        @if (Auth::user()->can('access-teacher') || Auth::user()->can('access-admin'))
         <div class="row">
-            <a href="{{ route('activity.create') }}" class="btn btn-primary ml-auto">Nouvelle activité</a>
+            <a href="{{ route('activity.create') }}" class="btn btn-primary ml-auto">Créer une activité</a>
         </div>
+        @endcan
         <div class="row mb-3 mt-3">
             <div class="col-md-12 mb-3">
                 <form action="{{ route('activity.index') }}" method="GET">
@@ -43,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if (Auth::user()->can('access-parent') || Auth::user()->can('access-admin'))
+                        @if (Auth::user()->tutor && Auth::user()->tutor->children->count() > 1 || Auth::user()->role_id === 1)
                         <div class="col-md-2">
                             <select name="sort" class="form-control" onchange="this.form.submit()">
                                 <option value="">Filtrer par classe</option>

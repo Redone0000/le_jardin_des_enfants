@@ -11,7 +11,7 @@ use App\Models\Event;
 class PageController extends Controller
 {   
     public function home()
-    {
+    {   
         return view('welcome');
     }
     
@@ -46,5 +46,10 @@ class PageController extends Controller
         $events = Event::all();
 
         return view('pages.events', compact('events'));
+    }
+
+    public function about()
+    {   
+        return view('pages.about');
     }
 }

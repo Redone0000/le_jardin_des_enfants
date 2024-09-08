@@ -2,7 +2,7 @@
       class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5"
     >
       <div class="row pt-5">
-        <div class="col-lg-3 col-md-6 mb-5">
+        <div class="col-lg-4 col-md-6 mb-5">
           <a
             href=""
             class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0"
@@ -44,8 +44,8 @@
             ></a>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5">
-          <h3 class="text-primary mb-4">Contactez-nous</h3>
+        <div class="col-lg-4 col-md-6 mb-5">
+          <h3 class="text-primary mb-4">Contact</h3>
           <div class="d-flex">
             <h4 class="fa fa-map-marker-alt text-primary"></h4>
             <div class="pl-3">
@@ -68,32 +68,28 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5">
+        <div class="col-lg-4 col-md-6 mb-5">
           <h3 class="text-primary mb-4">Lien rapide</h3>
           <div class="d-flex flex-column justify-content-start">
-            <a class="text-white mb-2" href="#"
+            <a class="text-white mb-2" href="{{ route('page.home') }}"
               ><i class="fa fa-angle-right mr-2"></i>Accueil</a
             >
-            <a class="text-white mb-2" href="#"
+            <a class="text-white mb-2" href="{{ route('page.about') }}"
               ><i class="fa fa-angle-right mr-2"></i>A propos</a
             >
-            <a class="text-white mb-2" href="#"
+            <a class="text-white mb-2" href="{{ route('page.classes') }}"
               ><i class="fa fa-angle-right mr-2"></i>Nos classes</a
             >
-            <a class="text-white mb-2" href="#"
+            <a class="text-white mb-2" href="{{ route('page.teachers') }}"
               ><i class="fa fa-angle-right mr-2"></i>Nos enseignants</a
             >
-            <a class="text-white mb-2" href="#"
-              ><i class="fa fa-angle-right mr-2"></i>Notre blog</a
+            <a class="text-white mb-2" href="{{ route('page.partners') }}"
+              ><i class="fa fa-angle-right mr-2"></i>Nos partenaires</a
             >
-            <a class="text-white" href="#"
+            <a class="text-white" href="{{ route('page.contact') }}"
               ><i class="fa fa-angle-right mr-2"></i>Contactez-nous</a
             >
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-5">
-          <h3 class="text-primary mb-4">Nos partenaires</h3>
-
         </div>
       </div>
       <div

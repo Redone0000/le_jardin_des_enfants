@@ -18,7 +18,7 @@
         maternelle est conçue pour inspirer la créativité, favoriser la curiosité et encourager 
         l'amour de l'apprentissage dès le plus jeune âge. 
         </p>
-        <a href="" class="btn btn-secondary mt-1 py-3 px-5">Lire plus</a>
+        <a href="{{ route('page.about') }}" class="btn btn-secondary mt-1 py-3 px-5">Lire plus</a>
     </div>
     <div class="col-lg-6 text-center text-lg-right">
         <img class="img-fluid mt-5" src="{{ asset('pictures/hero.png') }}" alt="" />
