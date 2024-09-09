@@ -16,9 +16,11 @@
                 <div class="row">
                     <div class="col-md-4 text-center">
                         <img src="{{ asset('storage/' . $child->picture) }}" alt="Photo de l'enfant" class="img-fluid rounded-circle" width="200">
+                        @can('access-admin')
                         <div class="mt-3">
                             <a href="{{ route('child.edit', $child->id) }}" class="btn btn-info mb-2">Mettre à jour</a>
                         </div>
+                        @endcan
                     </div>
                     <div class="col-md-8">
                         <table class="table table-bordered">

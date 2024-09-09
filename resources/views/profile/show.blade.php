@@ -34,7 +34,7 @@
                     <p><i class="fas fa-phone"></i> Téléphone : {{ $user->phone }}</p>
                 </div>
             </div>
-            <a href="{{ route('profile.edit', ['id' => $user->id]) }}" class="btn-sm btn-info">Mettre à jour</a>
+            <a href="{{ route('profile.edit', ['id' => $user->id]) }}" class="btn btn-info">Mettre à jour</a>
         </div>
 
         <!-- Section Détails Spécifiques au Rôle -->
@@ -74,7 +74,7 @@
                 <div class="card-body d-flex align-items-center">
                     <div class="flex-grow-1">
                         <h4><strong>{{ $child->lastname }} {{ $child->firstname }}</strong></h4>
-                        <a href="{{ route('child.show', $child->id) }}" class="btn-sm btn-primary">Voir</a>
+                        <a href="{{ route('child.show', $child->id) }}" class="btn btn-primary">Voir</a>
                     </div>
                     <div class="ml-3">
                         <img src="{{ asset('storage/' . $child->picture) }}" alt="Photo" class="" width="100px">

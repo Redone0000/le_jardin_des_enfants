@@ -43,7 +43,6 @@ class ChildController extends Controller
         }
 
         $children = $query->get();
-        // $children = Child::all();
         $classes = ClassSection::all();
 
         return view('children.index', ['children' => $children, 'classes' => $classes]);
@@ -145,6 +144,8 @@ class ChildController extends Controller
     public function edit(string $id)
     {
         $child = Child::with('classe')->find($id);
+        
+        $user = auth()->user();
 
         // Vérifie si l'utilisateur actuel est autorisé à voir le profil de l'enfant
         if (!Gate::allows('update', $child)) {
@@ -156,9 +157,9 @@ class ChildController extends Controller
         return view('children.edit', ['child' => $child, 'classes' => $classes]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
     public function update(UpdateChildRequest $request, string $id)
     {
         $child = Child::findOrFail($id);
@@ -188,6 +189,7 @@ class ChildController extends Controller
 
         return redirect()->route('child.show', ['id' => $child->id])->with('success', 'Enfant mis à jour avec succès.');
     }
+
 
     /**
      * Remove the specified resource from storage.

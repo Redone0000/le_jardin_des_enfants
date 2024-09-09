@@ -28,6 +28,7 @@
                                  
                     <h5 class="mb-3 mt-2">Informations de l'enfant</h5>
                     <div class="border p-4 bg-white shadow">
+                        @can('access-admin')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -43,6 +44,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endcan
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

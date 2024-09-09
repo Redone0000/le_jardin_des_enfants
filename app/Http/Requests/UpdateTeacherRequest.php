@@ -25,7 +25,6 @@ class UpdateTeacherRequest extends FormRequest
     public function rules(): array
     {   
         $teacherId = $this->route('id'); 
-
         return [
             'login' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],

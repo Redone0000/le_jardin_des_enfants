@@ -220,7 +220,7 @@
                     <div class="col-6 py-1 text-left border-right">
                     <strong>Places</strong>
                     </div>
-                    <div class="col-6 py-1">25</div>
+                    <div class="col-6 py-1">15</div>
                 </div>
                 <div class="row border-bottom">
                     <div class="col-6 py-1 text-left border-right">
@@ -251,7 +251,7 @@
                 <div class="col-6 py-1 text-left border-right">
                 <strong>Places</strong>
                 </div>
-                <div class="col-6 py-1">25</div>
+                <div class="col-6 py-1">15</div>
             </div>
             <div class="row border-bottom">
                 <div class="col-6 py-1 text-left border-right">
@@ -283,7 +283,7 @@
                     <div class="col-6 py-1 text-left border-right">
                     <strong>Places</strong>
                     </div>
-                    <div class="col-6 py-1">25</div>
+                    <div class="col-6 py-1">15</div>
                 </div>
                 <div class="row border-bottom">
                     <div class="col-6 py-1 text-left border-right">
@@ -315,7 +315,7 @@
                     <div class="col-6 py-1 text-left border-right">
                     <strong>Places</strong>
                     </div>
-                    <div class="col-6 py-1">25</div>
+                    <div class="col-6 py-1">15</div>
                 </div>
                 <div class="row border-bottom">
                     <div class="col-6 py-1 text-left border-right">

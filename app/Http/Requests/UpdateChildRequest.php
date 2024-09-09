@@ -22,7 +22,7 @@ class UpdateChildRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'classe' => 'required|integer',
+            'classe' => 'nullable|integer',
             'lastname' => 'required|string',
             'firstname' => 'required|string',
             'sexe' => 'required|in:Male,Female',

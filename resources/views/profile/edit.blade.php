@@ -23,7 +23,7 @@
 @section('content')
 <div class="container">
 <h1>Mise à jour du profil</h1>
-        <form method="POST" action="{{ route('profile.update') }}">
+        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

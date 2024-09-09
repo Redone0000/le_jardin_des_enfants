@@ -85,11 +85,13 @@
                     </div>
                   </div>
                   <hr>
+                  @can('access-admin')
                   <div class="row">
                     <div class="col-sm-12">
                       <a class="btn btn-info float-right" target="__blank" href="{{ route('teacher.edit', $teacher->user->id) }}">Mettre à jour</a>
                     </div>
                   </div>
+                  @endcan
                 </div>
               </div>
             </div>

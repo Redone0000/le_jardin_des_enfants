@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfileController extends Controller
 {
@@ -25,7 +27,8 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
+    {   
+        $user = $request->user();
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -34,7 +37,36 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // Mise à jour des informations de l'enseignant, si lié
+        $teacher = $user->teacher;
+
+        if ($teacher) {
+            // Mettez à jour les informations du modèle Teacher ici
+            $teacher->fill($request->only(['description', 'picture']));
+
+            // Gestion de l'image
+            if ($request->hasFile('picture')) {
+                // Suppression de l'ancienne photo si elle existe
+                if ($teacher->picture) {
+                    Storage::disk('public')->delete($teacher->picture);
+                }
+                // Sauvegarde de la nouvelle photo
+                $teacher->picture = $request->file('picture')->store('pictures', 'public');
+            }
+
+            $teacher->save();
+        }
+
+        $tutor = $user->tutor;
+
+        if ($tutor) {
+            // Mettez à jour les informations du modèle Teacher ici
+            $tutor->fill($request->only(['address', 'emergency_contact_name', 'emergency_contact_phone']));
+
+            $tutor->save();
+        }
+
+        return Redirect::route('profile.show')->with('status', 'profile-updated');
     }
 
     /**

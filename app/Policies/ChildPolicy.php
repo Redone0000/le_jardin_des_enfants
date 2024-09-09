@@ -38,7 +38,7 @@ class ChildPolicy
      */
     public function update(User $user, Child $child): bool
     {
-        return $user->role_id === 1 || $user->id === $child->tutor->user->id;
+        return $user->role_id === 1;
     }
 
     /**

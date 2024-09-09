@@ -80,7 +80,7 @@
             <a class="text-white mb-2" href="{{ route('page.classes') }}"
               ><i class="fa fa-angle-right mr-2"></i>Nos classes</a
             >
-            <a class="text-white mb-2" href="{{ route('page.teachers') }}"
+            <a class="text-white mb-2" href="{{ route('page.us-teachers') }}"
               ><i class="fa fa-angle-right mr-2"></i>Nos enseignants</a
             >
             <a class="text-white mb-2" href="{{ route('page.partners') }}"

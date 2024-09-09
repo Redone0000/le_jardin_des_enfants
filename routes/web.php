@@ -15,6 +15,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\MailController;
 
 
 Route::get('/', function () {
@@ -30,13 +31,15 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
+Route::post('/send-mail-to-admins', [MailController::class, 'sendMailToAdmins'])->name('sendMailToAdmins');
+
 // Pages
 
 Route::get('/', [PageController::class, 'home'])->name('page.home');
 
 Route::get('/contact', [PageController::class, 'contact'])->name('page.contact');
 
-Route::get('/teachers', [PageController::class, 'teachers'])->name('page.teachers');
+Route::get('/us-teachers', [PageController::class, 'teachers'])->name('page.us-teachers');
 
 Route::get('/us-partners', [PageController::class, 'partners'])->name('page.partners');
 

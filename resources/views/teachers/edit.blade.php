@@ -11,41 +11,41 @@
 
         <div class="row">
             <div class="col-md-6">
-                <form method="POST" action="{{ route('teacher.update', $teacher->id) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('teacher.update', $teacher->user->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <!-- Login -->
                     <div class="mb-3">
                         <label for="login" class="form-label">{{ __('Nom d\'utilisateur') }}</label>
-                        <input id="login" class="form-control" type="text" name="login" value="{{ old('login', $teacher->login) }}" required autofocus autocomplete="login" />
+                        <input id="login" class="form-control" type="text" name="login" value="{{ old('login', $teacher->user->login) }}" required autofocus autocomplete="login" />
                         <x-input-error :messages="$errors->get('login')" class="mt-2" />
                     </div>
 
                     <!-- FirstName -->
                     <div class="mb-3">
                         <label for="firstname" class="form-label">{{ __('Prénom') }}</label>
-                        <input id="firstname" class="form-control" type="text" name="firstname" value="{{ old('firstname', $teacher->firstname) }}" required autofocus autocomplete="firstname" readonly />
+                        <input id="firstname" class="form-control" type="text" name="firstname" value="{{ old('firstname', $teacher->user->firstname) }}" required autofocus autocomplete="firstname" readonly />
                         <x-input-error :messages="$errors->get('firstname')" class="mt-2" />
                     </div>
 
                     <!-- LastName -->
                     <div class="mb-3">
                         <label for="lastname" class="form-label">{{ __('Nom') }}</label>
-                        <input id="lastname" class="form-control" type="text" name="lastname" value="{{ old('lastname', $teacher->lastname) }}" required autofocus autocomplete="lastname" readonly />
+                        <input id="lastname" class="form-control" type="text" name="lastname" value="{{ old('lastname', $teacher->user->lastname) }}" required autofocus autocomplete="lastname" readonly />
                         <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
                     </div>
 
                     <!-- Email Address -->
                     <div class="mb-3">
                         <label for="email" class="form-label">{{ __('Email') }}</label>
-                        <input id="email" class="form-control" type="email" name="email" value="{{ old('email', $teacher->email) }}" required autocomplete="username" />
+                        <input id="email" class="form-control" type="email" name="email" value="{{ old('email', $teacher->user->email) }}" required autocomplete="username" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Phone -->
                     <div class="mb-3">
                         <label for="phone" class="form-label">{{ __('Téléphone ') }}</label>
-                        <input id="phone" class="form-control" type="text" name="phone" value="{{ old('phone', $teacher->phone) }}" required autocomplete="username" />
+                        <input id="phone" class="form-control" type="text" name="phone" value="{{ old('phone', $teacher->user->phone) }}" required autocomplete="username" />
                         <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                     </div>
                     @can('access-teacher')
@@ -66,15 +66,15 @@
                     <!-- Description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">{{ __('Description') }}</label>
-                        <input id="description" class="form-control" type="text" name="description" value="{{ old('description', $teacher->teacher->description) }}" required autofocus autocomplete="description"  />
+                        <input id="description" class="form-control" type="text" name="description" value="{{ old('description', $teacher->description) }}" required autofocus autocomplete="description"  />
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
 
                     <!-- Image existante -->
-                    @if ($teacher->teacher->picture)
+                    @if ($teacher->picture)
                         <div class="mb-3">
                             <label>{{ __('Ancienne Photo') }}</label><br>
-                            <img src="{{ asset('storage/' . $teacher->teacher->picture) }}" alt="Photo" width="10%">
+                            <img src="{{ asset('storage/' . $teacher->picture) }}" alt="Photo" width="10%">
                         </div>
                     @endif
 

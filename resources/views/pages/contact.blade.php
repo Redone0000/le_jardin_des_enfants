@@ -21,6 +21,11 @@
 
 <!-- Contact Start -->
 <div class="container-fluid pt-5">
+  @if (session('success'))
+      <div class="alert alert-success">
+          {{ session('success') }}
+      </div>
+  @endif
   <div class="container">
     <div class="text-center pb-2">
       <h1 class="mb-4">Contactez-nous pour toute question</h1>
@@ -29,14 +34,14 @@
       <div class="col-lg-5 mb-5">
         <div class="contact-form">
           <div id="success"></div>
-          <form name="sentMessage" id="contactForm" novalidate="novalidate" method="post" action="">
+          <form name="sentMessage" id="contactForm" novalidate="novalidate" method="post" action="{{ route('sendMailToAdmins') }}">
           @csrf
             <div class="control-group">
               <input
                 type="text"
                 class="form-control"
-                id="name"
-                name="name"
+                id="nameSender"
+                name="nameSender"
                 placeholder="Votre nom"
                 required="required"
                 data-validation-required-message="Entrez votre nom"
@@ -47,8 +52,8 @@
               <input
                 type="email"
                 class="form-control"
-                id="email"
-                name="email"
+                id="emailSender"
+                name="emailSender"
                 placeholder="Votre Email"
                 required="required"
                 data-validation-required-message="Entrez votre email"

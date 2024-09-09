@@ -25,7 +25,7 @@
           <div class="navbar-nav font-weight-bold mx-auto py-0">
             <a href="{{ route('page.home') }}" class="nav-item nav-link active">Accueil</a>
             <a href="{{ route('page.classes') }}" class="nav-item nav-link">Nos classes</a>
-            <a href="{{ route('page.teachers') }}" class="nav-item nav-link">Nos enseignants</a>
+            <a href="{{ route('page.us-teachers') }}" class="nav-item nav-link">Nos enseignants</a>
             <a href="{{ route('page.about') }}" class="nav-item nav-link">A propos</a>
             <a href="{{ route('page.events') }}" class="nav-item nav-link">Nos événements</a>
             <a href="" class="nav-item nav-link">Gallerie</a>            
