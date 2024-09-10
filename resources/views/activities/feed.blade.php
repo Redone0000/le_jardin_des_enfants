@@ -7,22 +7,22 @@
 @stop
 
 @section('content')
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-lg-7">
-            <div class="profile-cover">
-                <!-- Profil cover content (identique à ton code) -->
-                <div class="profile-cover__action bg--img" data-overlay="0.3">
-                    <a href="{{route('profile.show')}}" class="btn btn-info">
-                        <i class="fas fa-fw fa-user"></i>
-                        <span>Profil</span>
-                    </a>
-                    <button class="btn btn-rounded btn-info">
-                        <i class="fa fa-comment"></i>
-                        <span>Message</span>
-                    </button>
-                </div>
+<div class="container-fluid mt-4">
+    <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-lg-10">
+        <div class="profile-cover">
+            <!-- Profil cover content (identique à ton code) -->
+            <div class="profile-cover__action bg--img" data-overlay="0.3">
+                <a href="{{route('profile.show')}}" class="btn btn-info">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Profil</span>
+                </a>
+                <button class="btn btn-rounded btn-info">
+                    <i class="fa fa-comment"></i>
+                    <span>Message</span>
+                </button>
             </div>
+        </div>
 
             @foreach($activities as $activity)
             <div class="panel bg-white p-4 shadow-sm rounded mb-4">
@@ -137,7 +137,7 @@
                     </div>
                     <div class="actions bg-light p-2 rounded d-flex align-items-center">
                         <button type="submit" class="btn btn-sm btn-info ml-auto">
-                            Post
+                            Poster
                         </button>
                     </div>
                 </form>

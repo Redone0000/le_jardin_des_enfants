@@ -3,95 +3,97 @@
 @section('title', 'Show Child')
 
 @section('content_header')
-    <h1></h1>
+    <h1 class="m-0">Détails de l’Activité</h1>
 @stop
 
 @section('content')
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-3">
-                <div class="row">
-                    <!-- Place for any additional content if needed -->
-                </div>
-                <div class="row mt-3">
-                    <a href="" class="btn btn-info">???</a>
-                </div>
-                <div class="row mt-3">
-                    <!-- Place for any additional content if needed -->
-                </div>
-            </div>
-            <div class="col-md-7 ml-5">
-                <h1>
-                    <strong>{{ $activity->title }}</strong>
-                    <span class="float-right">#{{ $activity->class->name }}</span>
-                </h1>
-                <div class="table-responsive table-striped mt-5">
-                    <table class="table table-horizontal">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Identifiant</th>
-                                <td>{{ $activity->id }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Type</th>
-                                <td>{{ $activity->activityType->name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Description</th>
-                                <td>{{ $activity->description }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <!-- Main content area -->
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="font-weight-bold">{{ $activity->title }}</h2>
+                        <span class="badge badge-primary">{{ $activity->class->name }}</span>
 
-                @if($activity->activityData->isNotEmpty())
-                    <div>
-                        <h4 class="mt-3 mb-3">Data Activities</h4>
-                        
-                        <!-- Images -->
-                        @if($activity->activityData->filter(fn($data) => $data->isImage())->isNotEmpty())
-                            <h5 class="mt-2 mb-2">Images</h5>
-                            <div class="row mb-3">
-                                @foreach($activity->activityData->filter(fn($data) => $data->isImage()) as $data)
-                                    <div class="col-md-3 m-0 p-0 mb-2">
-                                        <a href="{{ asset('storage/' . $data->file_path) }}" target="_blank">
-                                            <img src="{{ asset('storage/' . $data->file_path) }}" alt="Photo" width="100%" height="100%">
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Identifiant</th>
+                                        <td>{{ $activity->id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Type</th>
+                                        <td>{{ $activity->activityType->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Description</th>
+                                        <td>{{ $activity->description }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <!-- Videos -->
-                        @if($activity->activityData->filter(fn($data) => $data->isVideo())->isNotEmpty())
-                            <h5 class="mt-2 mb-2">Videos</h5>
-                            <div class="row mb-3">
-                                @foreach($activity->activityData->filter(fn($data) => $data->isVideo()) as $data)
-                                    <div class="col-md-6 m-0 p-0 mb-2">
-                                        <video width="100%" height="100%" controls>
-                                            <source src="{{ asset('storage/' . $data->file_path) }}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
+                        @if($activity->activityData->isNotEmpty())
+                            <div class="mt-4">
+                                <h4 class="font-weight-bold">Données de l’Activité</h4>
 
-                        <!-- PDFs -->
-                        @if($activity->activityData->filter(fn($data) => $data->isPdf())->isNotEmpty())
-                            <h5 class="mt-2 mb-2">PDFs</h5>
-                            <div class="row mb-3">
-                                @foreach($activity->activityData->filter(fn($data) => $data->isPdf()) as $data)
-                                    <div class="col-md-3 m-0 p-0 mb-2">
-                                        <a href="{{ asset('storage/' . $data->file_path) }}" download>Download PDF</a>
+                                <!-- Images -->
+                                @if($activity->activityData->filter(fn($data) => $data->isImage())->isNotEmpty())
+                                    <h5 class="mt-3 mb-2">Images</h5>
+                                    <div class="row">
+                                        @foreach($activity->activityData->filter(fn($data) => $data->isImage()) as $data)
+                                            <div class="col-md-3 mb-3">
+                                                <a href="{{ asset('storage/' . $data->file_path) }}" target="_blank">
+                                                    <img src="{{ asset('storage/' . $data->file_path) }}" alt="Photo" class="img-fluid rounded">
+                                                </a>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
+                                @endif
+
+                                <!-- Videos -->
+                                @if($activity->activityData->filter(fn($data) => $data->isVideo())->isNotEmpty())
+                                    <h5 class="mt-3 mb-2">Vidéos</h5>
+                                    <div class="row">
+                                        @foreach($activity->activityData->filter(fn($data) => $data->isVideo()) as $data)
+                                            <div class="col-md-6 mb-3">
+                                                <video class="w-100 rounded" controls>
+                                                    <source src="{{ asset('storage/' . $data->file_path) }}" type="video/mp4">
+                                                    Votre navigateur ne supporte pas la balise vidéo.
+                                                </video>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+
+                                <!-- PDFs -->
+                                @if($activity->activityData->filter(fn($data) => $data->isPdf())->isNotEmpty())
+                                    <h5 class="mt-3 mb-2">PDFs</h5>
+                                    <div class="row">
+                                        @foreach($activity->activityData->filter(fn($data) => $data->isPdf()) as $data)
+                                            <div class="col-md-3 mb-3">
+                                                <a href="{{ asset('storage/' . $data->file_path) }}" class="btn btn-outline-primary btn-block" download>
+                                                    <i class="fas fa-file-pdf"></i> Télécharger PDF
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
+                        @else
+                            <p class="mt-3">Aucune donnée d’activité trouvée pour cette activité.</p>
                         @endif
                     </div>
-                @else
-                    <p>Aucune donnée d'activité trouvée pour cette activité.</p>
-                @endif
+                </div>
+
+                <!-- Retour à la liste button -->
+                <div class="mt-4">
+                    <a href="{{ route('activity.index') }}" class="btn btn-info">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                </div>
             </div>
         </div>
     </div>

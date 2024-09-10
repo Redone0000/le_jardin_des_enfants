@@ -55,7 +55,6 @@ class ActivityController extends Controller
         $classes = ClassSection::all();
         $types = ActivityType::all();
         $categories = ActivityType::select('category')->distinct()->get();
-        // dd($categories);
 
         return view('activities.index', compact('activities', 'activityTypes', 'classes', 'types', 'categories'));
     }
