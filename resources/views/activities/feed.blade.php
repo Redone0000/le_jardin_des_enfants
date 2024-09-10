@@ -23,7 +23,6 @@
                 </button>
             </div>
         </div>
-
             @foreach($activities as $activity)
             <div class="panel bg-white p-4 shadow-sm rounded mb-4">
             <div class="row mb-3 align-items-center">
