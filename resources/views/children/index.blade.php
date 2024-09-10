@@ -95,6 +95,11 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>
                                                 </form>
+                                                <form action="{{ route('chat.start') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" id="user_id" name="user_id" value="{{ $child->tutor->user->id }}">
+                                                    <button type="submit" class="btn-sm btn-warning">contacter parent</button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

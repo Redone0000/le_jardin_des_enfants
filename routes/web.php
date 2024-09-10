@@ -16,6 +16,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ChatController;
 
 
 Route::get('/', function () {
@@ -246,6 +247,19 @@ Route::get('payment/success/{reservation_id}', [ReservationController::class, 'p
 Route::get('payment/cancel/', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
 
 Route::post('/reservations/{id}/pay', [ReservationController::class, 'pay'])->name('reservations.pay');
+
+// Chat
+
+Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+
+Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');
+
+Route::post('/chat/message', [ChatController::class, 'store'])->name('chat.store');
+
+Route::post('/chat/start', [ChatController::class, 'createConversation'])->name('chat.start');
+
+Route::get('/chat/messages/{id}', [ChatController::class, 'getMessages']);
+
 
 // Route::get('/debug-route', function (Illuminate\Http\Request $request) {
 //     return response()->json([

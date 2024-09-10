@@ -425,6 +425,13 @@ return [
             'can' =>  'access-admin',
             'icon_color' => 'info',
         ],
+        [
+            'text' => 'Chat',
+            'url' => '/chat',
+            'icon' => 'fas fa-fw fa-file-signature',
+            // 'can' =>  'access-admin',
+            'icon_color' => 'info',
+        ],
         // [
         //     'text' => 'Nouvelle activité',
         //     'url' => 'activity-create',

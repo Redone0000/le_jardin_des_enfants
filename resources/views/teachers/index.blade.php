@@ -78,13 +78,18 @@
                             <td>{{ $teacher->user->phone }}</td>
                             <td>
                                 <div class="row">
-                                    <a href="{{ route('teacher.show', $teacher->id) }}" class="btn btn-primary mr-3">show</a>
+                                    <a href="{{ route('teacher.show', $teacher->id) }}" class="btn-sm btn-primary mr-3">show</a>
                                     @can('access-admin')
-                                        <a href="{{ route('teacher.edit', $teacher->user->id) }}" class="btn btn-info mr-3">edit</a>
+                                        <a href="{{ route('teacher.edit', $teacher->user->id) }}" class="btn-sm btn-info mr-3">edit</a>
                                         <form action="{{ route('teacher.delete', $teacher->user_id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')" class="btn btn-danger">supprimer</button>
+                                            <button type="submit" class="btn-sm btn-danger mr-3" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')" class="btn btn-danger">supprimer</button>
+                                        </form>
+                                        <form action="{{ route('chat.start') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" id="user_id" name="user_id" value="{{ $teacher->user->id }}">
+                                            <button type="submit" class="btn-sm btn-warning">contacter</button>
                                         </form>
                                     @endcan
                                 </div>
