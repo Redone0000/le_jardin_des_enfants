@@ -7,16 +7,16 @@
 <div class="container-fluid bg-info p-5 px-0 px-md-5 mb-5 shadow">
     <div class="row align-items-center px-3">
     <div class="col-lg-6 text-center text-lg-left p-3">
-        <h4 class="text-white mb-4 mt-5 mt-lg-0">Nom</h4>
+        <h4 class="text-white mb-4 mt-5 mt-lg-0">Le Jardin Des Enfants</h4>
         <!-- <h3 class="display-4 font-weight-bold text-white"> -->
         <h1 class="font-weight-bold text-secondary">
         Nouvelle approche de l'éducation de l'<span class="text-secondary">enfant</span>
         </h1>
         <p class="text-white mb-4">
-        Bienvenue à Nom, un lieu où l'apprentissage et le jeu se rencontrent 
-        pour créer une expérience éducative engageante pour les jeunes enfants. Notre école 
-        maternelle est conçue pour inspirer la créativité, favoriser la curiosité et encourager 
-        l'amour de l'apprentissage dès le plus jeune âge. 
+            Bienvenue au Jardin Des Enfants, un lieu où l'apprentissage et le jeu se rencontrent 
+            pour créer une expérience éducative engageante pour les jeunes enfants. Notre école 
+            maternelle est conçue pour inspirer la créativité, favoriser la curiosité et encourager 
+            l'amour de l'apprentissage dès le plus jeune âge.
         </p>
         <a href="{{ route('page.about') }}" class="btn btn-secondary mt-1 py-3 px-5">Lire plus</a>
     </div>
@@ -300,8 +300,7 @@
             <div class="card-body text-center">
             <h5 class="card-title">Troisième Maternelle</h5>
             <p class="card-text">
-                Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                ipsum duo et no et, ipsum ipsum erat duo amet clita duo
+            Pour les enfants de 5 à 6 ans, cette classe offre un cadre stimulant et interactif pour explorer, apprendre et se préparer pour l'école élémentaire.
             </p>
             </div>
             <div class="card-footer bg-transparent py-4 px-5">

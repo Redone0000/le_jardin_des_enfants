@@ -15,7 +15,7 @@ class TimeSlot extends Model
 
     public function availableDate()
     {
-        return $this->belongsTo(AvailableDate::class); // Chaque créneau appartient à une date
+        return $this->belongsTo(AvailableDate::class);
     }
 
     public function getFormattedStartTimeAttribute()

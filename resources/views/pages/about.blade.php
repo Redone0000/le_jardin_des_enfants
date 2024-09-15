@@ -5,7 +5,7 @@
 <!-- Header Start -->
 <div class="container-fluid bg-primary mb-5">
   <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
-    <h3 class="display-3 font-weight-bold text-white">Présentation de l'École</h3>
+    <h3 class="display-3 font-weight-bold text-white">Le Jardin Des Enfants</h3>
     <div class="d-inline-flex text-white">
       <p class="m-0"><a class="text-white" href="/">Accueil</a></p>
       <p class="m-0 px-2">/</p>
@@ -29,8 +29,9 @@
         <div class="card h-100 shadow-lg border-0 rounded">
           <div class="card-body text-center">
             <h5 class="card-title font-weight-bold">Notre Historique</h5>
-            <p class="card-text">Depuis 2001, notre école maternelle offre un environnement chaleureux où les jeunes enfants peuvent explorer, apprendre et grandir. Nous nous efforçons de créer des souvenirs précieux tout en posant les bases d'un apprentissage solide.</p>
-          </div>
+            <p class="card-text">Depuis sa création en 2001, Le Jardin Des Enfants s'est consacré à fournir un environnement éducatif de haute qualité pour les jeunes enfants. Fondée avec la mission de soutenir le développement intégral des tout-petits, notre école a évolué pour répondre aux besoins divers et croissants des familles. Nous avons mis en place des programmes enrichissants qui favorisent l'exploration, la créativité et l'apprentissage autonome dans un cadre chaleureux et sécurisé.</p>
+
+<p class="card-text">Au fil des années, nous avons renforcé notre engagement envers l'excellence éducative en adaptant notre approche pédagogique aux avancées en matière de développement précoce. Nos enseignants qualifiés et passionnés travaillent chaque jour pour offrir une expérience d'apprentissage stimulante qui prépare les enfants à réussir dans les prochaines étapes de leur parcours éducatif. Le Jardin Des Enfants est fier de son héritage et continue de se développer pour offrir aux nouvelles générations un lieu où elles peuvent s'épanouir et créer des souvenirs précieux.</p>          </div>
         </div>
       </div>
     </div>
@@ -88,7 +89,7 @@
             <h5 class="card-title font-weight-bold">Nous Contacter</h5>
             <p class="card-text">Pour toute question ou pour planifier une visite, veuillez nous contacter :</p>
             <p class="card-text font-weight-bold">Téléphone : +33 1 23 45 67 89</p>
-            <p class="card-text font-weight-bold">Email : contact@ecole-maternelle.com</p>
+            <p class="card-text font-weight-bold">Email : contact@ljde.com</p>
             <a href="{{ route('page.contact') }}" class="btn btn-primary">Contactez-nous</a>
           </div>
         </div>

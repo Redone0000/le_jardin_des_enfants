@@ -8,8 +8,7 @@
             class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0"
             style="font-size: 40px; line-height: 40px"
           >
-            <i class="flaticon-043-teddy-bear"></i>
-            <span class="text-white">Nom</span>
+          <img src="{{ asset('logo/logo-ljde.png') }}" alt="Logo" width="150" height="auto">
           </a>
           <p>
           Découvrez notre école maternelle accueillante, offrant un environnement 
@@ -98,13 +97,13 @@
       >
         <p class="m-0 text-center text-white">
           &copy;
-          <a class="text-primary font-weight-bold" href="#">Nom</a>.
+          <a class="text-primary font-weight-bold" href="#">Le Jardin Des Enfants</a>.
           Tout droit réservé.
           <a class="text-primary font-weight-bold" href="#"
             >lien</a
           >
           <br />Distributed By:
-          <a href="#" target="_blank">lien</a>
+          <a href="#" target="_blank">RS</a>
         </p>
       </div>
     </div>

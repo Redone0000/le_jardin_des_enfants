@@ -7,30 +7,56 @@ use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ChatController extends Controller
 {   
-    // public function index()
-    // {
-    //     // Récupérer toutes les conversations de l'utilisateur connecté
-    //     $conversations = Conversation::where('user1_id', Auth::id())
-    //                                   ->orWhere('user2_id', Auth::id())
-    //                                   ->get();
-    //     return view('chat.index', compact('conversations'));
-    // }
-
     public function index()
     {   
         $admins = User::where('role_id', 1)->get();
+        
         // Récupérer toutes les conversations de l'utilisateur connecté
         $conversations = Conversation::where(function($query) {
             $query->where('user1_id', Auth::id())
                 ->orWhere('user2_id', Auth::id());
         })
-        ->whereHas('messages') // Vérifie que la conversation a des messages
+        ->whereHas('messages')
         ->get();
 
-        return view('chat.index', compact('conversations', 'admins'));
+         // Vérifier le rôle de l'utilisateur connecté
+        $user = Auth::user();
+        $teachers = [];
+
+        if (Auth::user()->role_id == 3) {
+            // Récupérer les enfants du parent connecté
+            $children = Auth::user()->tutor->children;
+    
+            // Vérifier si des enfants sont trouvés
+            if ($children->isNotEmpty()) {
+                // Récupérer les enseignants pour chaque enfant
+                foreach ($children as $child) {
+                    $teacher = $child->classe->teacher;
+    
+                    // Vérifier si un enseignant est trouvé
+                    if ($teacher) {
+                        // Récupérer l'utilisateur associé à l'enseignant
+                        $teacherUser = $teacher->user;
+    
+                        // Initialiser l'entrée pour cet enseignant s'il n'existe pas encore
+                        if (!isset($teachers[$teacherUser->id])) {
+                            $teachers[$teacherUser->id] = [
+                                'teacher' => $teacherUser,
+                                'children' => []
+                            ];
+                        }
+                        $teachers[$teacherUser->id]['children'][] = $child->firstname;
+                    }
+                }
+            }
+        }
+
+        // return view('chat.index', compact('conversations', 'admins'));
+        return view('chat.index', compact('conversations', 'admins', 'teachers'));
     }
 
 
@@ -48,6 +74,7 @@ class ChatController extends Controller
 
         return view('chat.show', compact('conversations', 'conversation', 'messages'));
     }
+
 
     public function store(Request $request)
     {

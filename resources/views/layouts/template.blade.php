@@ -9,6 +9,7 @@
 
     <!-- Favicon -->
     <!-- <link href="{{ asset('favicon.ico') }}" rel='icon' /> -->
+    <link href="{{ asset('logo/logo-ljde.png') }}" rel='icon' />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />

@@ -89,11 +89,13 @@
                                         <td>
                                             <div class="row">
                                                 <a href="{{ route('child.show', $child->id) }}" class="btn-sm btn-primary mr-3">Afficher</a>
+                                                @can('access-admin')
                                                 <a href="{{ route('child.edit', $child->id) }}" class="btn-sm btn-info mr-3">Modifier</a>
+                                                @endcan
                                                 <form action="{{ route('child.delete', $child->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>
+                                                    <button type="submit" class="btn-sm btn-danger mr-3" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>
                                                 </form>
                                                 <form action="{{ route('chat.start') }}" method="POST">
                                                     @csrf
@@ -131,7 +133,6 @@
                                         <p><i class="fas fa-venus-mars"></i> Sexe : {{ $child->sexe }}</p>
                                         <p><i class="fas fa-birthday-cake"></i> Date de naissance : {{ $child->birth_date }}</p>
                                         <a href="{{ route('child.show', $child->id) }}" class="btn-sm btn-primary">Voir</a>
-                                        <a href="{{ route('child.edit', $child->id) }}" class="btn-sm btn-info">Mettre à jour</a>
                                     </div>
                                     <div class="ml-3">
                                         <img src="{{ asset('storage/' . $child->picture) }}" alt="Photo" class="" width="100">

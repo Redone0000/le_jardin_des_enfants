@@ -40,19 +40,4 @@ class ClassSection extends Model
     {
         return $this->hasMany(Activity::class, 'class_id');
     }
-
-    // public function scopeForUser($query, $user)
-    // {
-    //     if ($user->role_id === 1) {
-    //         return $query; // L'administrateur voit toutes les classes
-    //     } elseif ($user->role_id === 2) {
-    //         return $query->where('teacher_id', $user->teacher->id); // Le professeur voit ses propres classes
-    //     } elseif ($user->role_id === 3) {
-    //         $childrenClasses = $user->tutor->children->pluck('class_section_id')->toArray();
-    //         return $query->whereIn('id', $childrenClasses); // Le tuteur voit les classes de ses enfants
-    //     } else {
-    //         return $query->where('id', 0); // Utilisateur non autorisé (ne verra aucune classe)
-    //     }
-    // }
-
 }

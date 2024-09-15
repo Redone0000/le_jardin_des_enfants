@@ -13,7 +13,6 @@ class Child extends Model
         'class_id',
         'lastname',
         'firstname',
-        'type',
         'sexe',
         'birth_date',
         'picture',

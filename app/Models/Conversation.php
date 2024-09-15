@@ -43,6 +43,6 @@ class Conversation extends Model
     {
         return $this->users()->map(function ($user) {
             return $user->firstname . ' ' . $user->lastname;
-        })->join(' et ');
+        })->first();
     }
 }

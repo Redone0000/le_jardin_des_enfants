@@ -23,29 +23,29 @@
 
 @section('content')
 <section>
-    <div class="container py-5">
+    <div class="container-fluid py-5">
         <div class="row ">
             <div class="col-md-8">
                 <div class="card" id="chat1" style="border-radius: 15px;">
                     <div
                         class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
-                        style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                        style="border-top-left-radius: 10px; border-top-right-radius: 15px;">
                         <i class="fas fa-angle-left"></i>
                         <p class="mb-0 fw-bold">{{ $conversation->getUsersFullName() }}</p>
                         <i class="fas fa-times"></i>
                     </div>
 
                     <div class="card-body">
-                    <div id="messages-container">
-    @foreach ($messages as $message)
-        <div class="d-flex {{ $message->user_id == auth()->id() ? 'flex-row-reverse' : 'flex-row' }} justify-content-start mb-4">
-            <div class="p-3 {{ $message->user_id == auth()->id() ? 'me-3' : 'ms-3' }}" style="border-radius: 15px; background-color: {{ $message->user_id == auth()->id() ? 'rgb(220, 220, 220)' : 'rgba(57, 192, 237,.2)' }}">
-                <strong>{{ $message->user->firstname }} {{ $message->user->lastname }}</strong>
-                <p class="small mb-0">{{ $message->message }}</p>
-            </div>
-        </div>
-    @endforeach
-</div>
+                        <div id="messages-container">
+                            @foreach ($messages as $message)
+                                <div class="d-flex {{ $message->user_id == auth()->id() ? 'flex-row' : 'flex-row-reverse' }} justify-content-start mb-4">
+                                    <div class="p-3 {{ $message->user_id == auth()->id() ? 'me-3' : 'ms-3' }}" style="border-radius: 15px; background-color: {{ $message->user_id == auth()->id() ? 'rgb(220, 220, 220)' : 'rgba(57, 192, 237,.2)' }}">
+                                        <strong>{{ $message->user->firstname }} {{ $message->user->lastname }}</strong>
+                                        <p class="fs-5">{{ $message->message }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
 
                         <!-- Formulaire pour envoyer un message -->
                         <form action="{{ route('chat.store') }}" method="POST">
@@ -62,18 +62,18 @@
             <div class="col-m-4 ml-5 mt-5">
                 @can('access-admin')
                     <div class="row mb-3">
-                        <a href="{{ route('teacher.index') }}" class="btn btn-warning mr-3">Liste des enseignants</a>
+                        <a href="{{ route('teacher.index') }}" class="btn btn-warning mr-3">Contacter un enseignant</a>
                     </div>
                     <div class="row">
-                        <a href="{{ route('children.index') }}" class="btn btn-success">Liste des enfants et Parents</a>
+                        <a href="{{ route('children.index') }}" class="btn btn-success">Contacter un parent d'enfant</a>
                     </div>
                 @endcan
 
                 @can('access-teacher')
                     <div class="row ">
-                        <a href="{{ route('children.index') }}" class="btn btn-success">Liste des enfants et Parents</a>
+                        <a href="{{ route('children.index') }}" class="btn btn-success">Contacter un parent d'enfant</a>
                     </div>
-                @endcan
+                @endcan               
             </div>
             
         </div>
@@ -93,7 +93,7 @@
                 data.messages.forEach(message => {
                     let messageDiv = document.createElement('div');
                     // Apply the correct class based on whether the message is from the user or not
-                    messageDiv.className = message.user_id === {{ auth()->id() }} ? 'd-flex flex-row-reverse justify-content-start mb-4' : 'd-flex flex-row justify-content-start mb-4';
+                    messageDiv.className = message.user_id === {{ auth()->id() }} ? 'd-flex flex-row justify-content-start mb-4' : 'd-flex flex-row-reverse justify-content-start mb-4';
 
                     let messageContent = document.createElement('div');
                     messageContent.className = 'p-3 ' + (message.user_id === {{ auth()->id() }} ? 'me-3' : 'ms-3');
@@ -103,7 +103,7 @@
                     let strong = document.createElement('strong');
                     strong.textContent = `${message.user_firstname} ${message.user_lastname}`;
                     let p = document.createElement('p');
-                    p.className = 'small mb-0';
+                    p.className = 'mb-0';
                     p.textContent = message.message;
 
                     messageContent.appendChild(strong);

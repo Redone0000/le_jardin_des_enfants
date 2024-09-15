@@ -3,12 +3,11 @@
         class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5"
       >
         <a
-          href=""
+          href="{{ route('page.home') }}"
           class="navbar-brand font-weight-bold text-secondary"
-          style="font-size: 50px"
-        >
-          <i class="flaticon-043-teddy-bear color-info" style=""></i>
-          <span class="text-primary">Nom</span>
+        >  
+        <img src="{{ asset('logo/logo-ljde.png') }}" alt="Logo" width="150" height="auto" class="mb-3 mt-1">
+
         </a>
         <button
           type="button"

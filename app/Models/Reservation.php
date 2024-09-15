@@ -47,24 +47,6 @@ class Reservation extends Model
      * Récupère toutes les réservations pour l'administrateur
      * et seulement celles liées aux enfants du tuteur.
      */
-    // public static function getReservationsForUser($user)
-    // {
-    //     // Si l'utilisateur est un administrateur, on récupère toutes les réservations
-    //     if ($user->role_id === 1) {
-    //         return self::all(); // Récupère toutes les réservations
-    //     }
-
-    //     // Si l'utilisateur est un tuteur, on récupère les réservations liées à ses enfants
-    //     if ($user->role_id === 3) {
-    //         return self::whereHas('child', function ($query) use ($user) {
-    //             $query->where('tutor_id', $user->id);
-    //         })->get();
-    //     }
-
-    //     // Optionnel : Retourner un tableau vide pour les autres rôles ou non authentifié
-    //     return [];
-    // }
-
     public static function getReservationsForUserQuery($user)
     {
         // Si l'utilisateur est un administrateur, on récupère toutes les réservations

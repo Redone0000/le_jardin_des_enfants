@@ -20,4 +20,13 @@ class Menu extends Model
     {
         return $this->hasMany(MenuDay::class);
     }
+
+     /**
+     * Relation avec le modèle Reservation.
+     * Un menu peut avoir plusieurs réservations.
+     */
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
