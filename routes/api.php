@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PartnerController;
+use App\Http\Controllers\Api\EventController;
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('partners', [PartnerController::class, 'index']);
@@ -14,3 +12,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('partners/{id}', [PartnerController::class, 'update']);
     Route::delete('partners/{id}', [PartnerController::class, 'destroy']);
 });
+
+Route::apiResource('events', EventController::class);
