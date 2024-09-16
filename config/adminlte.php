@@ -313,7 +313,7 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Rechercher',
         ],
         [
             'text' => 'blog',
@@ -426,35 +426,12 @@ return [
             'icon_color' => 'info',
         ],
         [
-            'text' => 'Chat',
+            'text' => 'Messagerie',
             'url' => '/chat',
             'icon' => 'fas fa-fw fa-file-signature',
             // 'can' =>  'access-admin',
             'icon_color' => 'info',
         ],
-        // [
-        //     'text' => 'Nouvelle activité',
-        //     'url' => 'activity-create',
-        //     'can' => ['access-admin', 'access-teacher'],
-        //     'icon' => 'fas fa-fw fa-chalkboard',
-        //     'icon_color' => 'danger',
-        // ],
-        // ['header' => 'labels'],
-        // [
-        //     'text' => 'important',
-        //     'icon_color' => 'red',
-        //     'url' => '#',
-        // ],
-        // [
-        //     'text' => 'warning',
-        //     'icon_color' => 'yellow',
-        //     'url' => '#',
-        // ],
-        // [
-        //     'text' => 'information',
-        //     'icon_color' => 'cyan',
-        //     'url' => '#',
-        // ],
     ],
 
     /*

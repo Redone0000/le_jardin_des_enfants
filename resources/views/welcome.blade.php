@@ -175,7 +175,6 @@
                         </ul>
                     </div>
                 </div>
-                <a href="" class="btn btn-primary mt-2 py-2 px-4">Voir plus</a>
             </div>
             <div class="col-lg-5">
             <img
@@ -196,7 +195,7 @@
         <p class="section-title px-5">
         <span class="px-2">Niveau maternel</span>
         </p>
-        <h1 class="mb-4">Nos classes</h1>
+        <h1 class="mb-4">Nos sections</h1>
     </div>
     <div class="row">
         <div class="col-lg-3 mb-5" style="height: 500px;">
@@ -209,26 +208,6 @@
                 C'est un environnement chaleureux et stimulant où les enfants peuvent commencer leur parcours éducatif.
                 </p>
             </div>
-            <div class="card-footer bg-transparent py-4 px-5">
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Age</strong>
-                    </div>
-                    <div class="col-6 py-1">2 - 3 ans</div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Places</strong>
-                    </div>
-                    <div class="col-6 py-1">15</div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Horraires</strong>
-                    </div>
-                    <div class="col-6 py-1">08:00 - 15:00</div>
-                </div>          
-            </div>
         </div>
         </div>
         <div class="col-lg-3 mb-5" style="height: 500px;">
@@ -239,26 +218,6 @@
             <p class="card-text">
             Dédiée aux enfants de 3 ans, elle offre un environnement enrichissant où ils peuvent explorer, jouer et apprendre sous la guidance de nos enseignants dévoués.
             </p>
-            </div>
-            <div class="card-footer bg-transparent py-4 px-5">
-            <div class="row border-bottom">
-                <div class="col-6 py-1 text-left border-right">
-                <strong>Age</strong>
-                </div>
-                <div class="col-6 py-1">3 - 4 ans</div>
-            </div>
-            <div class="row border-bottom">
-                <div class="col-6 py-1 text-left border-right">
-                <strong>Places</strong>
-                </div>
-                <div class="col-6 py-1">15</div>
-            </div>
-            <div class="row border-bottom">
-                <div class="col-6 py-1 text-left border-right">
-                <strong>Class Time</strong>
-                </div>
-                <div class="col-6 py-1">08:00 - 15:00</div>
-            </div>
             </div>
         </div>
         </div>
@@ -272,26 +231,6 @@
             stimulant, ils sont encouragés à explorer, à interagir et à apprendre.
             </p>
             </div>
-            <div class="card-footer bg-transparent py-4 px-5">
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Age</strong>
-                    </div>
-                    <div class="col-6 py-1">4 - 5 ans</div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Places</strong>
-                    </div>
-                    <div class="col-6 py-1">15</div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Horraires</strong>
-                    </div>
-                    <div class="col-6 py-1">08:00 - 15:00</div>
-                </div>
-            </div>
         </div>
         </div>
         <div class="col-lg-3 mb-5" style="height: 550px;">
@@ -302,26 +241,6 @@
             <p class="card-text">
             Pour les enfants de 5 à 6 ans, cette classe offre un cadre stimulant et interactif pour explorer, apprendre et se préparer pour l'école élémentaire.
             </p>
-            </div>
-            <div class="card-footer bg-transparent py-4 px-5">
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Age</strong>
-                    </div>
-                    <div class="col-6 py-1">5 - 6 ans</div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Places</strong>
-                    </div>
-                    <div class="col-6 py-1">15</div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-6 py-1 text-left border-right">
-                    <strong>Class Time</strong>
-                    </div>
-                    <div class="col-6 py-1">08:00 - 15:00</div>
-                </div>
             </div>
         </div>
         </div>

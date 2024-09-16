@@ -19,14 +19,18 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\ChatController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('index');
 
-Route::get('/dashboard', function () {
-    // return view('dashboard');
-    return view('mydashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     $children = Children::all();
+// dd($children);
+//     return view('mydashboard', compact('children'));
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

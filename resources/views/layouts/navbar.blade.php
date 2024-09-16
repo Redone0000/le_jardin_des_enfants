@@ -6,7 +6,7 @@
           href="{{ route('page.home') }}"
           class="navbar-brand font-weight-bold text-secondary"
         >  
-        <img src="{{ asset('logo/ljde-logo.svg') }}" alt="Logo" width="150" height="auto" class="mb-2 mt-1">
+        <img src="{{ asset('logo/ljde-logo.svg') }}" alt="Logo" width="150" height="auto">
 
         </a>
         <button
