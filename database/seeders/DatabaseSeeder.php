@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             AvailableDatesSeeder::class,
             SectionSeeder::class,
             ActivityTypeSeeder::class,
+            ActivitySeeder::class,
+            PartnerSeeder::class,
         ]);
     }
 }

@@ -19,22 +19,14 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\ChatController;
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('index');
-
-// Route::get('/dashboard', function () {
-//     $children = Children::all();
-// dd($children);
-//     return view('mydashboard', compact('children'));
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/profile/password', [ProfileController::class, 'showChangePasswordForm'])->name('profile.password.form');
+Route::post('/profile/password', [ProfileController::class, 'changePassword'])->name('profile.password.change');
 
 Route::post('/send-mail-to-admins', [MailController::class, 'sendMailToAdmins'])->name('sendMailToAdmins');
 

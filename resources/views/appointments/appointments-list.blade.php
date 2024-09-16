@@ -34,7 +34,6 @@
                         <th>Nom</th>
                         <th>Téléphone</th>
                         <th>Email</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,14 +44,6 @@
                         <td>{{ $appointment->parent_last_name }} {{ $appointment->parent_first_name }}</td>
                         <td>{{ $appointment->phone_number }}</td>
                         <td>{{ $appointment->email }}</td>
-                        <td>
-                            <form action="{{ route('appointments.destroy', $appointment->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">Supprimer</button>
-                            </form>
-                            <a href="" class="btn btn-info btn-sm">Contacter</a>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>

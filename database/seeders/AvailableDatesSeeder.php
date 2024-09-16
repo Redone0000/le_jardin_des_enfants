@@ -15,8 +15,8 @@ class AvailableDatesSeeder extends Seeder
      */
     public function run(): void
     {
-        $startDate = Carbon::create(2024, 6, 30); // Début de la plage de dates
-        $endDate = Carbon::create(2024, 7, 15);   // Fin de la plage de dates
+        $startDate = Carbon::create(2024, 10, 16); // Début de la plage de dates
+        $endDate = Carbon::create(2024, 11, 30);   // Fin de la plage de dates
 
         while ($startDate->lessThanOrEqualTo($endDate)) {
             $availableDate = AvailableDate::create(['date' => $startDate]); // Créez la date

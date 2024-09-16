@@ -224,15 +224,16 @@ class TeacherController extends Controller
      */
     public function destroy(string $id)
     {   
-        $teacher = Teacher::findOrFail($id);
+        $user = User::findOrFail($id);
+        $teacher = $user->teacher;
+        // dd($teacher);
         // Vérifier si l'utilisateur a la permission de supprimer cet enseignant
         if (!Gate::allows('delete', $teacher)) {
             abort(403, 'Vous n\'avez pas la permission de supprimer cet enseignant.');
         }
-        if($teacher) {
-            $teacher->delete();
-        }
+        
+        $teacher->delete();
 
-        return redirect()->route('teacher.index')->with('error', 'Enseignant supprimé avec succès.');
+        return redirect()->route('teacher.index')->with('success', 'Enseignant supprimé avec succès.');
     }
 }

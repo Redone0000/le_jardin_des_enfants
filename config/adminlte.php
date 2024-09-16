@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<strong>LJDE</strong>',
-    'logo_img' => 'vendor/adminlte/dist/img/logo-ljde.png',
+    'logo_img' => 'vendor/adminlte/dist/img/ljde-logo.svg',
     'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -113,7 +113,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/logo-ljde.png',
+            'path' => 'vendor/adminlte/dist/img/ljde-logo.svg',
             'alt' => 'Le jardin des enfants',
             'effect' => 'animation__shake',
             'width' => 200,
@@ -326,8 +326,8 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url' => '/forgot-password',
+            'text' => 'Modifier son mot de passe',
+            'url' => '/profile/password',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
@@ -368,6 +368,12 @@ return [
             'url' => '/my-class',
             'icon' => 'fas fa-fw fa-chalkboard',
             'can' => ['access-teacher', 'access-parent'],
+        ],
+        [
+            'text' => 'Enseignants',
+            'url' => '/teacher',
+            'icon' => 'fas fa-fw fa-chalkboard',
+            'can' => 'access-admin',
         ],
         [
             'text' => 'Enfants',
@@ -426,10 +432,17 @@ return [
             'icon_color' => 'info',
         ],
         [
+            'text' => 'Partenaires',
+            'url' => '/partners',
+            'icon' => 'fas fa-fw fa-file-signature',
+            'can' =>  'access-admin',
+            'icon_color' => 'info',
+        ],
+        [
             'text' => 'Messagerie',
             'url' => '/chat',
             'icon' => 'fas fa-fw fa-file-signature',
-            // 'can' =>  'access-admin',
+            'can' => ['access-admin','access-teacher', 'access-parent'],
             'icon_color' => 'info',
         ],
     ],

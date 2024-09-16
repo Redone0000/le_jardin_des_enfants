@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 
 class ProfileController extends Controller
@@ -99,5 +100,29 @@ class ProfileController extends Controller
         $role = $user->role_id;
 
         return view('profile.show', compact('user','role'));
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('profile.changepassword');
+    }
+
+    public function changePassword(Request $request) 
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'L\'ancien mot de passe est incorrect!']);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->route('profile.password.form')->with('success', 'Mot de passe modifié avec succès');
     }
 }

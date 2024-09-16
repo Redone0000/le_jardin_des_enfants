@@ -60,24 +60,64 @@ class PageController extends Controller
         return view('pages.about');
     }
 
-
     public function dashboard() {
         $user = auth()->user();
-
-        if($user->role_id === 1) {
+        $appointments = null; 
+        $classes = null;
+        $reservations = null;
+        $evaluations = null;
+        $activities = null;
+    
+        if ($user->role_id === 1) {
+            // Administrateur
             $children = Child::all();
             $activities = Activity::all();
             $appointments = Appointment::all();
             $classes = ClassSection::all();
             $reservations = Reservation::all();
-        } elseif($user->role_id === 2) {
-            $children =  Child::where('class_id', $user->teacher->class_id)->get();
-        } elseif($user->role_id === 3) {
-            $children = $user->tutor->children;
-        }
-        
-        $events = Event::all();
+        } elseif ($user->role_id === 2) {
+            // Enseignant
+            $class = ClassSection::where('teacher_id', $user->teacher->id)->first(); // Classes de l'enseignant
+            
+            if($class) {
+            $children = Child::where('class_id', $class->id)->get();   // Enfants de la classe
+            $activities = $class->activities()->get();
 
-        return view('mydashboard', compact('children', 'activities', 'events', 'appointments', 'classes', 'reservations'));
+            // $evaluations = $activities->evaluations()->get(); // Évaluations des enfants
+            $evaluations = $children->flatMap(function ($child) {
+                return $child->evaluations;  // Ici on récupère les évaluations via chaque enfant
+            });
+            } else {
+                // Si l'enseignant n'a pas de classe
+                $children = collect();  // Collection vide pour éviter les erreurs
+                $activities = collect();  // Collection vide pour éviter les erreurs
+                $evaluations = collect();  // Collection vide pour éviter les erreurs
+            }
+    
+        } elseif ($user->role_id === 3) {
+            // Tuteurs
+            $children = $user->tutor->children;
+    
+            $reservations = $children->map(function ($child) {
+                return $child->reservations;
+            })->flatten();
+    
+            $evaluations = $children->map(function ($child) {
+                return $child->evaluations;
+            });
+    
+            $classes = $children->map(function($child) {
+                return $child->classe;
+            })->unique();
+    
+            $activities = $classes->flatMap(function($class) {
+                return $class->activities;
+            });
+        }
+    
+        $events = Event::all(); // Récupérer tous les événements
+    
+        return view('mydashboard', compact('children', 'activities', 'events', 'appointments', 'classes', 'reservations', 'evaluations'));
     }
+    
 }
