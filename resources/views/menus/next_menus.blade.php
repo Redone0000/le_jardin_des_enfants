@@ -9,6 +9,7 @@
 @section('content')
 @php
     use Carbon\Carbon;
+    $currentMonth = \Carbon\Carbon::now()->month; // Récupérer le mois courant
 @endphp
     <div class="container">
         @if (session('success'))
@@ -21,10 +22,10 @@
             </div>
         @endif
         <div class="row mb-4">
-            <a href="{{ route('reservations.index') }}" class="btn btn-primary ml-auto">Mes reservations</a>
+            <a href="{{ route('reservations.index') }}" class="btn btn-primary ml-auto">Mes réservations</a>
         </div>
         <div class="row mb-2">
-            <h3>Nos Prochains Menu</h3>
+            <h3>Nos Prochains Menus</h3>
         </div>
         @foreach($menuDays->groupBy(function($day) {
             return Carbon::parse($day->date)->format('F Y');
@@ -71,31 +72,37 @@
                             </tbody>
                         </table>
                     @endforeach
+
+                    <!-- Formulaire de réservation unique par mois -->
                     <form action="{{ route('reservations.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="menu_id" value="{{ $daysInMonth->first()->menu_id }}">
                         <input type="hidden" name="month" value="{{ $month }}">
                         <input type="hidden" name="price" value="{{ $daysInMonth->first()->menu->price }}">
 
-                        <div class="form-group">
-                            <label for="child_id">Sélectionnez un enfant :</label>
-                            <select name="child_id" id="child_id" class="form-control">
-                                @if($children->count() > 1)
-                                    @foreach($children as $child)
-                                        <option value="{{ $child->id }}">{{ $child->lastname }}</option>
-                                    @endforeach
-                                @elseif($children->count() == 1)
-                                    <!-- Sélectionner automatiquement le seul enfant disponible -->
-                                    <option value="{{ $children->first()->id }}" selected>{{ $children->first()->lastname }}</option>
-                                @else
-                                    <option value="" disabled>Aucun enfant disponible</option>
-                                @endif
-                            </select>
-                        </div>
+                        @php
+                            $menuMonth = Carbon::parse($daysInMonth->first()->date)->month; // Obtenir le mois du premier jour de menu
+                        @endphp
 
-                        <!-- <button type="submit" class="btn btn-success mt-3">Réserver pour ce mois</button> -->
-                        <button type="submit" name="action" value="pay_now" class="btn btn-success mt-3">Réserver et Payer</button>
-                        <button type="submit" name="action" value="pay_later" class="btn btn-warning mt-3">Réserver et Payer plus tard</button>
+                        @if ($menuMonth !== $currentMonth)
+                            <div class="form-group">
+                                <label for="child_id">Sélectionnez un enfant :</label>
+                                <select name="child_id" id="child_id" class="form-control">
+                                    @if($children->count() > 1)
+                                        @foreach($children as $child)
+                                            <option value="{{ $child->id }}">{{ $child->firstname }}</option>
+                                        @endforeach
+                                    @elseif($children->count() == 1)
+                                        <!-- Sélectionner automatiquement le seul enfant disponible -->
+                                        <option value="{{ $children->first()->id }}" selected>{{ $children->first()->firstname }}</option>
+                                    @else
+                                        <option value="" disabled>Aucun enfant disponible</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <button type="submit" name="action" value="pay_now" class="btn btn-success mt-3">Réserver et Payer</button>
+                            <button type="submit" name="action" value="pay_later" class="btn btn-warning mt-3">Réserver et Payer plus tard</button>
+                        @endif
                     </form>
                 </div>
             </div>

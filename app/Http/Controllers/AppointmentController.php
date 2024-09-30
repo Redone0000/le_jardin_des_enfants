@@ -57,7 +57,7 @@ class AppointmentController extends Controller
     {    
         // Valider les données        
         $validatedData = $request->validate([
-            'day' => 'required|date',
+            'day' => 'required|date_format:d/m/Y',
             'hour' => 'required|date_format:H:i',
             'child_last_name' => 'required|string',
             'child_first_name' => 'required|string',

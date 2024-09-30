@@ -205,6 +205,6 @@ class MenuController extends Controller
                         ->get();
         $children = auth()->user()->tutor->children;
 
-        return view('menus.next_menus', compact('menuDays', 'children'));
+        return view('menus.next_menus', compact('menuDays', 'children', 'startDate'));
     }
 }

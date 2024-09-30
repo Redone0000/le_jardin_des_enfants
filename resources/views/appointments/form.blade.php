@@ -5,10 +5,19 @@
   <div class="row mt-5">
     <h3>Formulaire</h3>
   </div>
-    @if(session('success'))
-      <div class="alert alert-success">
-          {{ session('success') }}
-      </div>
+  @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+  @endif
+  @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
   @endif
   <div class="col-md-8 p-5 border bg-light">
     <form action="{{ route('appointment') }}" method="post">

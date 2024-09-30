@@ -21,6 +21,15 @@
 
   <!-- contact section -->
   <div class="container-fluid pt-5 mt-5">
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <p>{{ $error }}</p>
+              @endforeach
+          </ul>
+      </div>
+    @endif
       <div class="container border col-6 p-2 shadow" style="height:400px">
         <div class="text-center pb-2">
           <p class="section-title px-5 mt-5 mb-5">
